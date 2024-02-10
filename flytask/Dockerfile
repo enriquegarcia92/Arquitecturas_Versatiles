@@ -1,29 +1,29 @@
-# Start from the latest OpenJDK image
-FROM openjdk:latest
+# Start from Ubuntu image
+FROM ubuntu:latest
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    openjdk-17-jdk \
+    maven
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /opt/app
 
 # Copy the Maven project files
 COPY pom.xml .
 
 # Copy the source code
-COPY src src
+COPY src src/
 
-# Execute Maven build to compile and package the application
+# Build the application
 RUN mvn clean install -DskipTests
-
-# Debugging: Print the contents of the /opt/app directory
-RUN ls -al /opt/app
 
 # Refer to Maven build -> finalName
 ARG JAR_FILE=target/*.jar
 
-# Copy the JAR file into the container
+
+# cp target/spring-boot-web.jar /opt/app/app.jar
 COPY ${JAR_FILE} app.jar
 
 # java -jar /opt/app/app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
