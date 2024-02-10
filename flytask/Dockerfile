@@ -16,6 +16,11 @@ RUN mvn clean install -DskipTests
 # Start from a new base image
 FROM openjdk:17-slim
 
+# Set environment variables
+ENV DATABASE_URL=jdbc:postgresql://db:5432/flytask
+ENV DATABASE_USERNAME=postgres
+ENV DATABASE_PASSWORD=password
+
 # Set the working directory
 WORKDIR /app
 
