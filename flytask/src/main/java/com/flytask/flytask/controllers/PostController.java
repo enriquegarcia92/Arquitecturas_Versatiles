@@ -17,8 +17,8 @@ public class PostController {
 	}
 	
 	@GetMapping
-	public List<post> findAll(){
-		return repository.findAll();
+	public String Helloworld(){
+		return "Helloworld";
 	}
 	
 	

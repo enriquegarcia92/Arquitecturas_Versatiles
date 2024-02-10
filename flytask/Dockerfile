@@ -1,13 +1,8 @@
-# Start from Ubuntu image
-FROM ubuntu:latest
+# Start from a base image with Maven and Java installed
+FROM maven:3.8.4-openjdk-17-slim AS builder
 
-# Install necessary packages
-RUN apt-get update && apt-get install -y \
-    openjdk-17-jdk \
-    maven
-
-# Set the working directory
-WORKDIR /opt/app
+# Set the working directory in the container
+WORKDIR /app
 
 # Copy the Maven project files
 COPY pom.xml .
@@ -18,12 +13,14 @@ COPY src src/
 # Build the application
 RUN mvn clean install -DskipTests
 
-# Refer to Maven build -> finalName
-ARG JAR_FILE=target/*.jar
+# Start from a new base image
+FROM openjdk:17-slim
 
+# Set the working directory
+WORKDIR /app
 
-# cp target/spring-boot-web.jar /opt/app/app.jar
-COPY ${JAR_FILE} app.jar
+# Copy the built JAR file from the previous stage
+COPY --from=builder /app/target/*.jar app.jar
 
-# java -jar /opt/app/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+# Specify the entry point
+ENTRYPOINT ["java", "-jar", "app.jar"]
