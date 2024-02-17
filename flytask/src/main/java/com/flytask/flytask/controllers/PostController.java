@@ -18,7 +18,7 @@ public class PostController {
 	
 	@GetMapping
 	public String Helloworld(){
-		return "Helloworld";
+		return "Test de contenedor";
 	}
 	
 	
