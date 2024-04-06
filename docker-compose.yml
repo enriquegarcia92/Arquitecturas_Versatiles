@@ -2,14 +2,24 @@ services:
   nginx:
     build: ./nginx
     image: nginx
-    container_name: "nginx_cont"
+    container_name: "nginx_container"
     ports:
       - 80:80
     depends_on:
       - java_app
-      - mediawiki
+      - arquitecturas_integrales
+      - django_postgre
+      - express_postgre
     volumes:
     - ./nginx:/etc/nginx/conf.d
+
+  arquitecturas_integrales:
+    image: arquitecturas_integrales:1.0.0
+    build: arquitecturas_integrales/.
+    container_name: arquitecturas_integrales_container
+    ports:
+      - 5173:5173
+
   java_app:
     container_name: spring_postgre_container
     image: flytask-java-app:1.0.0
@@ -18,6 +28,24 @@ services:
       - 8080:8080
     depends_on:
       - db   
+
+  django_postgre:
+    container_name: django_postgre_container
+    image: flytask-python-app:1.0.0
+    build: flytaskpyenv/flytaskpy/.
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+  express_postgre:
+    container_name: express_postgre_container
+    image: flytask-node-app:1.0.0
+    build: flytaskexpress/.
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
 
   db:
     image: postgres
@@ -28,25 +56,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=flytask
-  mediawiki:
-      image: mediawiki:1.38
-      restart: always
-      ports:
-        - 81:80
-      # volumes:      
-      #   - ./LocalSettings.php:/var/www/html/LocalSettings.php
-  # After initial setup, download LocalSettings.php to the same directory as
-  # this yaml and uncomment the following line and use compose to restart
-  # the mediawiki service
-  database:
-    image: mysql:8.0.29
-    restart: always
-    environment:
-      MYSQL_DATABASE: wiki_db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: wikimedia
-      MYSQL_PASSWORD: wikimedia
-    volumes:
-      - /var/lib/mysql
 
   
