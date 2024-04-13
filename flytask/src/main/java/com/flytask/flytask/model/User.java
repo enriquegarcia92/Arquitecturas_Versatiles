@@ -1,6 +1,7 @@
 package com.flytask.flytask.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,14 +36,17 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name ="USR_PASSWORD", nullable = false)
+    @JsonIgnore
     @JsonAlias("password")
     private String password;
 
     @Column(name = "USR_ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Tasks> tasks;
 
     @Override

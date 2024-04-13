@@ -13,13 +13,11 @@ import java.sql.Timestamp;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskDto {
-    @NotEmpty(message = "title must not be null")
+public class EditTaskDTO {
+    @NotEmpty(message = "title must not bel null")
     private String title;
     @NotEmpty(message = "description must not be null")
     private String description;
-    @NotNull(message = "due date must not be null")
+    @NotNull(message = "dueDate must not be null")
     private Timestamp dueDate;
-    @NotNull(message = "user identification must not be null")
-    private Integer userId;
 }
