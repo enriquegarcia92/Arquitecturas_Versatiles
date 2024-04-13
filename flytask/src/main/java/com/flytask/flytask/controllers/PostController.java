@@ -14,7 +14,7 @@ public class PostController {
 		this.repository = repository;
 	}
 	
-	@GetMapping
+	@GetMapping("/getPosts")
 	public String Helloworld(){
 		return "Test de contenedor";
 	}
