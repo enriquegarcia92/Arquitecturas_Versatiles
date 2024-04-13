@@ -56,6 +56,45 @@ public class TaskController {
         }
     }
 
+
+    @PutMapping("/todo/{taskid}")
+    public ResponseEntity<?> setTaskTodo(@PathVariable Integer taskid) {
+        HashMap<String, Object> response = taskService.setTodo(taskid);
+        if (response.containsKey("error")) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        } else {
+            return ResponseEntity.ok(response);
+        }
+    }
+
+    @PutMapping("/done/{taskid}")
+    public ResponseEntity<?> setTaskDone(@PathVariable Integer taskid) {
+        HashMap<String, Object> response = taskService.setDone(taskid);
+        if (response.containsKey("error")) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        } else {
+            return ResponseEntity.ok(response);
+        }
+    }
+    @PutMapping("/doing/{taskid}")
+    public ResponseEntity<?> setTaskDoing(@PathVariable Integer taskid) {
+        HashMap<String, Object> response = taskService.setDoing(taskid);
+        if (response.containsKey("error")) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        } else {
+            return ResponseEntity.ok(response);
+        }
+    }
+    @PutMapping("/upcoming/{taskid}")
+    public ResponseEntity<?> setTaskUpconing(@PathVariable Integer taskid) {
+        HashMap<String, Object> response = taskService.setUpcoming(taskid);
+        if (response.containsKey("error")) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        } else {
+            return ResponseEntity.ok(response);
+        }
+    }
+
     @DeleteMapping("/delete/{taskid}")
     public ResponseEntity<?> update(@PathVariable Integer taskid) {
         HashMap<String, Object> response = taskService.deleteTask(taskid);

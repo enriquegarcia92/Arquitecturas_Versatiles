@@ -12,4 +12,8 @@ public interface TaskService {
     public HashMap<String, Object> createTask (TaskDto task);
     public HashMap<String, Object> editTask(Integer TaskID , EditTaskDTO Task);
     public HashMap<String, Object> deleteTask(Integer taskId);
+    public HashMap<String, Object> setTodo(Integer TaskID);
+    public HashMap<String, Object> setDoing(Integer TaskID);
+    public HashMap<String, Object> setDone(Integer TaskID);
+    public HashMap<String, Object> setUpcoming(Integer TaskID);
 }

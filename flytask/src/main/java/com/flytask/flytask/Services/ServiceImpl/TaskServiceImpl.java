@@ -113,5 +113,88 @@ public class TaskServiceImpl implements TaskService {
         return response;
     }
 
+    @Override
+    public HashMap<String, Object> setTodo(Integer TaskID) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
+            if (taskToEdit.isPresent()) {
+                Tasks existingTask = taskToEdit.get();
+                existingTask.setStatus(0);
+                Tasks updatedTask = taskRepository.save(existingTask);
+                response.put("Message", "Task Changed to TODO");
+                response.put("data", updatedTask.getTaskId());
+            } else {
+                response.put("Error", "Task not found with ID: " + TaskID);
+            }
+        } catch (Exception e) {
+            response.put("Error", "An error occurred while updating the task");
+            e.printStackTrace(); // Log the exception for debugging purposes
+        }
+        return response;
+    }
+
+    @Override
+    public HashMap<String, Object> setDoing(Integer TaskID) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
+            if (taskToEdit.isPresent()) {
+                Tasks existingTask = taskToEdit.get();
+                existingTask.setStatus(1);
+                Tasks updatedTask = taskRepository.save(existingTask);
+                response.put("Message", "Task Changed to DOING");
+                response.put("data", updatedTask.getTaskId());
+            } else {
+                response.put("Error", "Task not found with ID: " + TaskID);
+            }
+        } catch (Exception e) {
+            response.put("Error", "An error occurred while updating the task");
+            e.printStackTrace(); // Log the exception for debugging purposes
+        }
+        return response;
+    }
+
+    @Override
+    public HashMap<String, Object> setDone(Integer TaskID) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
+            if (taskToEdit.isPresent()) {
+                Tasks existingTask = taskToEdit.get();
+                existingTask.setStatus(2);
+                Tasks updatedTask = taskRepository.save(existingTask);
+                response.put("Message", "Task Changed to DONE");
+                response.put("data", updatedTask.getTaskId());
+            } else {
+                response.put("Error", "Task not found with ID: " + TaskID);
+            }
+        } catch (Exception e) {
+            response.put("Error", "An error occurred while updating the task");
+            e.printStackTrace(); // Log the exception for debugging purposes
+        }
+        return response;
+    }
+
+    @Override
+    public HashMap<String, Object> setUpcoming(Integer TaskID) {
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
+            if (taskToEdit.isPresent()) {
+                Tasks existingTask = taskToEdit.get();
+                existingTask.setStatus(3);
+                Tasks updatedTask = taskRepository.save(existingTask);
+                response.put("Message", "Task Changed to Upcoming");
+                response.put("data", updatedTask.getTaskId());
+            } else {
+                response.put("Error", "Task not found with ID: " + TaskID);
+            }
+        } catch (Exception e) {
+            response.put("Error", "An error occurred while updating the task");
+            e.printStackTrace(); // Log the exception for debugging purposes
+        }
+        return response;
+    }
 
 }
