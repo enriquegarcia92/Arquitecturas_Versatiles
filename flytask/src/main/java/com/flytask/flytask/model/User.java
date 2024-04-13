@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@Table(name = "\"USER\"")
+@Table(name = "\"USER\"" , schema = "FLYTASK")
 public class User implements UserDetails {
 
     @Id
@@ -41,6 +41,9 @@ public class User implements UserDetails {
     @Column(name = "USR_ROLE", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Tasks> tasks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
