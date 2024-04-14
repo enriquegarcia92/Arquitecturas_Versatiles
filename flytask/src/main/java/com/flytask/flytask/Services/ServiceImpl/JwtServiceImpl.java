@@ -1,6 +1,7 @@
 package com.flytask.flytask.Services.ServiceImpl;
 
 import com.flytask.flytask.Services.JwtService;
+import com.flytask.flytask.model.TokenType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,8 +19,8 @@ import java.util.function.Function;
 public class JwtServiceImpl implements JwtService {
     @Value("${SECRETKEY}")
     private String secretKey;
-    public String getToken(UserDetails user){
-        return getToken(new HashMap<>(), user);
+    public String getToken(UserDetails user, TokenType tokenType){
+        return getToken(new HashMap<>(), user, tokenType);
     }
 
     @Override
@@ -37,6 +38,13 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
+    public boolean isTokenLogin(String token) {
+        Claims claims = getAllClaims(token);
+        String tokenType = (String) claims.get("tokenType");
+        return tokenType != null && tokenType.equals("LOGIN");
+    }
+
+    @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = getUserNameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
@@ -51,12 +59,24 @@ public class JwtServiceImpl implements JwtService {
     }
 
 
-    private String getToken (Map<String, Object> extraClaims, UserDetails user){
+    public String getToken(Map<String, Object> extraClaims, UserDetails user, TokenType tokenType) {
+        Date now = new Date();
+        long expirationMillis;
+
+        // Set expiration based on token type
+        if (tokenType == TokenType.RECOVERY) {
+            expirationMillis = now.getTime() + 1000 * 60 * 20; // 20 minutes
+            extraClaims.put("tokenType", TokenType.RECOVERY);
+        } else {
+            expirationMillis = now.getTime() + 1000 * 60 * 60 * 4; // 4 hours
+            extraClaims.put("tokenType", TokenType.LOGIN);
+        }
+
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*8))
+                .setIssuedAt(now)
+                .setExpiration(new Date(expirationMillis))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
