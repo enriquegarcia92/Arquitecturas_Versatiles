@@ -2,6 +2,7 @@ package com.flytask.flytask.Services.ServiceImpl;
 import com.flytask.flytask.Exceptions.*;
 import com.flytask.flytask.Services.AuthService;
 import com.flytask.flytask.Services.JwtService;
+import com.flytask.flytask.Utils.MailStructureUtil;
 import com.flytask.flytask.model.DTO.AuthResponse;
 import com.flytask.flytask.model.DTO.LoginRequest;
 import com.flytask.flytask.model.DTO.RecoveryDTO;
@@ -10,10 +11,14 @@ import com.flytask.flytask.model.Role;
 import com.flytask.flytask.model.TokenType;
 import com.flytask.flytask.model.User;
 import com.flytask.flytask.repository.UserRepository;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -35,18 +40,24 @@ public class AuthServiceImpl implements AuthService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JavaMailSender javaMailSender;
-
     @Override
     public HashMap<String, Object> sendRecoveryEmail(String email) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             UserDetails user = userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found"));
             String token = jwtService.getToken(user, TokenType.RECOVERY);
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setTo(email);
-            msg.setSubject("Password Recovery");
-            msg.setText("Your password recovery token is: " + token);
-            javaMailSender.send(msg);
+
+            MailStructureUtil mailStructureUtil = new MailStructureUtil();
+
+            javaMailSender.send(new MimeMessagePreparator() {
+                @Override
+                public void prepare(MimeMessage mimeMessage) throws MessagingException {
+                    MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+                    helper.setTo(email);
+                    helper.setSubject("Password Recovery");
+                    helper.setText(mailStructureUtil.EmailTemplate(token), true); // Set HTML content
+                }
+            });
             response.put("status", "success");
             response.put("message", "Password recovery email sent successfully.");
         } catch (NotFoundException e) {
