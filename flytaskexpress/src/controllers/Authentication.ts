@@ -3,8 +3,8 @@ import { AppDataSource } from '../data-source';
 import { compare, hash } from 'bcryptjs';
 import { User } from '../entity/User';
 import { Role } from './Role';
-import {generateLoginToken} from '../middleware/authenticationToken';
-
+import {generateLoginToken, generateRecoveryToken} from '../middleware/authenticationToken';
+import { verify, JwtPayload } from 'jsonwebtoken';
 interface RegisterRequestBody {
     usr_email: string;
     usr_name: string;
@@ -54,6 +54,31 @@ export class AuthController {
             return res.status(200).json({ token });
         } catch (err) {
             return res.status(500).send('Error in logging in');
+        }
+    }
+    public async passwordRecovery(req: express.Request, res: express.Response){
+        try {
+            const { usr_email, usr_password } = req.body;
+            const user = await AppDataSource.getRepository(User).findOne({ 
+                where: { usr_email } 
+            });
+            if (!user) {
+                return res.status(400).send('Usuario no encontrado');
+            }
+            const recoveryToken = generateRecoveryToken(user.usr_id, user.usr_email);
+            // Send recovery email with the token
+            const decoded = verify(recoveryToken, process.env.RECOVERY_JWT_SECRET) as JwtPayload;
+            if (decoded.userId !== user.usr_id || decoded.email !== user.usr_email) {
+                return res.status(400).send('Token de recuperación inválido');
+            }
+            const newPassword = usr_password;
+            user.usr_password = await hash(newPassword, 10);
+            await AppDataSource.getRepository(User).save(user);
+    
+            return res.status(200).send('Contraseña actualizada exitosamente');
+        } catch (error) {
+            console.error('Error en la recuperación de contraseña:', error);
+            return res.status(500).send('Error en la recuperación de contraseña');
         }
     }
 }
