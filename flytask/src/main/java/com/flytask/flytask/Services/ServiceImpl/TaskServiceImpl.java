@@ -5,15 +5,19 @@ import com.flytask.flytask.Services.UserService;
 import com.flytask.flytask.model.DTO.EditTaskDTO;
 import com.flytask.flytask.model.DTO.TaskDto;
 import com.flytask.flytask.repository.TaskRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import com.flytask.flytask.model.Tasks;
 import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +30,19 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private UserService userService;
 
+    @SneakyThrows
     @Override
-    public HashMap<String, Object> searchTasksByKeywordAndStatus(String keyword, Integer status, Timestamp dueDate, Timestamp creationDate) {
+    public HashMap<String, Object> searchTasksByKeywordAndStatus(String keyword, Integer status, String dueDate, String creationDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         HashMap<String, Object> response = new HashMap<>();
+        Date parsedDueDate = (Date) dateFormat.parse(dueDate);
+        Date parsedcreationDate = (Date) dateFormat.parse(creationDate);
+
+        Timestamp parsedDueDateTimeStamp = new Timestamp(parsedDueDate.getTime());
+        Timestamp parsedCreationDateTimestamp = new Timestamp(parsedcreationDate.getTime());
 
         try {
-            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatus(keyword, status,dueDate, creationDate);
+            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatus(keyword, status,parsedDueDateTimeStamp, parsedCreationDateTimestamp);
 
             // Add the list of tasks to the response map
             response.put("tasks", tasks);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BsListUl,
   BsFilter,
@@ -6,8 +6,29 @@ import {
   BsArrowBarDown,
 } from "react-icons/bs";
 import EmptyTaskboard from "./EmptyTaskboard";
+import { getTasks } from "../api/getTasksAPI";
+import TaskTable from "../components/TaskTable";
 
 const TaskBoard: React.FC = () => {
+  const [filterMode, setFilterMode] = useState(false);
+  const [listMode, setListMode] = useState(false);
+  const [kanBanMode, setKanbanMode] = useState(false);
+  const [tasks, setTasks] = useState<any>(null)
+
+  useEffect(() => {
+    getTasks
+      .getTasks()
+      .then((response) => {
+        console.log(response);
+        let tasks = response.data.tasks;
+        console.log(tasks);
+        setTasks(tasks);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, []);
+
   return (
     <div className="bg-slate-50 h-screen">
       {/* Top bar with options */}
@@ -39,7 +60,7 @@ const TaskBoard: React.FC = () => {
 
       {/* Main content of the dashboard */}
       <div className="h-screen">
-        <EmptyTaskboard/>
+        {tasks ? <EmptyTaskboard/> : <TaskTable/>}
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
@@ -25,8 +26,8 @@ public class TaskController {
     public ResponseEntity<Map<String, Object>> searchTasksByKeywordAndStatus(
             @RequestParam String keyword,
             @RequestParam Integer status,
-            @RequestParam Timestamp dueDate,
-            @RequestParam Timestamp creationDate
+            @RequestParam String dueDate,
+            @RequestParam String creationDate
     ) {
         HashMap<String, Object> response = taskService.searchTasksByKeywordAndStatus(keyword, status, dueDate, creationDate);
         if (response.containsKey("error")) {

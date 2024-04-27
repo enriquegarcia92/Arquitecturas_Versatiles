@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import chincheta from "../images/chincheta.png";
+import { registerUser } from "../api/registerAPI";
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -13,6 +14,10 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignupPage: React.FC = () => {
+  const [regStatus, setRegStatus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -22,8 +27,23 @@ const SignupPage: React.FC = () => {
     },
     validationSchema: SignupSchema,
     onSubmit: (values) => {
+      setIsLoading(true);
       console.log(values);
-      
+
+      registerUser
+        .register(values)
+        .then((response) => {
+          setIsLoading(false);
+          let status = response.status === 200;
+          setErrorStatus(!status);
+          setRegStatus(status);
+        })
+        .catch((error) => {
+          let status = error.response.status === 200;
+          setErrorStatus(!status);
+          setRegStatus(status);
+          setIsLoading(false);
+        });
     },
   });
 
@@ -31,7 +51,9 @@ const SignupPage: React.FC = () => {
     <div className="h-screen bg-signup-background bg-cover bg-center flex justify-center items-center w-screen">
       {/* Container for the card and the image */}
       <div className="relative bg-slate-50 p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-center font-bold">Join us!</h1>
+        <h1 className="text-center font-bold">{
+          regStatus ? "Your account has been registered" : errorStatus ? "An error has ocurred, try again" : "Join us!"
+        }</h1>
         {/* Absolute positioned image */}
         <img
           src={chincheta} // Replace with your image path
@@ -116,9 +138,19 @@ const SignupPage: React.FC = () => {
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={isLoading}
+              className={`w-full flex justify-center py-2 px-4 border rounded-md shadow-sm text-sm font-medium text-white ${
+                isLoading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-indigo-600 hover:bg-indigo-700"
+              } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
             >
-              Sign up
+              {isLoading
+                ? "Loading..."
+                : regStatus
+                ? "Success!, please" + <a href="/login">Log in.</a>
+                : "Register"
+              }
             </button>
           </div>
         </form>
