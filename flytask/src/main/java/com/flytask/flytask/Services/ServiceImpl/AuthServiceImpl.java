@@ -81,7 +81,7 @@ public class AuthServiceImpl implements AuthService {
 
         UserDetails user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
         String token = jwtService.getToken(user, TokenType.LOGIN);
-        return AuthResponse.builder().token(token).name(user.getUsername()).build();
+        return AuthResponse.builder().token(token).name(user.getUsername()).id(userRepository.findByEmail(user.getUsername()).orElseThrow(()-> new NotFoundException("User not found")).getUserId()).build();
     }
 
     @Override
@@ -108,7 +108,7 @@ public class AuthServiceImpl implements AuthService {
 
         // Generate token and build AuthResponse
         String token = jwtService.getToken(savedUser, TokenType.LOGIN);
-        return AuthResponse.builder().token(token).name(request.getName()).build();
+        return AuthResponse.builder().token(token).name(request.getName()).id(userRepository.findByEmail(user.getUsername()).orElseThrow(()-> new NotFoundException("User not found")).getUserId()).build();
     }
 
     @Override

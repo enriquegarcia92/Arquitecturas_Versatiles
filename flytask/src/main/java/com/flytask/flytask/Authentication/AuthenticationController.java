@@ -15,6 +15,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -26,6 +27,7 @@ public class AuthenticationController {
     public ResponseEntity<AuthResponse> Login(@RequestBody @Valid LoginRequest request){
         return ResponseEntity.ok(authService.login(request));
     }
+
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.ok(authService.register(request));
@@ -39,5 +41,10 @@ public class AuthenticationController {
     @PostMapping("/recover-authenticated")
     public ResponseEntity<?> recoveryAuthenticated(@RequestBody RecoveryDTO request){
         return ResponseEntity.ok(authService.recoverPassword(request));
+    }
+
+    @PostMapping("/whoami")
+    public ResponseEntity<?> checkToken(){
+        return ResponseEntity.ok("Token valido");
     }
 }
