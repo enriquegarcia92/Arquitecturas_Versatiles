@@ -1,4 +1,4 @@
-package com.flytaskmongo.flytaskmongodb;
+package com.flytaskmongodb.flytaskmongodb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

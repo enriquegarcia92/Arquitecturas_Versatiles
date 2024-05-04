@@ -1,4 +1,4 @@
-package com.flytaskmongo.flytaskmongodb;
+package com.flytaskmongodb.flytaskmongodb;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
