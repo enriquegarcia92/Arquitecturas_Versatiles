@@ -27,7 +27,13 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - db   
+      - db
+  java_app_mdb:
+    container_name: spring_mongo_container
+    image: flytask-javamdb-app:1.0.0
+    build: flytaskmongodb/.
+    ports:
+      - 8080:8080 
 
   django_postgre:
     container_name: django_postgre_container
