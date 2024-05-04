@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Builder
 @Document(collection = "tasks")
@@ -32,15 +33,15 @@ public class Tasks {
     private Integer status;
 
     @JsonAlias("creationDate")
-    private Timestamp creationDate;
+    private Date creationDate;
 
     @JsonAlias("dueDate")
-    private Timestamp dueDate;
+    private Date dueDate;
 
     @DBRef
     private User user;
 
-    public Tasks(String title, String description, Integer status, Timestamp creationDate, Timestamp dueDate, User user) {
+    public Tasks(String title, String description, Integer status, Date creationDate, Date dueDate, User user) {
         this.title = title;
         this.description = description;
         this.status = status;

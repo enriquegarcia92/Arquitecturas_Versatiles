@@ -37,12 +37,11 @@ public class TaskServiceImpl implements TaskService {
         HashMap<String, Object> response = new HashMap<>();
         Date parsedDueDate = (Date) dateFormat.parse(dueDate);
         Date parsedcreationDate = (Date) dateFormat.parse(creationDate);
-
         Timestamp parsedDueDateTimeStamp = new Timestamp(parsedDueDate.getTime());
         Timestamp parsedCreationDateTimestamp = new Timestamp(parsedcreationDate.getTime());
 
         try {
-            List<Tasks> tasks = taskRepository.findByTitleContainingIgnoreCaseOrDueDateGreaterThanEqualOrCreationDateGreaterThanEqualOrStatus(keyword, status,parsedDueDateTimeStamp, parsedCreationDateTimestamp);
+            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatus(keyword, status,parsedDueDateTimeStamp, parsedCreationDateTimestamp);
 
             // Add the list of tasks to the response map
             response.put("tasks", tasks);
@@ -62,8 +61,7 @@ public class TaskServiceImpl implements TaskService {
         HashMap<String, Object> response = new HashMap<>();
 
         try {
-            LocalDateTime now = LocalDateTime.now();
-            Timestamp creationDate = Timestamp.valueOf(now);
+            Date creationDate = new Date();
             Tasks newTask = Tasks.builder()
                     .taskId(sequenceGeneratorService.generarIdSecuencial(Tasks.SEQUENCE_NAME))
                     .title(task.getTitle())
@@ -114,7 +112,6 @@ public class TaskServiceImpl implements TaskService {
             Tasks taskToDelete = taskRepository.findById(taskId).orElseThrow(() -> new TaskNotFoundException("Tarea no encontrada"));
                 taskRepository.delete(taskToDelete);
                 response.put("Message", "Task Deleted Successfully");
-                response.put("Error", "Task not found with ID: " + taskId);
         } catch (Exception e) {
             response.put("Error", "An error occurred while deleting the task");
             e.printStackTrace(); // Log the exception for debugging purposes

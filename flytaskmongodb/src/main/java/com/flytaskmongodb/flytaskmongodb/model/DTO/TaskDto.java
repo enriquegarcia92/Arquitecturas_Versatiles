@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 @Builder
@@ -19,7 +20,7 @@ public class TaskDto {
     @NotEmpty(message = "description must not be null")
     private String description;
     @NotNull(message = "due date must not be null")
-    private Timestamp dueDate;
+    private Date dueDate;
     @NotNull(message = "user identification must not be null")
     private Integer userId;
 }
