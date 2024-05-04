@@ -25,7 +25,7 @@ services:
     image: flytask-java-app:1.0.0
     build: flytask/.
     ports:
-      - 8080:8080
+      - 7070:7070
     depends_on:
       - db
   java_app_mdb:
