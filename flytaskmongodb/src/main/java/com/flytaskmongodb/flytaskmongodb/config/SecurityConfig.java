@@ -25,9 +25,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
     @Autowired
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
-    private final AuthenticationProvider authProvider;
+    private AuthenticationProvider authProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -47,7 +47,8 @@ public class SecurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers( "/api/auth/**").permitAll()
+                                .requestMatchers( "/api/auth/login").permitAll()
+                                .requestMatchers( "/api/auth/register").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->
