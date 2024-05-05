@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -72,18 +73,19 @@ WSGI_APPLICATION = 'flytaskpy.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'flytask',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'db',  # O la dirección IP de tu servidor PostgreSQL
-        'PORT': '5432',       # El puerto por defecto de PostgreSQL
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'OPTIONS': {
+            'options': f'-c search_path=flytask'
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -125,3 +127,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
