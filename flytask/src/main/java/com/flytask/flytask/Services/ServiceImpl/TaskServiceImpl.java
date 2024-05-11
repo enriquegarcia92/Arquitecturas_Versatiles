@@ -32,7 +32,7 @@ public class TaskServiceImpl implements TaskService {
 
     @SneakyThrows
     @Override
-    public HashMap<String, Object> searchTasksByKeywordAndStatus(String keyword, Integer status, String dueDate, String creationDate) {
+    public HashMap<String, Object> searchTasksByKeywordAndStatus(String keyword, Integer status, String dueDate, String creationDate, Integer userId) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         HashMap<String, Object> response = new HashMap<>();
         Date parsedDueDate = (Date) dateFormat.parse(dueDate);
@@ -42,7 +42,7 @@ public class TaskServiceImpl implements TaskService {
         Timestamp parsedCreationDateTimestamp = new Timestamp(parsedcreationDate.getTime());
 
         try {
-            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatus(keyword, status,parsedDueDateTimeStamp, parsedCreationDateTimestamp);
+            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatusAndUserId(keyword, status,parsedDueDateTimeStamp, parsedCreationDateTimestamp,userId);
 
             // Add the list of tasks to the response map
             response.put("tasks", tasks);

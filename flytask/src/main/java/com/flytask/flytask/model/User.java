@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @JsonAlias("email")
     private String email;
 
-    @Column(name ="USR_PASSWORD", nullable = false)
+    @Column(name ="usr_password", nullable = false)
     @JsonIgnore
     @JsonAlias("password")
     private String password;
