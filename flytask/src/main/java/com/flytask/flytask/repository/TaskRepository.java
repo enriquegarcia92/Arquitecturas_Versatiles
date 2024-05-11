@@ -8,12 +8,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Tasks, Integer> {
-    @Query("SELECT t FROM Tasks t WHERE " +
-            "LOWER(t.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+    @Query("SELECT t FROM Tasks t JOIN t.user u WHERE " +
+            "u.userId = :userId AND " +
+            "(LOWER(t.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(t.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "t.dueDate >= :dueDate OR " +
             "t.creationDate >= :creationDate OR " +
-            "t.status = :status")
-    List<Tasks> searchTasksByKeywordAndStatus(String keyword, Integer status, Timestamp dueDate, Timestamp creationDate);
+            "t.status = :status)")
+    List<Tasks> searchTasksByKeywordAndStatusAndUserId(String keyword, Integer status, Timestamp dueDate, Timestamp creationDate, Integer userId);
+
 }
 
