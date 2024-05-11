@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { User } from "./entity/User"
+import { Task } from "./entity/Tasks"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
     database: "flytask",
     synchronize: true,
     logging: false,
-    entities: [User,],
-    migrations: [],
+    entities: [User, Task],
+    migrations: [__dirname + '/migration/*.js'],
     subscribers: [],
 })
