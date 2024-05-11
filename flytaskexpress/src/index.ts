@@ -2,6 +2,7 @@ import { AppDataSource } from "./data-source"
 import * as express from "express"
 import { authenticateToken } from "./middleware/authenticationToken"
 import { TaskController } from "./controllers/Task"
+import { AuthController } from "./controllers/Authentication"
 
 
 const app = express()
@@ -21,6 +22,10 @@ app.put("api/task/doing", authenticateToken, new TaskController().updateTaskStat
 app.put("api/task/upcoming", authenticateToken, new TaskController().updateTaskStatusToUpcoming)
 app.put("ap/task/todo", authenticateToken, new TaskController().updateTaskStatusToTodo)
 
+//Auth Routes
+app.post("api/auth/register", new AuthController().registerUser)
+app.post("api/auth/login", new AuthController().loginUser)
+app.post("api/auth/recover-password", new AuthController().passwordRecovery)
 
 app.put
 AppDataSource.initialize()
