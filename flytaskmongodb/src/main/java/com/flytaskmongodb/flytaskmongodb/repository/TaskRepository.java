@@ -8,11 +8,14 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface TaskRepository extends MongoRepository<Tasks, Integer> {
-    @Query("SELECT t FROM Tasks t WHERE " +
-            "LOWER(t.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(t.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "t.dueDate >= :dueDate OR " +
-            "t.creationDate >= :creationDate OR " +
-            "t.status = :status")
-    List<Tasks> searchTasksByKeywordAndStatus(String keyword, Integer status, Timestamp dueDate, Timestamp creationDate);
+    @Query("{$and: ["
+            + "{ $or: ["
+            + "{ 'creationDate': { $eq: ?3 } },"
+            + "{ 'dueDate': { $eq: ?2 } },"
+            + "{ 'title': { $regex: ?0, $options: 'i' } },"
+            + "{ 'description': { $regex: ?0, $options: 'i' } }"
+            + "]},"
+            + "{ 'user.$id': ?4 }, { 'status': ?1 }"
+            + "]}")
+    List<Tasks> searchTasksByKeywordAndStatusAndUserId(String keyword, Integer status, Timestamp dueDate, Timestamp creationDate, Integer userId);
 }

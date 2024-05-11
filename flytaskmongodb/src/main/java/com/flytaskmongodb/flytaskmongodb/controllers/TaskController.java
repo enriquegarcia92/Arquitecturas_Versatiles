@@ -24,9 +24,10 @@ public class TaskController {
             @RequestParam String keyword,
             @RequestParam Integer status,
             @RequestParam String dueDate,
-            @RequestParam String creationDate
+            @RequestParam String creationDate,
+            @RequestParam(required = true) Integer userId
     ) {
-        HashMap<String, Object> response = taskService.searchTasksByKeywordAndStatus(keyword, status, dueDate, creationDate);
+        HashMap<String, Object> response = taskService.searchTasksByKeywordAndStatus(keyword, status, dueDate, creationDate, userId);
         if (response.containsKey("error")) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         } else {
