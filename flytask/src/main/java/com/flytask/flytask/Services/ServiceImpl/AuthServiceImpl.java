@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
             MailStructureUtil mailStructureUtil = new MailStructureUtil();
 
             javaMailSender.send(new MimeMessagePreparator() {
-                @Override
+               @Override
                 public void prepare(MimeMessage mimeMessage) throws MessagingException {
                     MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
                     helper.setTo(email);
