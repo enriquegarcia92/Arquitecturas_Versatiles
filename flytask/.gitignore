@@ -3,7 +3,7 @@ HELP.md
 
 # Ignore everything in the target/ directory
 target/
-
+flytaskmongodb/target/classes/com/flytaskmongodb/flytaskmongodb/
 # Except for maven-wrapper.jar in the .mvn/wrapper directory
 !.mvn/wrapper/maven-wrapper.jar
 
