@@ -1,6 +1,5 @@
-from django.urls import path
-from flytaskpy.views import hello_world
+from django.urls import path, include
 
 urlpatterns = [
-    path('testing', hello_world, name='hello_world'),
+    path('api/', include('users.urls')),
 ]

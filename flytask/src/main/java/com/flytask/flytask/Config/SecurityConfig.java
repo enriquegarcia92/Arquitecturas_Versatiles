@@ -56,6 +56,8 @@ public class SecurityConfig {
                         authRequest
                                 .requestMatchers( "/api/auth/login").permitAll()
                                 .requestMatchers( "/api/auth/register").permitAll()
+                                .requestMatchers("api/auth/recover-password").permitAll()
+                                .requestMatchers("api/auth/recover-authenticated").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .exceptionHandling(config -> config.authenticationEntryPoint(new CustomAuthenticationEntryPoint()))
