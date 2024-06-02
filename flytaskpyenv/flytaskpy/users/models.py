@@ -11,7 +11,7 @@ class User(AbstractUser):
     usr_email = models.CharField(max_length=255, unique=True)
     usr_password = models.CharField(max_length=255)
     usr_role = models.CharField(max_length=10)
-    #Variables default no utilizadas para caso de uso
+
     password = models.CharField(max_length=255, unique=True, null=True)
     is_superuser = models.BooleanField(blank=True, default=False, null=True)  # Set default value to False
     first_name = models.CharField(max_length=255, blank=True, null=True)  # Adjust as needed
@@ -25,16 +25,3 @@ class User(AbstractUser):
 
     class Meta:
         db_table = 'user'
-
-
-class Task(models.Model):
-    tsk_id = models.AutoField(primary_key=True)
-    tsk_title = models.CharField(max_length=255)
-    tsk_desc = models.CharField(max_length=255, blank=True)
-    tsk_status = models.IntegerField()
-    tsk_creation_date = models.DateTimeField()
-    tsk_due_date = models.DateTimeField()
-    usr = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'tasks'

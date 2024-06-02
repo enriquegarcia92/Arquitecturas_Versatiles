@@ -1,3 +1,5 @@
+from functools import wraps
+
 from django.core.mail import send_mail
 from rest_framework.views import APIView
 from flytaskpy import settings
@@ -44,6 +46,43 @@ def generate_logintoken(user):
     )
 
     return token
+
+
+def token_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        token = request.headers.get('Authorization', '').split('Bearer ')[-1]
+        if not token:
+            response = {
+                "message": "Token missing",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        try:
+            decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            response = {
+                "message": "Token Expired",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except jwt.InvalidTokenError:
+            response = {
+                "message": "Token invalid",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        if decoded_token.get('tokenType') != 'LOGIN':
+            response = {
+                "message": "Token not login type",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return view_func(request, *args, **kwargs)
+
+    return _wrapped_view
 
 
 # Create your views here.
@@ -155,3 +194,9 @@ class RestePasswordView(APIView):
                 "status": "error"
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class WhoamIView(APIView):
+    @token_required
+    def post(self, request):
+        return Response("Token Valid", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
