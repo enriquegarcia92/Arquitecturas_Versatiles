@@ -38,7 +38,6 @@ const LoginPage: React.FC = () => {
         })
         .catch((error) => {
           console.log(error);
-          
           let status = error.response.status === 200;
           setErrorStatus(!status);
           setIsLoading(false);
