@@ -1,5 +1,4 @@
 package com.flytaskmongodb.flytaskmongodb.authentication;
-import com.flytaskmongodb.flytaskmongodb.model.DTO.AuthResponse;
 import com.flytaskmongodb.flytaskmongodb.model.DTO.LoginRequest;
 import com.flytaskmongodb.flytaskmongodb.model.DTO.RecoveryDTO;
 import com.flytaskmongodb.flytaskmongodb.model.DTO.RegisterRequest;
@@ -19,23 +18,23 @@ public class AuthenticationController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> Login(@RequestBody @Valid LoginRequest request){
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<?> Login(@RequestBody @Valid LoginRequest request){
+        return authService.login(request);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody @Valid RegisterRequest request){
-        return ResponseEntity.ok(authService.register(request));
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request){
+        return authService.register(request);
     }
 
     @PostMapping("/recover-password")
     public ResponseEntity<?> recoveryPassword(@RequestParam String email){
-        return ResponseEntity.ok(authService.sendRecoveryEmail(email));
+        return authService.sendRecoveryEmail(email);
     }
 
     @PostMapping("/recover-authenticated")
     public ResponseEntity<?> recoveryAuthenticated(@RequestBody RecoveryDTO request){
-        return ResponseEntity.ok(authService.recoverPassword(request));
+        return authService.recoverPassword(request);
     }
 
     @PostMapping("/whoami")
