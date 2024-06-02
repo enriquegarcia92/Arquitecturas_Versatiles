@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User
-from .Exceptions import PasswordMismatchException, DuplicateEmailException
+import bcrypt
+
 class UserSerializer(serializers.ModelSerializer):
     confirmPassword = serializers.CharField(write_only=True)
     name = serializers.CharField(write_only=True, source='usr_name')
@@ -9,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['usr_id', 'name', 'email', 'password', 'confirmPassword']
+        fields = ['name', 'email', 'password', 'confirmPassword']
         read_only_fields = ['usr_id']
         extra_kwargs = {
             'usr_password': {'write_only': True},
@@ -17,9 +18,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if data['usr_password'] != data['confirmPassword']:
-            raise PasswordMismatchException("Passwords do not match")
+            print("passwords not match")
+            raise Exception("Passwords do not match")
         if User.objects.filter(usr_email=data['usr_email']).exists():
-            raise DuplicateEmailException("Email already exists")
+            print("email exists")
+            raise Exception("Email already exists")
         return data
 
     def create(self, validated_data):
@@ -28,6 +31,9 @@ class UserSerializer(serializers.ModelSerializer):
         validated_data['usr_role'] = 'CLIENT'
         instance = self.Meta.model(**validated_data)
         if password:
-            instance.set_password(password)
+            # Hash the password using bcrypt
+            salt = bcrypt.gensalt()
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+            instance.usr_password = hashed_password.decode('utf-8')  # Decode to store as string
         instance.save()
         return instance

@@ -4,7 +4,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-jb#0v74po0$#)##^(*f32r3(vlcm_322zt4^c_fs&qlszi1)^8'
+SECRET_KEY = 'jb0v74po0f32r3vlcm322zt4cfsqlszi18jb0v74po0f32r3vlcm322zt4cfsqlszi18jb0v74po0f32r3vlcm322zt4cfsqlszi18'
 
 DEBUG = True
 
@@ -18,8 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders',
-    'users'
+    'users',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -100,3 +100,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 SECRET_KEY = '74fb18cb25e231e2fd2dd6d140f23d3c6bf1e5b11af3b52d98ef6a2158d99a1674fb18cb25e231e2fd2dd6d140f23d3c6bf1e5b11af3b52d98ef6a2158d99a16'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'expensetrackerg21@gmail.com'
+EMAIL_HOST_PASSWORD = 'lbgy yqpy besa efcs'
