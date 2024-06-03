@@ -19,16 +19,8 @@ class GetMyTasks(APIView):
         keyword = request.GET.get("keyword")
         tsk_status = request.GET.get("status")
         # Get the date strings from the request
-        due_date_str = request.GET.get("dueDate")
-        creation_date_str = request.GET.get("creationDate")
-
-        # Convert date strings to datetime objects
-        due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ")
-        creation_date = datetime.datetime.strptime(creation_date_str, "%Y-%m-%dT%H:%M:%SZ")
 
         # Print to debug
-        print(user_id, keyword, keyword, due_date, creation_date, tsk_status)
-
         try:
             query = """
                 select * 
@@ -37,14 +29,12 @@ class GetMyTasks(APIView):
                 where t.usr_id = %s 
                 AND (LOWER(t.tsk_title) like lower(concat('%%', %s, '%%')) 
                      OR LOWER(t.tsk_desc) like lower(concat('%%', %s, '%%')) 
-                     OR t.tsk_due_date >= %s 
-                     OR t.tsk_creation_date >= %s 
                      OR t.tsk_status = %s)
             """
 
             # Execute the SQL query
             with connection.cursor() as cursor:
-                cursor.execute(query, (user_id, keyword, keyword, due_date, creation_date, tsk_status))
+                cursor.execute(query, (user_id, keyword, keyword, tsk_status))
 
                 rows = cursor.fetchall()
 

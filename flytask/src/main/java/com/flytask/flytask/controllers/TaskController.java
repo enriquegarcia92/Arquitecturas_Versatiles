@@ -23,10 +23,8 @@ public class TaskController {
     public ResponseEntity<?> searchTasksByKeywordAndStatus(
             @RequestParam String keyword,
             @RequestParam Integer status,
-            @RequestParam String dueDate,
-            @RequestParam String creationDate,
             @RequestParam(required = true) Integer userId) {
-        return taskService.searchTasksByKeywordAndStatus(keyword, status, dueDate, creationDate, userId);
+        return taskService.searchTasksByKeywordAndStatus(keyword, status, userId);
     }
 
     @PostMapping("/create")

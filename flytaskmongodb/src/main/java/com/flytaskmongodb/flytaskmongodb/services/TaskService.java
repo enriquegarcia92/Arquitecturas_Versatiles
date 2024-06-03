@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.HashMap;
 
 public interface TaskService {
-    public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, String dueDate, String creationDate, Integer userId);
+    public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, Integer userId);
     public ResponseEntity<HashMap<String, Object>> createTask (TaskDto task);
     public ResponseEntity<HashMap<String, Object>> editTask(Integer TaskID , EditTaskDTO Task);
     public ResponseEntity<HashMap<String, Object>> deleteTask(Integer taskId);

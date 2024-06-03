@@ -12,10 +12,8 @@ public interface TaskRepository extends JpaRepository<Tasks, Integer> {
             "u.userId = :userId AND " +
             "(LOWER(t.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(t.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "t.dueDate >= :dueDate OR " +
-            "t.creationDate >= :creationDate OR " +
             "t.status = :status)")
-    List<Tasks> searchTasksByKeywordAndStatusAndUserId(String keyword, Integer status, Timestamp dueDate, Timestamp creationDate, Integer userId);
+    List<Tasks> searchTasksByKeywordAndStatusAndUserId(String keyword, Integer status, Integer userId);
 
 }
 

@@ -30,17 +30,10 @@ public class TaskServiceImpl implements TaskService {
 
     @SneakyThrows
     @Override
-    public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, String dueDate, String creationDate, Integer userId) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, Integer userId) {
         HashMap<String, Object> response = new HashMap<>();
-        Date parsedDueDate = (Date) dateFormat.parse(dueDate);
-        Date parsedcreationDate = (Date) dateFormat.parse(creationDate);
-
-        Timestamp parsedDueDateTimeStamp = new Timestamp(parsedDueDate.getTime());
-        Timestamp parsedCreationDateTimestamp = new Timestamp(parsedcreationDate.getTime());
-
         try {
-            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatusAndUserId(keyword, status,parsedDueDateTimeStamp, parsedCreationDateTimestamp,userId);
+            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatusAndUserId(keyword, status,userId);
             response.put("status", "success");
             response.put("message", "Tasks retrieved successfully");
             response.put("data", tasks);
