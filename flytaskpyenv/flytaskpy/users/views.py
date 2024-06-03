@@ -1,6 +1,7 @@
 from functools import wraps
 
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from rest_framework.views import APIView
 from flytaskpy import settings
 from .serializers import UserSerializer
@@ -10,7 +11,6 @@ import jwt, datetime
 from rest_framework import status
 import bcrypt
 from .Utils import Utils
-
 
 def generate_recoverytoken(user):
     now = datetime.datetime.utcnow()
@@ -50,8 +50,19 @@ def generate_logintoken(user):
 
 def token_required(view_func):
     @wraps(view_func)
-    def _wrapped_view(request, *args, **kwargs):
-        token = request.headers.get('Authorization', '').split('Bearer ')[-1]
+    def _wrapped_view(self, request, *args, **kwargs):
+        authorization_header = request.headers.get('Authorization')
+        print("encabezado", authorization_header)
+
+        if not authorization_header or not authorization_header.startswith('Bearer '):
+            response = {
+                "message": "Invalid Authorization header format",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_401_UNAUTHORIZED)
+
+        token = authorization_header.split('Bearer ')[1].strip()
+
         if not token:
             response = {
                 "message": "Token missing",
@@ -61,15 +72,15 @@ def token_required(view_func):
 
         try:
             decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
-        except jwt.ExpiredSignatureError:
+        except jwt.ExpiredSignatureError as e:
             response = {
-                "message": "Token Expired",
+                "message": str(e),
                 "status": "error"
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        except jwt.InvalidTokenError:
+        except jwt.InvalidTokenError as e:
             response = {
-                "message": "Token invalid",
+                "message": str(e),
                 "status": "error"
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -80,7 +91,8 @@ def token_required(view_func):
                 "status": "error"
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        return view_func(request, *args, **kwargs)
+
+        return view_func(self, request, *args, **kwargs)
 
     return _wrapped_view
 
@@ -199,4 +211,4 @@ class RestePasswordView(APIView):
 class WhoamIView(APIView):
     @token_required
     def post(self, request):
-        return Response("Token Valid", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return HttpResponse("Token Valid", status=status.HTTP_200_OK, content_type="text/plain")
