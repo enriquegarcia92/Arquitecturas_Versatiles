@@ -52,8 +52,6 @@ def token_required(view_func):
     @wraps(view_func)
     def _wrapped_view(self, request, *args, **kwargs):
         authorization_header = request.headers.get('Authorization')
-        print("encabezado", authorization_header)
-
         if not authorization_header or not authorization_header.startswith('Bearer '):
             response = {
                 "message": "Invalid Authorization header format",
