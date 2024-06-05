@@ -20,7 +20,7 @@ const TaskBoard: React.FC = () => {
       .getTasks()
       .then((response) => {
         console.log(response);
-        let tasks = response.data.tasks;
+        let tasks = response.data.data;
         console.log(tasks);
         setTasks(tasks);
       })

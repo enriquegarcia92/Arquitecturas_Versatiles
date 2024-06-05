@@ -55,7 +55,6 @@ export const AddTaskModal: React.FC<{ closeAddTaskModal: () => void }> = ({ clos
                   <Field type="date" id="dueDate" name="dueDate" className="w-full p-2 border border-primary bg-mint  rounded-md shadow-md" />
                   {errors.dueDate && touched.dueDate && <div className="text-red-500">{errors.dueDate}</div>}
                 </div>
-                
                 <button type="submit" className="w-full bg-yellow hover:bg-yellow text-white py-2 px-4 rounded-md shadow-md">
                   Create
                 </button>

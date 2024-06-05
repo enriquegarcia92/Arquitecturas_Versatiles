@@ -12,7 +12,7 @@ const validationSchema = Yup.object().shape({
   dueDate: Yup.date()
     .min(new Date(), "Due Date cannot be earlier than today")
     .required("Due Date is required"),
-  userId: Yup.number().required(),
+  taskId: Yup.number().required(),
 });
 
 type EditTaskModalProps = {
@@ -27,7 +27,7 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
   const idValue = localStorage.getItem("id");
   const userId: number = Number(idValue);
 
-  const handleEdit = () => {
+  const handleEdit = (title: string, despcription: string, dueDate: string, ) => {
     console.log();
     
   }
@@ -46,7 +46,9 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
           initialValues={{
             title: task.title,
             description: task.description,
-            dueDate: task.dueDate.split("T")[0], // to format as YYYY-MM-DD
+            dueDate: task.dueDate.split("T")[0],
+             // to format as YYYY-MM-DD
+            taskId: task.taskId
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
@@ -62,6 +64,9 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
               )
               .then((response) => {
                 console.log(response);
+                if (response.status === 200) {
+                  window.location.reload()
+                }
               })
               .catch((error) => {
                 console.log(error);

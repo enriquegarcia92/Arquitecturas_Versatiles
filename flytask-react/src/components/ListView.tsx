@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { BsSearch } from "react-icons/bs";
+import { BsArrow90DegRight, BsArrowsMove, BsPencil, BsSearch } from "react-icons/bs";
 import { Task } from "../utils/types";
 import AddTaskModal from "./modals/AddTaskModal";
 import EditTaskModal from "./modals/EditTaskModal";
-import { numberToStatusColorConverter, numberToStatusConverter } from "../utils/dataConversions";
+import {
+  isoToYYYYMMDD,
+  numberToStatusColorConverter,
+  numberToStatusConverter,
+} from "../utils/dataConversions";
+import { BiArrowToLeft, BiArrowToRight, BiMoveHorizontal } from "react-icons/bi";
+import { MdAddTask } from "react-icons/md";
+import MoveTaskModal from "./modals/MoveTaskModal";
 
 type ListViewProps = {
   tasks: Task[];
@@ -14,6 +21,7 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [addTaskModalIsOpen, setAddTaskModalIsOpen] = useState(false);
   const [editTaskModalIsOpen, setEditTaskModalIsOpen] = useState(false);
+  const [moveTaskModalIsOpen, setMoveTaskModalIsOpen] = useState(false);
 
   const filteredTasks = tasks.filter((task) =>
     task.title.toLowerCase().includes(searchText.toLowerCase())
@@ -27,6 +35,14 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
     setAddTaskModalIsOpen(false);
   };
 
+  const openMoveTaskModal = () => {
+    setMoveTaskModalIsOpen(true);
+  };
+
+  const closeMoveTaskModal = () => {
+    setMoveTaskModalIsOpen(false);
+  };
+
   const openEditTaskModal = () => {
     setEditTaskModalIsOpen(true);
   };
@@ -37,7 +53,13 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
 
   const handleSelectedTask = (task: Task) => {
     setSelectedTask(task);
+    openEditTaskModal()
   };
+
+  const handleMoveTask = (task: Task) => {
+    setSelectedTask(task); 
+    openMoveTaskModal()
+  }
 
   return (
     <div className="h-full flex justify-center items-center">
@@ -45,45 +67,54 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
         <div className="h-fit flex justify-between p-3 gap-3">
           <input
             type="text"
-            className="w-5/6 bg-mint focus:outline-none focus:ring-primary focus:ring-1 rounded-md px-3 py-2"
+            className="w-5/6 bg-mint rounded-md px-3 py-2"
             placeholder="Search..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
           <div className="w-1/6 flex gap-2">
             <button
-              className="bg-charcoal px-3 rounded-md text-white"
-              onClick={openEditTaskModal}
-            >
-              Edit Task
-            </button>
-            <button
-              className="bg-yellow px-3 rounded-md text-white"
+              className="bg-yellow px-3 rounded-md text-white w-full flex justify-center items-center gap-2"
               onClick={openAddTaskModal}
             >
               Add Task
+              <MdAddTask/>
             </button>
           </div>
         </div>
-        <div className="h-4/5 p-3 overflow-y-auto">
+        <div className="h-4/5 p-3 overflow-y-auto flex flex-col gap-2">
           {/* List of tasks */}
           {filteredTasks.map((task) => (
             <div
               key={task.taskId}
-              className={`flex items-center cursor-pointer ${
-                selectedTask?.taskId === task.taskId ? "bg-mint rounded-md" : ""
-              }`}
-              onClick={() => handleSelectedTask(task)}
+              
             >
               {/* Render task details here */}
-              <div className="w-full flex justify-between border border-primary rounded-md py-1">
-                <div className="flex flex-col w-fit">
+              <div className="w-full flex justify-between rounded-md py-1 shadow-md border border-mint">
+                <div className="flex justify-between m-1 items-center w-1/2 hover:bg-mint hover:rounded-md hover:border-r-2 hover:border-primary" onClick={() => handleSelectedTask(task)}>
+                <div className="flex flex-col w-1/2 p-2 gap-1 justify-start">
                   <h3 className="text-lg font-medium">{task.title}</h3>
                   <p className="text-gray-500">{task.description}</p>
                 </div>
-                <div className="flex flex-col w-fit justify-center items-center gap-1">
-                  <p className="text-md font-medium border border-primary rounded-md p-1">Due: {task.dueDate}</p>
-                  <p className={`text-md font-medium p-1 rounded-md ${numberToStatusColorConverter(task.status)}`}>{numberToStatusConverter(task.status)}</p>
+                  <p className="p-2 flex items-center gap-2 text-gray-500">Edit <BiArrowToRight/></p>
+                </div>
+                <div className="flex flex-col w-1/2 items-end gap-1 p-2">
+                  <div className="flex flex-row w-full justify-end">
+                    <p className="text-md font-medium rounded-md p-1 w-2/3 text-center">
+                      Due: {isoToYYYYMMDD(task.dueDate)}
+                    </p>
+                    <p
+                      className={`text-md font-medium p-1 rounded-md w-1/3 text-center ${numberToStatusColorConverter(
+                        task.status
+                      )}`}
+                    >
+                      {numberToStatusConverter(task.status)}
+                    </p>
+                  </div>
+                  <button className="bg-primary text-white p-1 w-1/3 rounded-md hover:bg-gray-500 flex gap-1 items-center justify-center" onClick={() => handleMoveTask(task)}>
+                    Move
+                    <BiMoveHorizontal/>
+                  </button>
                 </div>
               </div>
               {/* Add more task details if needed */}
@@ -100,6 +131,11 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
           closeEditTaskModal={closeEditTaskModal}
         />
       )}
+      {
+        moveTaskModalIsOpen && selectedTask && (
+          <MoveTaskModal closeMoveTaskModal={closeMoveTaskModal} task={selectedTask}/>
+        )
+      }
     </div>
   );
 };

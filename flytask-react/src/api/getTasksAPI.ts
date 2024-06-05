@@ -15,7 +15,7 @@ function formatTimestamp(date: Date): string {
 var date = new Date()
 var sqlTimestampDate = formatTimestamp(date)
 
-const endpoint = 'task/search?keyword=&status=0&dueDate=' + sqlTimestampDate + '&creationDate=' +sqlTimestampDate
+const endpoint = 'task/search?keyword=&status=0&userId=' + localStorage.getItem('id')
 
 
 export const getTasks = {
