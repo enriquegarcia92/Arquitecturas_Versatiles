@@ -1,10 +1,8 @@
-// src/App.jsx
-// import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Content from './components/Content';
-import Topbar from './components/Topbar';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Topbar from "./components/Topbar";
+import Sidebar from "./components/Sidebar";
+import Content from "./components/Content";
 
 function App() {
   return (
