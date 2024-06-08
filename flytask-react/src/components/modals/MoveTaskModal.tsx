@@ -17,7 +17,6 @@ type MoveTaskModalProps = {
 
 export const MoveTaskModal: React.FC<MoveTaskModalProps> = ({
   closeMoveTaskModal,
-  task,
 }) => {
   const [selectedStatus, setSelectedStatus] = useState<number>(0);
 

@@ -24,13 +24,6 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
   closeEditTaskModal,
   task,
 }) => {
-  const idValue = localStorage.getItem("id");
-  const userId: number = Number(idValue);
-
-  const handleEdit = (title: string, despcription: string, dueDate: string, ) => {
-    console.log();
-    
-  }
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
@@ -52,7 +45,6 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log(values);
             editTask
               .editTask(
                 {
@@ -63,7 +55,6 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 task.taskId
               )
               .then((response) => {
-                console.log(response);
                 if (response.status === 200) {
                   window.location.reload()
                 }

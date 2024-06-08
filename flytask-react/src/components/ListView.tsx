@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { BsArrow90DegRight, BsArrowsMove, BsPencil, BsSearch } from "react-icons/bs";
 import { Task } from "../utils/types";
 import AddTaskModal from "./modals/AddTaskModal";
 import EditTaskModal from "./modals/EditTaskModal";
@@ -8,7 +7,7 @@ import {
   numberToStatusColorConverter,
   numberToStatusConverter,
 } from "../utils/dataConversions";
-import { BiArrowToLeft, BiArrowToRight, BiMoveHorizontal } from "react-icons/bi";
+import {BiArrowToRight, BiMoveHorizontal } from "react-icons/bi";
 import { MdAddTask } from "react-icons/md";
 import MoveTaskModal from "./modals/MoveTaskModal";
 

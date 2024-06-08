@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import emptybox from '../assets/caja-vacia 1.png';
-import { MdClose } from 'react-icons/md';
-import { Formik, Form, Field } from 'formik';
-import { createTask } from '../api/createTaskAPI';
 import AddTaskModal from '../components/modals/AddTaskModal';
 
 

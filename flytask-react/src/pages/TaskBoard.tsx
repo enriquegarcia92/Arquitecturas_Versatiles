@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   BsListUl,
-  BsFilter,
   BsGrid3X3Gap,
-  BsArrowBarDown,
 } from "react-icons/bs";
 import EmptyTaskboard from "./EmptyTaskboard";
 import { getTasks } from "../api/getTasksAPI";
