@@ -11,10 +11,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<SignupPage />} path="/register" />
-          <Route element={<LoginPage />} path="/sign-in" />
-          <Route element={<PrivateRoutes/>} path="/">
-            <Route element={<TaskBoard />} path="/board" />
+          <Route element={<SignupPage />} path="/react/register" />
+          <Route element={<LoginPage />} path="/react/sign-in" />
+          <Route element={<PrivateRoutes/>} path="/react/">
+            <Route element={<TaskBoard />} path="/react/board" />
           </Route>
         </Routes>
       </BrowserRouter>
