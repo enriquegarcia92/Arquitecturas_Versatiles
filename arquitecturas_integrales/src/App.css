@@ -1,9 +1,16 @@
-#root {
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap');
+:root {
+  --logo-shadow: #646cffaa;
+  --logo-react-shadow: #61dafbaa;
+  --text-muted: #888;
+}
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
 .logo {
   height: 6em;
@@ -11,11 +18,13 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--logo-shadow));
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em var(--logo-react-shadow));
 }
 
 @keyframes logo-spin {
@@ -38,5 +47,64 @@
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--text-muted);
+}
+
+.kanit {
+  font-family: "Kanit", sans-serif;
+}
+
+.kanit-light {
+  font-weight: 300;
+  font-style: normal;
+}
+
+.kanit-regular {
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kanit-medium {
+  font-weight: 500;
+  font-style: normal;
+}
+
+.kanit-semibold {
+  font-weight: 600;
+  font-style: normal;
+}
+
+.kanit-bold {
+  font-weight: 700;
+  font-style: normal;
+}
+
+.kanit-extrabold {
+  font-weight: 800;
+  font-style: normal;
+}
+
+.kanit-light-italic {
+  font-weight: 300;
+  font-style: italic;
+}
+
+.kanit-regular-italic {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.kanit-medium-italic {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.kanit-semibold-italic {
+  font-weight: 600;
+  font-style: italic;
+}
+
+.kanit-bold-italic {
+  font-weight: 700;
+  font-style: italic;
 }
