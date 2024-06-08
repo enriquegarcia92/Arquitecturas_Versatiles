@@ -19,7 +19,7 @@
           </button>
         </div>
       </div>
-      <div class="h-4/5 p-3 overflow-y-auto flex flex-col gap-2">
+      <div class="h-full p-3 overflow-y-auto flex flex-col gap-2">
         <div v-for="task in filteredTasks" :key="task.taskId">
           <div
             class="w-full flex justify-between rounded-md py-1 shadow-md border border-mint"
@@ -91,16 +91,22 @@ export default {
   },
   props: {
     tasks: {
-        type: Array, 
-        required: true
+      type: Array,
+      required: true,
     },
   },
   methods: {
-    filteredTasks(tasks) {
-        console.log(tasks);
+    filterTasks(tasks) {
+      console.log(tasks);
       tasks.filter((task) =>
-        task.title.toLowerCase().includes(searchText.value.toLowerCase())
+        {return task.title.toLowerCase().includes(searchText.value.toLowerCase())}
       );
+    },
+  },
+
+  computed: {
+    filteredTasks() {
+      return this.filterTasks(this.tasks);
     },
   },
   data() {
