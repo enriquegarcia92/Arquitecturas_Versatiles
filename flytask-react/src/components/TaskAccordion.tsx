@@ -6,8 +6,6 @@ import {
 } from "@headlessui/react";
 import { BiChevronDown, BiMoveHorizontal } from "react-icons/bi";
 import { Task } from "../utils/types";
-import { MdAddTask } from "react-icons/md";
-import AddTaskModal from "./modals/AddTaskModal";
 import EditTaskModal from "./modals/EditTaskModal";
 
 type AccordionProps = {

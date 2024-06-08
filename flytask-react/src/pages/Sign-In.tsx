@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import chincheta from '../images/chincheta.png';
@@ -11,10 +10,6 @@ const LoginSchema = Yup.object().shape({
 
 const LoginPage: React.FC = () => {
 
-  const [logStatus, setLogStatus] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [errorStatus, setErrorStatus] = useState(false)
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,8 +17,6 @@ const LoginPage: React.FC = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      setIsLoading(true)
-      console.log(values);
       loginUser
         .login(values)
         .then((response) => {
@@ -38,9 +31,6 @@ const LoginPage: React.FC = () => {
         })
         .catch((error) => {
           console.log(error);
-          let status = error.response.status === 200;
-          setErrorStatus(!status);
-          setIsLoading(false);
         });
     },
   });
