@@ -1,6 +1,14 @@
+# Ignore the HELP.md file in the root directory
 HELP.md
+
+# Ignore everything in the target/ directory
 target/
+flytaskmongodb/target/
+
+# Except for maven-wrapper.jar in the .mvn/wrapper directory
 !.mvn/wrapper/maven-wrapper.jar
+
+# Except for target directories under src/main and src/test directories
 !**/src/main/**/target/
 !**/src/test/**/target/
 

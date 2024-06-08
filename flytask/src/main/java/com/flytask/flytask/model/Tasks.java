@@ -1,6 +1,7 @@
 package com.flytask.flytask.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,6 +48,7 @@ public class Tasks {
     @JoinColumn(name = "USR_ID", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonAlias(value = "userId")
+    @JsonIgnore
     private User user;
 
     public Tasks(String title, String description, Integer status, Timestamp creationDate, Timestamp dueDate, User user) {

@@ -1,7 +1,6 @@
 package com.flytaskmongodb.flytaskmongodb.services;
 import com.flytaskmongodb.flytaskmongodb.model.TokenType;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 public interface JwtService {
 
