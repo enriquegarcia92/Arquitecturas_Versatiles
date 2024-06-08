@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import connection
-from django.shortcuts import render
 from django.utils.timezone import make_aware
 from rest_framework import status
 from rest_framework.response import Response

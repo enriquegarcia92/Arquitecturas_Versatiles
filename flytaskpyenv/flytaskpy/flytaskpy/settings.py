@@ -60,7 +60,7 @@ DATABASES = {
         'NAME': 'flytask',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
         'OPTIONS': {
             'options': f'-c search_path=flytask'
@@ -99,8 +99,6 @@ AUTH_USER_MODEL = 'users.User'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-
-SECRET_KEY = '74fb18cb25e231e2fd2dd6d140f23d3c6bf1e5b11af3b52d98ef6a2158d99a1674fb18cb25e231e2fd2dd6d140f23d3c6bf1e5b11af3b52d98ef6a2158d99a16'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

@@ -1,15 +1,18 @@
 package com.flytaskmongodb.flytaskmongodb.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.util.Date;
 
 @Builder
-@Document(collection = "tasks")
+@Document(collection = "Tasks")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -19,24 +22,32 @@ public class Tasks {
     public static final String SEQUENCE_NAME = "task_sequence";
 
     @Id
+    @Field("tsk_id")
     private Integer taskId;
 
+    @Field("tsk_title")
     @JsonAlias("title")
     private String title;
 
+    @Field("tsk_desc")
     @JsonAlias("description")
     private String description;
 
+    @Field("tsk_status")
     @JsonAlias("status")
     private Integer status;
 
+    @Field("tsk_creation_date")
     @JsonAlias("creationDate")
     private Date creationDate;
 
+    @Field("tsk_due_date")
     @JsonAlias("dueDate")
     private Date dueDate;
 
     @DBRef
+    @Field("usr_id")
+    @JsonIgnore
     private User user;
 
     public Tasks(String title, String description, Integer status, Date creationDate, Date dueDate, User user) {
