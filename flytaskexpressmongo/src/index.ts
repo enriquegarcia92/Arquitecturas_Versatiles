@@ -1,20 +1,41 @@
 import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
+import * as express from "express"
+import { authenticateToken } from "./middleware/authenticationToken"
+import { TaskController } from "./controllers/Task"
+import { AuthController } from "./controllers/Authentication"
 
-AppDataSource.initialize().then(async () => {
 
-    console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
+const app = express()
+const PORT = Number(process.env.PORT) || 3000
+app.use(express.json())
+app.use(authenticateToken)
 
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
+// Task Routes
+app.get("api/task", authenticateToken, new TaskController().getTasks)
+app.get("api/task/search", authenticateToken, new TaskController().getTask)
+app.post("api/task/create", authenticateToken, new TaskController().createTask)
+app.put("api/task/edit/:id", authenticateToken, new TaskController().updateTask)
+app.delete("api/task/delete/:id", authenticateToken, new TaskController().deleteTask)
+//status requests
+app.put("api/task/done/:id", authenticateToken, new TaskController().updateTaskStatusToDone)
+app.put("api/task/doing", authenticateToken, new TaskController().updateTaskStatusToDoing)
+app.put("api/task/upcoming", authenticateToken, new TaskController().updateTaskStatusToUpcoming)
+app.put("ap/task/todo", authenticateToken, new TaskController().updateTaskStatusToTodo)
 
-    console.log("Here you can setup and run express / fastify / any other framework.")
+//Auth Routes
+app.post("api/auth/register", new AuthController().registerUser)
+app.post("api/auth/login", new AuthController().loginUser)
+app.post("api/auth/recover-password", new AuthController().passwordRecovery)
 
-}).catch(error => console.log(error))
+app.put
+AppDataSource.initialize()
+  .then(() => {
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+    console.log('DataSource initialized successfully');
+  })
+  .catch(error => {
+    console.error('Error initializing DataSource:', error);
+  });
+
