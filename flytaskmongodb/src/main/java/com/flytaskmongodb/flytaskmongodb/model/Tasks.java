@@ -3,6 +3,7 @@ package com.flytaskmongodb.flytaskmongodb.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -23,7 +24,7 @@ public class Tasks {
 
     @Id
     @Field("tsk_id")
-    private Integer taskId;
+    private ObjectId taskId;
 
     @Field("tsk_title")
     @JsonAlias("title")

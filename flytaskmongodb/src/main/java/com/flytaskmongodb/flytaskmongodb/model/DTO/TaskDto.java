@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
+
 import java.util.Date;
 
 @Data
@@ -20,5 +22,5 @@ public class TaskDto {
     @NotNull(message = "due date must not be null")
     private Date dueDate;
     @NotNull(message = "user identification must not be null")
-    private Integer userId;
+    private ObjectId userId;
 }

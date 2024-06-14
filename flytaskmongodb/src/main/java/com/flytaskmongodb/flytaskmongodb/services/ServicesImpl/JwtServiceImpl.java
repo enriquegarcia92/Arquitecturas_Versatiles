@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Claims getAllClaims(String token){
-        return Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes())).build().parseClaimsJws(token).getBody();
     }
 
     public <T> T getClaims (String token, Function<Claims, T> claimsResolver){
@@ -73,17 +74,18 @@ public class JwtServiceImpl implements JwtService {
             extraClaims.put("tokenType", TokenType.LOGIN);
         }
 
+        String encodedKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+
+        System.out.println(encodedKey); // Print encoded key
+
         return Jwts.builder()
+                .setHeaderParam("alg", "HS256")
+                .setHeaderParam("typ", "JWT")
                 .setClaims(extraClaims)
                 .setSubject(user.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(new Date(expirationMillis))
-                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .signWith(SignatureAlgorithm.HS256, encodedKey)
                 .compact();
-    }
-
-    private Key getKey(){
-        byte [] keyBytes = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
     }
 }

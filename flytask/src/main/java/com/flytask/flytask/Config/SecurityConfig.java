@@ -40,6 +40,9 @@ public class SecurityConfig {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOrigins(Collections.singletonList("*"));
         List<String> allowedmethods = new ArrayList<>();
+        List<String> allowedHeaders = new ArrayList<>();
+        allowedHeaders.add("Authorization");
+        allowedHeaders.add("Content-Type");
         allowedmethods.add("GET");
         allowedmethods.add("POST");
         allowedmethods.add("PUT");
@@ -48,6 +51,7 @@ public class SecurityConfig {
         corsConfig.setAllowedMethods(allowedmethods);
         corsConfig.setMaxAge(3600L);
         corsConfig.setAllowedHeaders(Collections.singletonList("*"));
+        corsConfig.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
 
