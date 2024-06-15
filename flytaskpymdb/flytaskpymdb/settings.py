@@ -41,7 +41,17 @@ INSTALLED_APPS = [
     'users',
     'tasks',
     'corsheaders',
+    'django_mongoengine',
+    'django_mongoengine.mongo_auth'
 ]
+
+MONGOENGINE_USER_DOCUMENT = 'users.models.User'
+AUTHENTICATION_BACKENDS = (
+    'django_mongoengine.mongo_auth.backends.MongoEngineBackend',
+)
+
+SESSION_ENGINE = 'django_mongoengine.sessions'
+SESSION_SERIALIZER = 'django_mongoengine.sessions.BSONSerializer'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

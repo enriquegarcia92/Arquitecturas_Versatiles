@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from mongoengine import ObjectIdField
 
 
 # Create your models here.
 
 class User(AbstractUser):
-    usr_id = models.AutoField(primary_key=True)
-    usr_name = models.CharField(max_length=255, blank=True)  # Adjust as needed
-    username = models.CharField(max_length=255, blank=True, null=True)  # Adjust as needed
+    usr_id = ObjectIdField(primary_key=True, default=None)
+    usr_name = models.CharField(max_length=255, blank=False)  # Adjust as needed
     usr_email = models.CharField(max_length=255, unique=True)
     usr_password = models.CharField(max_length=255)
     usr_role = models.CharField(max_length=10)
 
+    username = models.CharField(max_length=255, blank=True, null=True)  # Adjust as needed
     password = models.CharField(max_length=255, blank=True, null=True)
     is_superuser = models.BooleanField(blank=True, default=False, null=True)  # Set default value to False
     first_name = models.CharField(max_length=255, blank=True, null=True)  # Adjust as needed
