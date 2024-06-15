@@ -1,19 +1,36 @@
-// src/components/Sidebar.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="w-1/6 h-screen bg-gray-200 p-4">
-      <ul>
-        <li className="mb-2">
-          <Link to="/home" className="text-blue-500 hover:underline">Home</Link>
+    <div className="w-64 bg-gray-800 text-white">
+      <ul className="space-y-2 p-4">
+        <li>
+          <Link to="/" className="block p-2 hover:bg-gray-700">Home</Link>
         </li>
-        <li className="mb-2">
-          <Link to="/about" className="text-blue-500 hover:underline">About</Link>
+        <li>
+          <Link to="/integration-technologies" className="block p-2 hover:bg-gray-700">Integración de Tecnologías</Link>
         </li>
-        <li className="mb-2">
-          <Link to="/contact" className="text-blue-500 hover:underline">Contact</Link>
+        <li>
+          <Link to="/client-server-architecture" className="block p-2 hover:bg-gray-700">Arquitectura Cliente-Servidor</Link>
+        </li>
+        <li>
+          <Link to="/frontend-backend-integration" className="block p-2 hover:bg-gray-700">Integración Frontend-Backend</Link>
+        </li>
+        <li>
+          <Link to="/data-handling" className="block p-2 hover:bg-gray-700">Manejo de Datos</Link>
+        </li>
+        <li>
+          <Link to="/backend-database-integration" className="block p-2 hover:bg-gray-700">Integración Backend-Base de Datos</Link>
+        </li>
+        <li>
+          <Link to="/backend-structure" className="block p-2 hover:bg-gray-700">Estructura Backend</Link>
+        </li>
+        <li>
+          <Link to="/frontend-structure" className="block p-2 hover:bg-gray-700">Estructura Frontend</Link>
+        </li>
+        <li>
+          <Link to="/infrastructure-frontend-backend" className="block p-2 hover:bg-gray-700">Infraestructura Frontend-Backend</Link>
         </li>
       </ul>
     </div>
