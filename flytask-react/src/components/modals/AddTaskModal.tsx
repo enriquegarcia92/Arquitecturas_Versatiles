@@ -29,8 +29,10 @@ export const AddTaskModal: React.FC<{ closeAddTaskModal: () => void }> = ({ clos
   
               createTask
                 .createTask(values)
-                .then((response) => { 
-                  window.location.reload()
+                .then((response) => {
+                  if(response.status === 200){
+                    window.location.reload()
+                  } 
                 })
                 .catch((error) => {
                   console.log(error);

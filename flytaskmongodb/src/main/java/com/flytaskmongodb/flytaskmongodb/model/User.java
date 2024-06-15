@@ -3,16 +3,18 @@ package com.flytaskmongodb.flytaskmongodb.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Builder
-@Document(collection = "users")
+@Document(collection = "User")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -23,18 +25,24 @@ public class User implements UserDetails {
     public static final String SEQUENCE_NAME = "users_sequence";
 
     @Id
-    private Integer userId;
+    @Field("usr_id")
+    private ObjectId userId;
+
+    @Field("usr_name")
     @JsonAlias("name")
     private String name;
 
+    @Field("usr_email")
     @JsonAlias("email")
     private String email;
 
     @JsonIgnore
+    @Field("usr_password")
     @JsonAlias("password")
     private String password;
 
     @JsonIgnore
+    @Field("usr_role")
     private Role role;
 
     private List<?> tasks;

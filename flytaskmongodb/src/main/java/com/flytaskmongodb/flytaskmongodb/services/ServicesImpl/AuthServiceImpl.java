@@ -83,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
             response.put("token", token);
             response.put("status", "success");
             response.put("message", "Logged succesfully");
-            response.put("id", userRepository.findByEmail(user.getUsername()).orElseThrow(()-> new NotFoundException("User not found")).getUserId());
+            response.put("id", userRepository.findByEmail(user.getUsername()).orElseThrow(()-> new NotFoundException("User not found")).getUserId().toHexString());
             return ResponseEntity.status(200).body(response);
         } catch (AuthenticationException e) {
             String errorMessage = e.getMessage();
@@ -121,7 +121,7 @@ public class AuthServiceImpl implements AuthService {
             String token = jwtService.getToken(savedUser, TokenType.LOGIN);
             response.put("status",  "success");
             response.put("message", "User registered successfully");
-            response.put("user id", savedUser.getUserId());
+            response.put("user id", savedUser.getUserId().toHexString());
             return ResponseEntity.status(200).body(response);
         } catch (PasswordMismatchException | DuplicateEmailException e) {
             // Catch specific exceptions and handle them

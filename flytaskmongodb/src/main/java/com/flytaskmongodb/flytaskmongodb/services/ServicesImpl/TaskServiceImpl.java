@@ -2,12 +2,14 @@ package com.flytaskmongodb.flytaskmongodb.services.ServicesImpl;
 import com.flytaskmongodb.flytaskmongodb.exceptions.TaskNotFoundException;
 import com.flytaskmongodb.flytaskmongodb.model.DTO.EditTaskDTO;
 import com.flytaskmongodb.flytaskmongodb.model.DTO.TaskDto;
+import com.flytaskmongodb.flytaskmongodb.model.DTO.TaskResponseDTO;
 import com.flytaskmongodb.flytaskmongodb.model.Tasks;
 import com.flytaskmongodb.flytaskmongodb.repository.TaskRepository;
 import com.flytaskmongodb.flytaskmongodb.services.SequenceGeneratorService;
 import com.flytaskmongodb.flytaskmongodb.services.TaskService;
 import com.flytaskmongodb.flytaskmongodb.services.UserService;
 import lombok.SneakyThrows;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -30,13 +33,16 @@ public class TaskServiceImpl implements TaskService {
 
     @SneakyThrows
     @Override
-    public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, Integer userId) {
+    public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, ObjectId userId) {
         HashMap<String, Object> response = new HashMap<>();
         try {
-            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatusAndUserId(keyword, status,userId);
+            List<Tasks> tasks = taskRepository.searchTasksByKeywordAndStatusAndUserId(keyword, status, userId);
+            List<TaskResponseDTO> taskResponseDTOs = tasks.stream()
+                    .map(TaskResponseDTO::new)
+                    .collect(Collectors.toList());
             response.put("status", "success");
             response.put("message", "Tasks retrieved successfully");
-            response.put("data", tasks);
+            response.put("data", taskResponseDTOs);
             response.put("totalTasks", tasks.size());
             return ResponseEntity.status(201).body(response);
         } catch (Exception e) {
@@ -59,12 +65,12 @@ public class TaskServiceImpl implements TaskService {
                     .dueDate(task.getDueDate())
                     .description(task.getDescription())
                     .status(0)
-                    .user(userService.getUserbyId(task.getUserId()))
+                    .user(userService.getUserbyId(task.getUserId()).getUserId())
                     .build();
             Tasks createdTask = taskRepository.save(newTask);
             response.put("status", "success");
-            response.put("message", "Task Created Successfully for user " + createdTask.getUser().getName());
-            response.put("data", createdTask.getTaskId());
+            response.put("message", "Task Created Successfully for user " + createdTask.getUser());
+            response.put("data", createdTask.getTaskId().toHexString());
             return ResponseEntity.status(200).body(response);
         } catch (Exception e) {
             String errorMessage = e.getMessage();
@@ -75,7 +81,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<HashMap<String, Object>> editTask(Integer TaskID , EditTaskDTO Task) {
+    public ResponseEntity<HashMap<String, Object>> editTask(ObjectId TaskID , EditTaskDTO Task) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
@@ -87,7 +93,7 @@ public class TaskServiceImpl implements TaskService {
                 Tasks updatedTask = taskRepository.save(existingTask);
                 response.put("status", "success");
                 response.put("message", "Task Updated Successfully");
-                response.put("data", updatedTask.getTaskId());
+                response.put("data", updatedTask.getTaskId().toHexString());
                 return ResponseEntity.status(200).body(response);
             } else {
                 response.put("status", "error");
@@ -103,7 +109,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<HashMap<String, Object>>deleteTask(Integer taskId) {
+    public ResponseEntity<HashMap<String, Object>>deleteTask(ObjectId taskId) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             Optional<Tasks> taskToDelete = taskRepository.findById(taskId);
@@ -126,7 +132,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<HashMap<String, Object>> setTodo(Integer TaskID) {
+    public ResponseEntity<HashMap<String, Object>> setTodo(ObjectId TaskID) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
@@ -151,7 +157,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<HashMap<String, Object>> setDoing(Integer TaskID) {
+    public ResponseEntity<HashMap<String, Object>> setDoing(ObjectId TaskID) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
@@ -176,7 +182,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<HashMap<String, Object>> setDone(Integer TaskID) {
+    public ResponseEntity<HashMap<String, Object>> setDone(ObjectId TaskID) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);
@@ -201,7 +207,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public ResponseEntity<HashMap<String, Object>> setUpcoming(Integer TaskID) {
+    public ResponseEntity<HashMap<String, Object>> setUpcoming(ObjectId TaskID) {
         HashMap<String, Object> response = new HashMap<>();
         try {
             Optional<Tasks> taskToEdit = taskRepository.findById(TaskID);

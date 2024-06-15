@@ -47,7 +47,6 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log(values);
             editTask
               .editTask(
                 {
@@ -58,7 +57,6 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 task.taskId
               )
               .then((response) => {
-                console.log(response);
                 if (response.status === 200) {
                   window.location.reload()
                 }

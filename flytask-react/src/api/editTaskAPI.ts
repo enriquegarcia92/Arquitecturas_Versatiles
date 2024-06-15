@@ -1,4 +1,3 @@
-import { Task } from "../utils/types"
 import { axiosInstance, headers} from "./base.api"
 
 
