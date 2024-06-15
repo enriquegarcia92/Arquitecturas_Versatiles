@@ -21,7 +21,6 @@ function App() {
         <div className="flex flex-grow">
           <Sidebar />
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/integration-technologies" element={<IntegrationTechnologies />} />
             <Route path="/client-server-architecture" element={<ClientServerArchitecture />} />
