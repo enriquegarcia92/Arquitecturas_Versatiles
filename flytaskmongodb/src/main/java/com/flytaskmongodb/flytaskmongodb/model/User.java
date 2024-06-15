@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Builder
-@Document(collection = "Users")
+@Document(collection = "User")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter

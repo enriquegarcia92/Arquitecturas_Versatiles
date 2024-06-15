@@ -65,11 +65,11 @@ public class TaskServiceImpl implements TaskService {
                     .dueDate(task.getDueDate())
                     .description(task.getDescription())
                     .status(0)
-                    .user(userService.getUserbyId(task.getUserId()))
+                    .user(userService.getUserbyId(task.getUserId()).getUserId())
                     .build();
             Tasks createdTask = taskRepository.save(newTask);
             response.put("status", "success");
-            response.put("message", "Task Created Successfully for user " + createdTask.getUser().getName());
+            response.put("message", "Task Created Successfully for user " + createdTask.getUser());
             response.put("data", createdTask.getTaskId().toHexString());
             return ResponseEntity.status(200).body(response);
         } catch (Exception e) {

@@ -40,18 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'tasks',
-    'corsheaders',
-    'django_mongoengine',
-    'django_mongoengine.mongo_auth'
+    'corsheaders'
 ]
-
-MONGOENGINE_USER_DOCUMENT = 'users.models.User'
-AUTHENTICATION_BACKENDS = (
-    'django_mongoengine.mongo_auth.backends.MongoEngineBackend',
-)
-
-SESSION_ENGINE = 'django_mongoengine.sessions'
-SESSION_SERIALIZER = 'django_mongoengine.sessions.BSONSerializer'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,7 +81,7 @@ WSGI_APPLICATION = 'flytaskpymdb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'flytask',
+        'NAME': 'flytask_django',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb+srv://00093619:flytask580@flytaskcluster.xlycw9x.mongodb.net/flytask?retryWrites=true&w=majority',

@@ -14,6 +14,7 @@ from rest_framework import status
 import bcrypt
 from .Utils import Utils
 
+
 def generate_recoverytoken(user):
     now = datetime.datetime.utcnow()
     exp = now + datetime.timedelta(minutes=20)
@@ -35,6 +36,7 @@ def generate_recoverytoken(user):
     )
 
     return token
+
 
 def generate_logintoken(user):
     now = datetime.datetime.utcnow()
@@ -113,8 +115,9 @@ class RegisterView(APIView):
             serializer = UserSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
                 user = serializer.save()
+                print(user._id)
                 response = {
-                    "user id": user.usr_id,
+                    "user id": str(user._id),
                     "message": "User registered successfully",
                     "status": "success"
                 }
@@ -140,7 +143,7 @@ class LoginView(APIView):
             if not bcrypt.checkpw(provided_password, stored_hashed_password):
                 raise Exception('Bad credentials')
             response = ({
-                'id': user.usr_id,
+                'id': str(user._id),
                 'message': 'Logged succesfully',
                 'status': 'success',
                 'token': generate_logintoken(user)
@@ -192,6 +195,8 @@ class PasswordRecoveryView(APIView):
                 "status": "error"
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class RestePasswordView(APIView):
     def post(self, request):
         try:

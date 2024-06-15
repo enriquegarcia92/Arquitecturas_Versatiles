@@ -9,6 +9,7 @@ from users.models import User
 from .serializers import TaskSerializer
 from datetime import datetime
 from djongo.models import Q  # Import Q object for query construction
+from bson import ObjectId
 
 class GetMyTasks(APIView):
     @token_required
@@ -16,11 +17,13 @@ class GetMyTasks(APIView):
         user_id = request.GET.get("userId")
         keyword = request.GET.get("keyword")
         tsk_status = request.GET.get("status")
+        obj_id = ObjectId(user_id)
+        user = User.objects.filter(_id=obj_id).first()
 
         try:
             # Construct the MongoDB-like filter using djongo's Q object
             filter_query = Q(
-                usr_id=user_id,
+                usr_id = user._id,
                 tsk_status=tsk_status
             )
 
@@ -53,10 +56,11 @@ class CreateTaskView(APIView):
             description = request.data['description']
             due_date_str = request.data['dueDate']
             usr_id = request.data['userId']
+            obj_id = ObjectId(usr_id)
 
             # Convert dueDate string to datetime object
             due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
-            user = User.objects.filter(usr_id=usr_id).first()
+            user = User.objects.filter(_id=obj_id).first()
 
             # Create Task instance
             task = Task.objects.create(
@@ -65,13 +69,13 @@ class CreateTaskView(APIView):
                 tsk_status=0,  # Assuming 0 represents an initial status
                 tsk_creation_date=datetime.now(),
                 tsk_due_date=due_date,
-                usr_id=user.usr_id
+                usr=user
             )
             serializer = TaskSerializer(task)
 
             response = {
-                "data": task.tsk_id,
-                "message": f"Task created successfully for user {user.usr_id}",
+                "data": str(task._id),
+                "message": f"Task created successfully for user {str(user._id)}",
                 "status": "success"
             }
             # Return success response
@@ -89,7 +93,8 @@ class UpdateTaskView(APIView):
     def put(self, request, id):
         try:
             # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
+            obj_id = ObjectId(id)
+            task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception("Task not found")
             # Update the Task instance with the new values
@@ -101,7 +106,7 @@ class UpdateTaskView(APIView):
             # Save the updated Task instance
             task.save()
             response = {
-                "data": task.tsk_id,
+                "data": str(task._id),
                 "message": "Task Updated Successfully",
                 "status": "success"
             }
@@ -119,8 +124,10 @@ class SetTodoView(APIView):
     @token_required
     def put(self, request, id):
         try:
+            obj_id = ObjectId(id)
+
             # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
+            task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Update the Task instance with the new values
@@ -145,8 +152,10 @@ class SetDoingView(APIView):
     @token_required
     def put(self, request, id):
         try:
+            obj_id = ObjectId(id)
+
             # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
+            task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Update the Task instance with the new values
@@ -171,8 +180,10 @@ class SetDoneView(APIView):
     @token_required
     def put(self, request, id):
         try:
+            obj_id = ObjectId(id)
+
             # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
+            task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Update the Task instance with the new values
@@ -197,8 +208,10 @@ class SetUpcomingView(APIView):
     @token_required
     def put(self, request, id):
         try:
+            obj_id = ObjectId(id)
+
             # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
+            task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Update the Task instance with the new values
@@ -223,8 +236,10 @@ class DeleteTaksView(APIView):
     @token_required
     def delete(self, request, id):
         try:
+            obj_id = ObjectId(id)
+
             # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
+            task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Delete the Task instance

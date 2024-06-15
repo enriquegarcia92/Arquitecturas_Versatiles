@@ -46,12 +46,11 @@ public class Tasks {
     @JsonAlias("dueDate")
     private Date dueDate;
 
-    @DBRef
     @Field("usr_id")
     @JsonIgnore
-    private User user;
+    private ObjectId user;
 
-    public Tasks(String title, String description, Integer status, Date creationDate, Date dueDate, User user) {
+    public Tasks(String title, String description, Integer status, Date creationDate, Date dueDate, ObjectId user) {
         this.title = title;
         this.description = description;
         this.status = status;

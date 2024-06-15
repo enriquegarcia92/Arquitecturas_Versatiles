@@ -3,7 +3,7 @@ from .models import Task, User
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    taskId = serializers.IntegerField(source='tsk_id')
+    taskId = serializers.CharField(source='_id')
     title = serializers.CharField(source='tsk_title')
     description = serializers.CharField(source='tsk_desc')
     status = serializers.IntegerField(source='tsk_status')
