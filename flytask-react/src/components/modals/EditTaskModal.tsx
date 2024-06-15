@@ -27,11 +27,6 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
   const idValue = localStorage.getItem("id");
   const userId: number = Number(idValue);
 
-  const handleEdit = (title: string, despcription: string, dueDate: string, ) => {
-    console.log();
-    
-  }
-
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white w-96 p-8 rounded-lg shadow-md relative">

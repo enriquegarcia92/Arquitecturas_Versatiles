@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { BsArrow90DegRight, BsArrowsMove, BsPencil, BsSearch } from "react-icons/bs";
+import {
+  BsArrow90DegRight,
+  BsArrowsMove,
+  BsPencil,
+  BsSearch,
+} from "react-icons/bs";
 import { Task } from "../utils/types";
 import AddTaskModal from "./modals/AddTaskModal";
 import EditTaskModal from "./modals/EditTaskModal";
@@ -8,9 +13,15 @@ import {
   numberToStatusColorConverter,
   numberToStatusConverter,
 } from "../utils/dataConversions";
-import { BiArrowToLeft, BiArrowToRight, BiMoveHorizontal } from "react-icons/bi";
+import {
+  BiArrowToLeft,
+  BiArrowToRight,
+  BiMoveHorizontal,
+  BiX,
+} from "react-icons/bi";
 import { MdAddTask } from "react-icons/md";
 import MoveTaskModal from "./modals/MoveTaskModal";
+import DeleteButton from "./DeleteButton";
 
 type ListViewProps = {
   tasks: Task[];
@@ -53,13 +64,13 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
 
   const handleSelectedTask = (task: Task) => {
     setSelectedTask(task);
-    openEditTaskModal()
+    openEditTaskModal();
   };
 
   const handleMoveTask = (task: Task) => {
-    setSelectedTask(task); 
-    openMoveTaskModal()
-  }
+    setSelectedTask(task);
+    openMoveTaskModal();
+  };
 
   return (
     <div className="h-full flex justify-center items-center">
@@ -78,46 +89,48 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
               onClick={openAddTaskModal}
             >
               Add Task
-              <MdAddTask/>
+              <MdAddTask />
             </button>
           </div>
         </div>
         <div className="h-4/5 p-3 overflow-y-auto flex flex-col gap-2">
           {/* List of tasks */}
           {filteredTasks.map((task) => (
-            <div
-              key={task.taskId}
-              
-            >
+            <div key={task.taskId}>
               {/* Render task details here */}
               <div className="w-full flex justify-between rounded-md py-1 shadow-md border border-mint">
-                <div className="flex justify-between m-1 items-center w-1/2 hover:bg-mint hover:rounded-md hover:border-r-2 hover:border-primary" onClick={() => handleSelectedTask(task)}>
-                <div className="flex flex-col w-1/2 p-2 gap-1 justify-start">
-                  <h3 className="text-lg font-medium">{task.title}</h3>
-                  <p className="text-gray-500">{task.description}</p>
-                </div>
-                  <p className="p-2 flex items-center gap-2 text-gray-500">Edit <BiArrowToRight/></p>
-                </div>
-                <div className="flex flex-col w-1/2 items-end gap-1 p-2">
-                  <div className="flex flex-row w-full justify-end">
-                    <p className="text-md font-medium rounded-md p-1 w-2/3 text-center">
+                <div
+                  className="flex justify-between m-1 items-center w-4/5 hover:bg-mint hover:rounded-md hover:border-r-2 hover:border-primary"
+                  onClick={() => handleSelectedTask(task)}
+                >
+                  <div className="flex flex-col w-1/2 p-2 gap-1 justify-start">
+                    <h3 className="text-lg font-medium">{task.title}</h3>
+                    <p className="text-gray-500">{task.description}</p>
+                  </div>
+                  <div className="flex justify-center items-end w-full me-2">
+                    <p className="text-md font-medium rounded-md p-1 w-1/2 text-center">
                       Due: {isoToYYYYMMDD(task.dueDate)}
                     </p>
                     <p
-                      className={`text-md font-medium p-1 rounded-md w-1/3 text-center ${numberToStatusColorConverter(
+                      className={`text-md font-medium p-1 rounded-md w-1/2 text-center ${numberToStatusColorConverter(
                         task.status
                       )}`}
                     >
                       {numberToStatusConverter(task.status)}
                     </p>
                   </div>
-                  <button className="bg-primary text-white p-1 w-1/3 rounded-md hover:bg-gray-500 flex gap-1 items-center justify-center" onClick={() => handleMoveTask(task)}>
+                </div>
+                <div className="w-full flex w-1/5 justify-center me-2 gap-1 items-center">
+                  <button
+                    className="bg-primary text-white p-2 w-fit rounded-md hover:bg-gray-500 flex gap-1 items-center justify-center"
+                    onClick={() => handleMoveTask(task)}
+                  >
                     Move
-                    <BiMoveHorizontal/>
+                    <BiMoveHorizontal />
                   </button>
+                  <DeleteButton task={task} />
                 </div>
               </div>
-              {/* Add more task details if needed */}
             </div>
           ))}
         </div>
@@ -131,11 +144,12 @@ const ListView: React.FC<ListViewProps> = ({ tasks }) => {
           closeEditTaskModal={closeEditTaskModal}
         />
       )}
-      {
-        moveTaskModalIsOpen && selectedTask && (
-          <MoveTaskModal closeMoveTaskModal={closeMoveTaskModal} task={selectedTask}/>
-        )
-      }
+      {moveTaskModalIsOpen && selectedTask && (
+        <MoveTaskModal
+          closeMoveTaskModal={closeMoveTaskModal}
+          task={selectedTask}
+        />
+      )}
     </div>
   );
 };

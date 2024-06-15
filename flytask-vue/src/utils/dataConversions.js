@@ -3,10 +3,10 @@
 export function numberToStatusConverter(num){
   // Define a lookup object for mapping numbers to status strings
   const statusMap ={
-    0: "Upcoming",
-    1: "To do",
-    2: "Doing",
-    3: "Done",
+    0: "To do",
+    1: "Doing",
+    2: "Done",
+    3: "Upcoming",
   };
 
   // Check if the number is within the valid range

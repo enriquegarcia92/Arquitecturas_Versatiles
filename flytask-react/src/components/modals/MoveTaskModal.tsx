@@ -19,14 +19,17 @@ export const MoveTaskModal: React.FC<MoveTaskModalProps> = ({
   closeMoveTaskModal,
   task,
 }) => {
-  const [selectedStatus, setSelectedStatus] = useState<number>(0);
+  const [selectedStatus, setSelectedStatus] = useState<string>('');
 
   const handleMoveTask = (selectedStatus: string, taskId: number) => {
+    console.log(selectedStatus);
+    console.log(taskId);
+    
     moveTask
         .moveTask(selectedStatus, taskId)
         .then((response) => {
             console.log(response);
-            
+            window.location.reload()
         }) 
         .catch((error) => {
             console.log(error);
@@ -55,7 +58,7 @@ export const MoveTaskModal: React.FC<MoveTaskModalProps> = ({
             id="status"
             name="status"
             value={selectedStatus}
-            onChange={(e) => setSelectedStatus(Number(e.target.value))}
+            onChange={(e) => setSelectedStatus(e.target.value)}
             className="mt-1 block w-full p-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="" disabled>
@@ -69,7 +72,7 @@ export const MoveTaskModal: React.FC<MoveTaskModalProps> = ({
           </select>
         </div>
         <button
-          onClick={() => handleMoveTask}
+          onClick={() => {handleMoveTask(selectedStatus, task.taskId)}}
           className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-green-500"
         >
           Move task

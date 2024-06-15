@@ -37,7 +37,6 @@ public class TaskController {
         return taskService.editTask(taskid, newTask);
     }
 
-
     @PutMapping("/todo/{taskid}")
     public ResponseEntity<?> setTaskTodo(@PathVariable Integer taskid) {
         return taskService.setTodo(taskid);

@@ -30,7 +30,7 @@
             <ListView :tasks="taskData"/>
         </div>
         <div v-else="kanban">
-            <KanbanView/>
+            <KanbanView :tasks="taskData"/>
         </div>
       </div>
       <div v-else="taskData.length = 0">

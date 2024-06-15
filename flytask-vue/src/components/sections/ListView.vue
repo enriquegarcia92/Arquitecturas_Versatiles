@@ -20,13 +20,13 @@
         </div>
       </div>
       <div class="h-full p-3 overflow-y-auto flex flex-col gap-2">
-        <div v-for="task in filteredTasks" :key="task.taskId">
+        <div v-for="task in filterTasks" :key="task.taskId">
           <div
             class="w-full flex justify-between rounded-md py-1 shadow-md border border-mint"
           >
             <div
               class="flex justify-between m-1 items-center w-1/2 hover:bg-mint hover:rounded-md hover:border-r-2 hover:border-primary"
-              @click="handleSelectedTask(task)"
+              @click="handleEditTask(task)"
             >
               <div class="flex flex-col w-1/2 p-2 gap-1 justify-start">
                 <h3 class="text-lg font-medium">{{ task.title }}</h3>
@@ -57,25 +57,29 @@
         </div>
       </div>
     </div>
-    <AddTaskModal
-      v-if="addTaskModalIsOpen"
-      :closeAddTaskModal="closeAddTaskModal"
-    />
+    <EditTaskModal :isOpen="editTaskModalIsOpen" :task={selectedTask} @close="closeEditTaskModal"/>
+    <AddTaskModal :isOpen="addTaskModalIsOpen" @close="closeAddTaskModal" />
+    <MoveTaskModal :isOpen="moveTaskModalIsOpen" @close="closeMoveTaskModal" :task="selectedTask"/>
   </div>
 </template>
 
 <script>
 import { ref, computed } from "vue";
 import AddTaskModal from "@/components/modals/AddTaskModal.vue";
+import EditTaskModal from "@/components/modals/EditTaskModal.vue";
+import MoveTaskModal from "@/components/modals/MoveTaskModal.vue";
 import {
   isoToYYYYMMDD,
   numberToStatusColorConverter,
   numberToStatusConverter,
 } from "@/utils/dataConversions";
 
+
 const searchText = ref("");
 const selectedTask = ref(null);
 const addTaskModalIsOpen = ref(false);
+const editTaskModalIsOpen = ref(false);
+const moveTaskModalIsOpen = ref(false);
 
 const openAddTaskModal = () => {
   addTaskModalIsOpen.value = true;
@@ -88,6 +92,8 @@ const closeAddTaskModal = () => {
 export default {
   components: {
     AddTaskModal,
+    EditTaskModal, 
+    MoveTaskModal
   },
   props: {
     tasks: {
@@ -96,17 +102,34 @@ export default {
     },
   },
   methods: {
-    filterTasks(tasks) {
-      console.log(tasks);
-      tasks.filter((task) =>
-        {return task.title.toLowerCase().includes(searchText.value.toLowerCase())}
-      );
+    handleEditTask(task) {
+      selectedTask.value = task;
+      this.openEditTaskModal()
+    },
+    handleMoveTask(task) {
+      selectedTask.value = task;
+      this.openMoveTaskModal()
+    },
+    openEditTaskModal() {
+      editTaskModalIsOpen.value = true;
+    },
+    closeEditTaskModal() {
+      editTaskModalIsOpen.value = false;
+    },
+    openMoveTaskModal() {
+      moveTaskModalIsOpen.value = true;
+    },
+    closeMoveTaskModal() {
+      moveTaskModalIsOpen.value = false;
     },
   },
 
   computed: {
-    filteredTasks() {
-      return this.filterTasks(this.tasks);
+    filterTasks() {
+      console.log(this.tasks);
+      return this.tasks.filter((task) =>
+        task.title.toLowerCase().includes(searchText.value.toLowerCase())
+      );
     },
   },
   data() {
@@ -114,6 +137,8 @@ export default {
       searchText,
       selectedTask,
       addTaskModalIsOpen,
+      editTaskModalIsOpen,
+      moveTaskModalIsOpen,
       openAddTaskModal,
       closeAddTaskModal,
       isoToYYYYMMDD,

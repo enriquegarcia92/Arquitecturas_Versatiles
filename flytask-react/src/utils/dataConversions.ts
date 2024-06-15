@@ -3,10 +3,10 @@ import { Task } from "./types";
 export function numberToStatusConverter(num: number): string {
   // Define a lookup object for mapping numbers to status strings
   const statusMap: { [key: number]: string } = {
-    0: "Upcoming",
-    1: "To do",
-    2: "Doing",
-    3: "Done",
+    0: "To do",
+    1: "Doing",
+    2: "Done",
+    3: "Upcoming",
   };
 
   // Check if the number is within the valid range
@@ -20,10 +20,10 @@ export function numberToStatusConverter(num: number): string {
 
 export function numberToStatusColorConverter(num: number): string {
   const statusMap: { [key: number]: string } = {
-    0: "bg-upcoming",
-    1: "bg-toDo",
-    2: "bg-doing",
-    3: "bg-done",
+    0: "bg-toDo",
+    1: "bg-doing",
+    2: "bg-done",
+    3: "bg-upcoming",
   };
 
   // Check if the number is within the valid range

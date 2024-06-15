@@ -4,6 +4,7 @@ import LoginPage from "./pages/Sign-In";
 import SignupPage from "./pages/Sign-Up";
 import TaskBoard from "./pages/TaskBoard";
 import PrivateRoutes from "./utils/PrivateRoute";
+import PasswordRecovery from "./pages/PasswordRecovery";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route element={<SignupPage />} path="/react/register" />
           <Route element={<LoginPage />} path="/react/sign-in" />
+          <Route element={<PasswordRecovery />} path="/react/recover-password" />
           <Route element={<PrivateRoutes/>} path="/react/">
             <Route element={<TaskBoard />} path="/react/board" />
           </Route>

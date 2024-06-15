@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
           style={{ transform: 'translate(-50%, -50%)' }} // Adjust the image to "peek" from the corner
         />
 
-        <form onSubmit={formik.handleSubmit} className="space-y-6">
+        <form onSubmit={formik.handleSubmit} className="space-y-6 flex flex-col justify-center">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
             <input
@@ -89,6 +89,7 @@ const LoginPage: React.FC = () => {
               Login
             </button>
           </div>
+          <a href="/react/recover-password" className='text-center'>Forgot your password?</a>
         </form>
       </div>
     </div>
