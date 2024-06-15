@@ -40,7 +40,7 @@ services:
   django_postgre:
     container_name: django_postgre_container
     image: flytask-python-app:1.0.0
-    build: flytaskpyenv/flytaskpy/.
+    build: flytaskpy/.
     ports:
       - 8000:8000
     depends_on:

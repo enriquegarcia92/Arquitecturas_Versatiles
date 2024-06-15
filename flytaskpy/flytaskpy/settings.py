@@ -63,7 +63,7 @@ DATABASES = {
         'NAME': 'flytask',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
         'OPTIONS': {
             'options': f'-c search_path=flytask'
