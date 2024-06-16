@@ -6,17 +6,18 @@ import TaskBoard from "./pages/TaskBoard";
 import PrivateRoutes from "./utils/PrivateRoute";
 import PasswordRecovery from "./pages/PasswordRecovery";
 
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES
+console.log(BASE_PATH);
 function App() {
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<SignupPage />} path="/react/register" />
-          <Route element={<LoginPage />} path="/react/sign-in" />
-          <Route element={<PasswordRecovery />} path="/react/recover-password" />
-          <Route element={<PrivateRoutes/>} path="/react/">
-            <Route element={<TaskBoard />} path="/react/board" />
+          <Route element={<SignupPage />} path={`${BASE_PATH}register`} />
+          <Route element={<LoginPage />} path={`${BASE_PATH}sign-in`} />
+          <Route element={<PasswordRecovery />} path={`${BASE_PATH}recover-password`} />
+          <Route element={<PrivateRoutes />} path={`${BASE_PATH}`}>
+            <Route element={<TaskBoard />} path={`${BASE_PATH}board`} />
           </Route>
         </Routes>
       </BrowserRouter>

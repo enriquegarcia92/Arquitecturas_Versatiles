@@ -1,4 +1,5 @@
 services:
+#REVERSE PROXY
   nginx:
     build: ./nginx
     image: nginx
@@ -12,16 +13,17 @@ services:
       - django_postgre
       - django_mdb
       - react
+      - react_mdb
     volumes:
     - ./nginx:/etc/nginx/conf.d
-
+#CONTENEDOR PAGINA INFORMATIVA
   arquitecturas_integrales:
     image: arquitecturas_integrales:1.0.0
     build: arquitecturas_integrales/.
     container_name: arquitecturas_integrales_container
     ports:
       - 5176:5176
-
+#CONTENEDOR SPRING BASE DE DATOS SQL
   java_app:
     container_name: spring_postgre_container
     image: flytask-java-app:1.0.0
@@ -31,14 +33,14 @@ services:
     depends_on:
       - db
       - django_postgre
-      
+#CONTENEDOR SPRING BASE DE DATOS MONGODB 
   java_app_mdb:
     container_name: spring_mongo_container
     image: flytask-javamdb-app:1.0.0
     build: flytaskmongodb/.
     ports:
       - 8080:8080 
-
+#CONTENEDOR DJANGO BASE DE DATOS SQL
   django_postgre:
     container_name: django_postgre_container
     image: flytask-python-app:1.0.0
@@ -47,23 +49,41 @@ services:
       - 8000:8000
     depends_on:
       - db
-
+#CONTENEDOR DJANGO BASE DE DATOS MONGODB
   django_mdb:
     container_name: django_mongo_container
     image: flytaskmdb-python-app:1.0.0
     build: flytaskpymdb/.
     ports:
       - 8001:8001
-
+#CONTENEDOR DE REACT QUE SE CONECTA A STREAM DE POSTGRE
   react:
     container_name: react_container
     image: react-app:1.0.0
     build: flytask-react/.
     ports:
       - 5173:5173
+    environment:
+      - VITE_URL_API=$VITE_POSTGRES_API
+      - VITE_BASE_ROUTES=$VITE_REACT_POSTGRE_BASE
+      - VITE_BASE_PORT=$VITE_POSTGRE_PORT
     depends_on:
       - java_app
       - django_postgre
+#CONTENEDOR DE REACT QUE SE CONECTA A STREAM DE MONGO
+  react_mdb:
+    container_name: react_mdb_container
+    image: react-mdb-app:1.0.0
+    build: flytask-react/.
+    ports:
+      - 5170:5170
+    environment:
+      - VITE_URL_API=$VITE_MONGO_API
+      - VITE_BASE_ROUTES=$VITE_REACT_MONGO_BASE
+      - VITE_BASE_PORT=$VITE_MONGO_PORT
+    depends_on:
+      - java_app_mdb
+      - django_mdb
 
   #express_postgre:
   #  container_name: express_postgre_container
@@ -74,9 +94,14 @@ services:
   #  depends_on:
   #    - db
 
+#CONTENEDOR DE BASE DE DATOS SQL
   db:
       container_name: db
       image: db-1.0.0
       build: postgreinit/.
       ports:
         - "5432:5432"
+      environment:
+        - POSTGRES_USER=$POSTGRES_USER
+        - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+        - POSTGRES_DB=$POSTGRES_DB

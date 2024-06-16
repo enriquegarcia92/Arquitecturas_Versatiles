@@ -1,10 +1,12 @@
 # Use the official PostgreSQL image from the Docker Hub
 FROM postgres:latest
 
-# Environment variables to configure PostgreSQL
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=password
-ENV POSTGRES_DB=flytask
+# Define build-time variables
+
+# Set environment variables using ARG values
+ENV POSTGRES_USER=$POSTGRES_USER
+ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+ENV POSTGRES_DB=$POSTGRES_DB
 
 # Add the SQL script to the Docker image
 COPY create_schema.sql /docker-entrypoint-initdb.d/

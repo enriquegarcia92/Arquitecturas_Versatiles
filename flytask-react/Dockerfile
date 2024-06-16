@@ -13,8 +13,12 @@ RUN npm install
 # Copia el resto del código de la aplicación
 COPY . .
 
+ENV VITE_URL_API=$VITE_URL_API
+ENV VITE_BASE_ROUTES=$VITE_BASE_ROUTES
+ENV VITE_BASE_PORT=$VITE_BASE_PORT
+
 # Expon el puerto 5176 para Vite
-EXPOSE 5176
+EXPOSE $BASE_CONFIG_PORT
 
 # Comando por defecto para ejecutar Vite
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
