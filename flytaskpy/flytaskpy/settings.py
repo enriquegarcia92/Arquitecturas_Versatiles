@@ -10,9 +10,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-PORT = '8001'
-BASE_URL = 'http://localhost:' + PORT
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -66,7 +63,7 @@ DATABASES = {
         'HOST': 'db',
         'PORT': '5432',
         'OPTIONS': {
-            'options': f'-c search_path=flytask'
+            'options': f'-c search_path=public'
         },
     }
 }

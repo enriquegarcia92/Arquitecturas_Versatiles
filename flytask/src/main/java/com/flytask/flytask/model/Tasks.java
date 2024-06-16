@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@Table(name = "\"TASKS\"", schema = "FLYTASK")
+@Table(name = "\"TASKS\"", schema = "PUBLIC")
 public class Tasks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

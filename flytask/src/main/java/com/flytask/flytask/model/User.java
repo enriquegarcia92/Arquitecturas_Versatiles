@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@Table(name = "\"USER\"" , schema = "FLYTASK")
+@Table(name = "\"USER\"" , schema = "PUBLIC")
 public class User implements UserDetails {
 
     @Id

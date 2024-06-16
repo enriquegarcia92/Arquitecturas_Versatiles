@@ -10,6 +10,7 @@ services:
       - java_app_mdb
       - arquitecturas_integrales
       - django_postgre
+      - django_mdb
       - react
     volumes:
     - ./nginx:/etc/nginx/conf.d
@@ -29,6 +30,7 @@ services:
       - 7070:7070
     depends_on:
       - db
+      - django_postgre
       
   java_app_mdb:
     container_name: spring_mongo_container
@@ -46,6 +48,13 @@ services:
     depends_on:
       - db
 
+  django_mdb:
+    container_name: django_mongo_container
+    image: flytaskmdb-python-app:1.0.0
+    build: flytaskpymdb/.
+    ports:
+      - 8001:8001
+
   react:
     container_name: react_container
     image: react-app:1.0.0
@@ -54,7 +63,6 @@ services:
       - 5173:5173
     depends_on:
       - java_app
-      - java_app_mdb
       - django_postgre
 
   #express_postgre:
@@ -67,12 +75,8 @@ services:
   #    - db
 
   db:
-      image: postgres
-      restart: always
+      container_name: db
+      image: db-1.0.0
+      build: postgreinit/.
       ports:
         - "5432:5432"
-      environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=password
-        - POSTGRES_DB=flytask
-  
