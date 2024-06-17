@@ -71,7 +71,7 @@ services:
       - db
 #CONTENEDOR DE EXPRESS CON BASE DE DATOS MONGODB
   express_mongo:
-    container_name: express_MONGO_container
+    container_name: express_mongo_container
     image: flytaskmdb-node-app:1.0.0
     build: flytaskexpressmongo/.
     ports:
