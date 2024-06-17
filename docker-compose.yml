@@ -94,21 +94,50 @@ services:
     depends_on:
       - java_app
       - django_postgre
+#CONTENEDOR DE VUE QUE SE CONECTA A STREAM DE MONGO
+  vue:
+    container_name: vue_container
+    image: vue-app:1.0.0
+    build: flytask-vue/.
+    ports:
+      - 5163:5163
+    environment:
+      - VITE_URL_API=$VITE_POSTGRES_API
+      - VITE_BASE_ROUTES=$VITE_VUE_POSTGRE_BASE
+      - VITE_BASE_PORT=$VITE_VUE_POSTGRE_PORT
+    depends_on:
+      - java_app
+      - django_postgre
 #CONTENEDOR DE REACT QUE SE CONECTA A STREAM DE MONGO
   react_mdb:
-    container_name: react_mdb_container
-    image: react-mdb-app:1.0.0
-    build: flytask-react/.
-    ports:
-      - 5170:5170
-    environment:
-      - VITE_URL_API=$VITE_MONGO_API
-      - VITE_BASE_ROUTES=$VITE_REACT_MONGO_BASE
-      - VITE_BASE_PORT=$VITE_MONGO_PORT
-    depends_on:
-      - java_app_mdb
-      - django_mdb
-
+      container_name: react_mdb_container
+      image: react-mdb-app:1.0.0
+      build: flytask-react/.
+      ports:
+        - 5170:5170
+      environment:
+        - VITE_URL_API=$VITE_MONGO_API
+        - VITE_BASE_ROUTES=$VITE_REACT_MONGO_BASE
+        - VITE_BASE_PORT=$VITE_MONGO_PORT
+        - VITE_ROUTER_PATH=$VITE_VUE_POSTGRE_ROUTER_PATH
+      depends_on:
+        - java_app_mdb
+        - django_mdb
+#CONTENEDOR DE VUE QUE SE CONECTA A STREAM DE MONGO
+  vue_mdb:
+      container_name: vue_mdb_container
+      image: vue-mdb-app:1.0.0
+      build: flytask-vue/.
+      ports:
+        - 5160:5160
+      environment:
+        - VITE_URL_API=$VITE_MONGO_API
+        - VITE_BASE_ROUTES=$VITE_VUE_MONGO_BASE
+        - VITE_BASE_PORT=$VITE_VUE_MONGO_PORT
+        - VITE_ROUTER_PATH=$VITE_VUE_MONGO_ROUTER_PATH
+      depends_on:
+        - java_app_mdb
+        - django_mdb
 #CONTENEDOR DE BASE DE DATOS SQL
   db:
       container_name: db
