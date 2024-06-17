@@ -1,9 +1,9 @@
 <template>
   <div
-    class="h-screen w-full bg-signup-background bg-cover flex justify-center items-center"
+    class="flex flex-col justify-center items-center h-screen w-full md:bg-signup-background md:bg-cover"
   >
     <div
-      class="relative bg-slate-50 p-8 rounded-lg shadow-md w-full max-w-md h-3/5 shadow-lg"
+      class="relative md:h-fit md:border md:rounded-md md:p-8 md:w-2/4 md:shadow-lg md:bg-white xl:w-1/3"
     >
       <h1 class="text-center font-bold text-lg">Welcome</h1>
       <h1 class="text-center text-sm">
@@ -12,7 +12,7 @@
       <!-- Absolute positioned image -->
       <img
         src="@/assets/chincheta.png"
-        class="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24"
+        class="invisible absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:visible"
         alt="Chincheta"
       />
       <Form
@@ -43,12 +43,25 @@
           <ErrorMessage name="password" class="text-red-500 text-sm mt-1" />
         </div>
         <button
-          class="p-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100"
+          :disabled="isLoading"
+          class="p-2 text-center mb-2 bg-yellow rounded-md text-white w-full hover:bg-yellow-100"
         >
-          Sign in
+          <span v-if="isLoading">
+            <p>Processing...</p>
+          </span>
+          <span v-if="!isLoading">
+            <p>Sign in</p>
+          </span>
         </button>
+        <a href="/passwordRecovery">Forgot your password?</a>
+        <a href="/register">New to Flytask? create an account</a>
       </Form>
     </div>
+    <Notification
+      :message="notificationMessage"
+      :show="showNotification"
+      :color="notificationColor"
+    />
   </div>
 </template>
 
@@ -56,6 +69,7 @@
 import { Field, Form, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { loginUser } from "@/api/loginAPI";
+import Notification from "@/components/feedback/Notification.vue";
 
 const loginSchema = yup.object({
   email: yup
@@ -80,30 +94,54 @@ export default {
     Form,
     Field,
     ErrorMessage,
+    Notification
   },
   methods: {
+    triggerNotification(message, color) {
+      this.notificationMessage = message;
+      this.notificationColor = color;
+      this.showNotification = true;
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000); // Hide after 3 seconds
+    },
+
     onSubmit(values) {
+      this.isLoading = true;
       console.log(values);
       loginUser
         .login(values)
         .then((response) => {
           console.log(response);
           let token = response.data.token;
-          if (token) {
+          if (response.status === 200 && token) {
+            this.triggerNotification(
+              "Sign in successful",
+              "bg-green-500"
+            );
             localStorage.setItem("name", response.data.name);
             localStorage.setItem("token", token);
             localStorage.setItem("id", response.data.id);
+            this.isLoading = false;
             window.location.href = "/board";
           }
         })
         .catch((error) => {
-          console.log(error);
+          this.triggerNotification(
+            "An error has ocurred, please try again",
+            "bg-red-500"
+          );
+          this.isLoading = false;
         });
     },
   },
   data() {
     return {
       loginSchema,
+      showNotification: false,
+      notificationMessage: "",
+      notificationColor: "bg-red-600",
+      isLoading: false
     };
   },
 };

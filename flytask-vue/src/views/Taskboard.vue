@@ -1,9 +1,9 @@
 <template>
   <div className="bg-slate-50 h-screen">
     <div
-      className="flex justify-between items-center w-full shadow-lg h-[10vh]"
+      className="flex justify-center md:justify-end items-center w-full shadow-lg h-[10vh]"
     >
-      <ul className="flex w-full bg-slate-50">
+      <ul className="flex w-fit bg-slate-50">
         <li className="">
           <button
             @click="listmode"
@@ -20,6 +20,15 @@
           >
             <BsGrid3X3Gap className="inline-block mr-2" />
             Group by Stage
+          </button>
+        </li>
+        <li className="">
+          <button
+            @click="handleLogout"
+            class="text-gray-800 bg-slate-50 hover:bg-slate-100 p-5"
+          >
+            <BsGrid3X3Gap className="inline-block mr-2" />
+            Log out
           </button>
         </li>
       </ul>
@@ -46,6 +55,7 @@ import { ref } from "vue";
 import EmptyTaskboard from "@/components/sections/EmptyTaskboard.vue"
 import ListView from "@/components/sections/ListView.vue"
 import KanbanView from "@/components/sections/KanbanView.vue"
+import { whoami } from "@/api/whoamiAPI";
 
 const taskData = ref([]);
 const list = false;
@@ -70,32 +80,46 @@ export default {
     listmode() {
       this.list = true;
       this.kanban = false;
-      console.log(this.list);
-      console.log(this.kanban);
     },
 
     kanbanmode() {
       this.list = false;
       this.kanban = true;
-      console.log(this.list);
-      console.log(this.kanban);
     },
-  },
+    
+    handleLogout() {
+      localStorage.clear()
+      window.location.href = "/login";
+    },
 
-  created() {
-    getTasks
+    fetchTasks() {
+      getTasks
       .getTasks()
       .then((response) => {
-        console.log(response);
         let tasks = response.data.data;
-        console.log(tasks);
         this.taskData = tasks;
       })
       .catch((error) => {
         if (error) {
-           window.location.href = "/login";
+
         }
       });
+    }
+
+  },
+
+  created() {
+
+    whoami
+      .whoami()
+      .then((response) => {
+        if (response.status === 200) {
+          this.fetchTasks()
+        }
+      })
+      .catch((error) => {
+        window.location.href = "/login";
+      })
   },
 };
 </script>
