@@ -1,41 +1,50 @@
-import { AppDataSource } from "./data-source"
-import * as express from "express"
-import { authenticateToken } from "./middleware/authenticationToken"
-import { TaskController } from "./controllers/Task"
-import { AuthController } from "./controllers/Authentication"
+import express, { NextFunction, Request, Response } from 'express';
+import sequelize from './config/database';
+import { CreateUserDTO } from './models/DTO/UserDTO';
+import { validationMiddleware } from './middleware/validate';
+import { loginUser, passwordRecovery, recoverPassword, registerUser, whoami } from './controllers/authController';
+import { LoginDTO } from './models/DTO/LoginDTO';
+import dotenv from 'dotenv';
+import { verifyToken } from './middleware/authenticate';
+import { RecoverPwDTO } from './models/DTO/RecoverPwDTO';
+import { TaskDTO } from './models/DTO/TaskDTO';
+import { changeStatus, createTask, deleteTask, getTasks, updateTask } from './controllers/tasksController';
+import { UpdateTaskDTO } from './models/DTO/UpdateTaskDTO';
+import { verify } from 'jsonwebtoken';
 
+dotenv.config();
+const app = express();
+const port = 3000;
 
-const app = express()
-const PORT = Number(process.env.PORT) || 3000
-app.use(express.json())
-app.use(authenticateToken)
+// Middleware to parse JSON
+app.use(express.json());
 
-// Task Routes
-app.get("api/task", authenticateToken, new TaskController().getTasks)
-app.get("api/task/search", authenticateToken, new TaskController().getTask)
-app.post("api/task/create", authenticateToken, new TaskController().createTask)
-app.put("api/task/edit/:id", authenticateToken, new TaskController().updateTask)
-app.delete("api/task/delete/:id", authenticateToken, new TaskController().deleteTask)
-//status requests
-app.put("api/task/done/:id", authenticateToken, new TaskController().updateTaskStatusToDone)
-app.put("api/task/doing", authenticateToken, new TaskController().updateTaskStatusToDoing)
-app.put("api/task/upcoming", authenticateToken, new TaskController().updateTaskStatusToUpcoming)
-app.put("ap/task/todo", authenticateToken, new TaskController().updateTaskStatusToTodo)
+//Authentication and user requests
+app.post('/api/auth/whoami', verifyToken, whoami);
+app.post('/api/auth/register', validationMiddleware(CreateUserDTO), registerUser);
+app.post('/api/auth/login', validationMiddleware(LoginDTO), loginUser);
+app.post('/api/auth/recover-password', passwordRecovery);
+app.post('/api/auth/recover-authenticated',validationMiddleware(RecoverPwDTO), recoverPassword);
 
-//Auth Routes
-app.post("api/auth/register", new AuthController().registerUser)
-app.post("api/auth/login", new AuthController().loginUser)
-app.post("api/auth/recover-password", new AuthController().passwordRecovery)
+//Tasks requests
+app.get('/api/task/search', verifyToken, getTasks);
+app.post('/api/task/create', verifyToken, validationMiddleware(TaskDTO), createTask);
+app.put('/api/task/edit/:id', verifyToken, validationMiddleware(UpdateTaskDTO), updateTask);
+app.put('/api/task/:status/:id', verifyToken, changeStatus);
+app.delete('/api/task/delete/:id', verifyToken, deleteTask);
 
-app.put
-AppDataSource.initialize()
-  .then(() => {
-    app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-    console.log('DataSource initialized successfully');
-  })
-  .catch(error => {
-    console.error('Error initializing DataSource:', error);
+  async function initialize() {
+    try {
+      await sequelize.authenticate();
+      console.log('Connection has been established successfully.');
+      // Continue with your application logic here
+    } catch (error) {
+      console.error('Unable to connect to the database:', error);
+    }
+  }
+
+  initialize();
+
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
   });
-
