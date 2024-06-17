@@ -56,6 +56,19 @@ services:
     build: flytaskpymdb/.
     ports:
       - 8001:8001
+#CONTENEDOR DE EXPRESS CON BASE DE DATOS SQL
+  express_postgre:
+    container_name: express_postgre_container
+    image: flytask-node-app:1.0.0
+    build: flytaskexpress/.
+    ports:
+      - 3000:3000
+    environment:
+      - SECRET_KEY=$SECRET_KEY
+      - EMAIL_HOST_USER=$EMAIL_HOST_USER
+      - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
+    depends_on:
+      - db
 #CONTENEDOR DE REACT QUE SE CONECTA A STREAM DE POSTGRE
   react:
     container_name: react_container
@@ -84,15 +97,6 @@ services:
     depends_on:
       - java_app_mdb
       - django_mdb
-
-  #express_postgre:
-  #  container_name: express_postgre_container
-  #  image: flytask-node-app:1.0.0
-  #  build: flytaskexpress/.
-  #  ports:
-  #    - 3000:3000
-  #  depends_on:
-  #    - db
 
 #CONTENEDOR DE BASE DE DATOS SQL
   db:

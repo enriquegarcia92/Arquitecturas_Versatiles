@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 const sequelize = new Sequelize('flytask', 'postgres', 'password', {
-  host: 'localhost',
+  host: 'db',
   dialect: 'postgres', // Adjust this based on your database type (e.g., 'mysql', 'sqlite')
   logging: false, // Disable logging of SQL queries to avoid cluttering your console
   define: {
