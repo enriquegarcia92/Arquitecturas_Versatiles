@@ -1,41 +1,47 @@
-import { AppDataSource } from "./data-source"
-import * as express from "express"
-import { authenticateToken } from "./middleware/authenticationToken"
-import { TaskController } from "./controllers/Task"
-import { AuthController } from "./controllers/Authentication"
+import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import { validationMiddleware } from './middleware/validate';
+import { CreateUserDTO } from './models/DTO/UserDTO';
+import { loginUser, passwordRecovery, recoverPassword, registerUser, whoami } from './controlers/authController';
+import { LoginDTO } from './models/DTO/LoginDTO';
+import { RecoverPwDTO } from './models/DTO/RecoveryPwDTO';
+import { verifyToken } from './middleware/authenticate';
+import dotenv from 'dotenv';
+import { changeStatus, createTask, deleteTask, getTasks, updateTask } from './controlers/tasksController';
+import { TaskDTO } from './models/DTO/TaskDTO';
+import { UpdateTaskDTO } from './models/DTO/UpdateTaskDTO';
+
+dotenv.config();
+const app = express();
+const port = process.env.PORT || 3001;
+
+// Middleware to parse JSON
+app.use(express.json());
 
 
-const app = express()
-const PORT = Number(process.env.PORT) || 3000
-app.use(express.json())
-app.use(authenticateToken)
+//Authentication and user requests
+app.post('/api/auth/whoami', verifyToken, whoami);
+app.post('/api/auth/register', validationMiddleware(CreateUserDTO), registerUser);
+app.post('/api/auth/login', validationMiddleware(LoginDTO), loginUser);
+app.post('/api/auth/recover-password', passwordRecovery);
+app.post('/api/auth/recover-authenticated',validationMiddleware(RecoverPwDTO), recoverPassword);
 
-// Task Routes
-app.get("api/task", authenticateToken, new TaskController().getTasks)
-app.get("api/task/search", authenticateToken, new TaskController().getTask)
-app.post("api/task/create", authenticateToken, new TaskController().createTask)
-app.put("api/task/edit/:id", authenticateToken, new TaskController().updateTask)
-app.delete("api/task/delete/:id", authenticateToken, new TaskController().deleteTask)
-//status requests
-app.put("api/task/done/:id", authenticateToken, new TaskController().updateTaskStatusToDone)
-app.put("api/task/doing", authenticateToken, new TaskController().updateTaskStatusToDoing)
-app.put("api/task/upcoming", authenticateToken, new TaskController().updateTaskStatusToUpcoming)
-app.put("ap/task/todo", authenticateToken, new TaskController().updateTaskStatusToTodo)
+//Tasks requests
+//Tasks requests
+app.get('/api/task/search', verifyToken, getTasks);
+app.post('/api/task/create', verifyToken, validationMiddleware(TaskDTO), createTask);
+app.put('/api/task/edit/:id', verifyToken, validationMiddleware(UpdateTaskDTO), updateTask);
+app.put('/api/task/:status/:id', verifyToken, changeStatus);
+app.delete('/api/task/delete/:id', verifyToken, deleteTask);
 
-//Auth Routes
-app.post("api/auth/register", new AuthController().registerUser)
-app.post("api/auth/login", new AuthController().loginUser)
-app.post("api/auth/recover-password", new AuthController().passwordRecovery)
 
-app.put
-AppDataSource.initialize()
-  .then(() => {
-    app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-    console.log('DataSource initialized successfully');
-  })
-  .catch(error => {
-    console.error('Error initializing DataSource:', error);
-  });
+// MongoDB connection
+const mongoUri = 'mongodb+srv://00093619:flytask580@flytaskcluster.xlycw9x.mongodb.net/flytask?retryWrites=true&w=majority&appName=flytaskcluster';
 
+mongoose.connect(mongoUri)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('Failed to connect to MongoDB', err));
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
