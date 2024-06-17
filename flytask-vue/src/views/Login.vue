@@ -70,6 +70,7 @@ import { Field, Form, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { loginUser } from "@/api/loginAPI";
 import Notification from "@/components/feedback/Notification.vue";
+import { whoami } from "@/api/whoamiAPI";
 
 const loginSchema = yup.object({
   email: yup
@@ -94,8 +95,9 @@ export default {
     Form,
     Field,
     ErrorMessage,
-    Notification
+    Notification,
   },
+
   methods: {
     triggerNotification(message, color) {
       this.notificationMessage = message;
@@ -108,17 +110,13 @@ export default {
 
     onSubmit(values) {
       this.isLoading = true;
-      console.log(values);
       loginUser
         .login(values)
         .then((response) => {
           console.log(response);
           let token = response.data.token;
           if (response.status === 200 && token) {
-            this.triggerNotification(
-              "Sign in successful",
-              "bg-green-500"
-            );
+            this.triggerNotification("Sign in successful", "bg-green-500");
             localStorage.setItem("name", response.data.name);
             localStorage.setItem("token", token);
             localStorage.setItem("id", response.data.id);
@@ -135,13 +133,28 @@ export default {
         });
     },
   },
+
+  created() {
+    whoami
+      .whoami()
+      .then((response) => {
+        if (response.status === 200) {
+          this.triggerNotification("Session restored!", "bg-green-500");
+          window.location.href = "/board";
+        }
+      })
+      .catch((error) => {
+        
+      });
+  },
+
   data() {
     return {
       loginSchema,
       showNotification: false,
       notificationMessage: "",
       notificationColor: "bg-red-600",
-      isLoading: false
+      isLoading: false,
     };
   },
 };

@@ -20,7 +20,7 @@
         @submit="onSubmit"
         class="h-5/6 w-full flex flex-col gap-2 items-center"
       >
-        <div class="mb-2 w-full">
+        <div class=" w-full">
           <label for="name" class="block text-sm font-medium text-gray-700"
             >Name</label
           >
@@ -30,7 +30,7 @@
           />
           <ErrorMessage name="name" class="text-red-500 text-sm" />
         </div>
-        <div class="mb-2 w-full">
+        <div class="w-full">
           <label for="email" class="block text-sm font-medium text-gray-700"
             >Email</label
           >
@@ -41,7 +41,7 @@
           />
           <ErrorMessage name="email" class="text-red-500 text-sm" />
         </div>
-        <div class="mb-2 w-full">
+        <div class="w-full">
           <label for="password" class="block text-sm font-medium text-gray-700"
             >Password</label
           >
@@ -52,7 +52,7 @@
           />
           <ErrorMessage name="password" class="text-red-500 text-sm" />
         </div>
-        <div class="mb-2 w-full">
+        <div class="w-full">
           <label
             for="confirmPassword"
             class="block text-sm font-medium text-gray-700"
@@ -67,7 +67,7 @@
         </div>
         <button
           :disabled="isLoading"
-          class="p-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100"
+          class="p-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100 mb-2"
         >
           <span v-if="isLoading">
             <p>Processing...</p>
@@ -76,6 +76,7 @@
             <p>Register</p>
           </span>
         </button>
+        <a href="/login">I already have an account!</a>
       </Form>
     </div>
     <Notification

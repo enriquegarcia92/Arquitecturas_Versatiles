@@ -46,6 +46,11 @@
         <EmptyTaskboard/>
       </div>
     </div>
+    <Notification
+      :message="notificationMessage"
+      :show="showNotification"
+      :color="notificationColor"
+    />
   </div>
 </template>
 
@@ -56,6 +61,7 @@ import EmptyTaskboard from "@/components/sections/EmptyTaskboard.vue"
 import ListView from "@/components/sections/ListView.vue"
 import KanbanView from "@/components/sections/KanbanView.vue"
 import { whoami } from "@/api/whoamiAPI";
+import Notification from "@/components/feedback/Notification.vue";
 
 const taskData = ref([]);
 const list = false;
@@ -67,16 +73,31 @@ export default {
       taskData,
       list,
       kanban,
+      showNotification: false,
+      notificationMessage: "",
+      notificationColor: "bg-red-600",
+      isLoading: false
     };
   },
 
   components: {
     EmptyTaskboard, 
     ListView,
-    KanbanView 
+    KanbanView, 
+    Notification 
   },
 
   methods: {
+
+    triggerNotification(message, color) {
+      this.notificationMessage = message;
+      this.notificationColor = color;
+      this.showNotification = true;
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000); // Hide after 3 seconds
+    },
+
     listmode() {
       this.list = true;
       this.kanban = false;
@@ -89,7 +110,8 @@ export default {
     
     handleLogout() {
       localStorage.clear()
-      window.location.href = "/login";
+      this.triggerNotification("Session closed!", "bg-green-500")
+      window.location.href = "/login"; 
     },
 
     fetchTasks() {
@@ -101,7 +123,7 @@ export default {
       })
       .catch((error) => {
         if (error) {
-
+          this.triggerNotification("An error ocurred, please reload or try again later", "bg-red-500");
         }
       });
     }
@@ -118,6 +140,7 @@ export default {
         }
       })
       .catch((error) => {
+        localStorage.clear()
         window.location.href = "/login";
       })
   },

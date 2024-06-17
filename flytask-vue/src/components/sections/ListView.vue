@@ -66,7 +66,7 @@
     </div>
     <EditTaskModal
       :isOpen="editTaskModalIsOpen"
-      :task="{ selectedTask }"
+      :task="selectedTask"
       @close="closeEditTaskModal"
     />
     <AddTaskModal :isOpen="addTaskModalIsOpen" @close="closeAddTaskModal" />
@@ -134,7 +134,7 @@ export default {
     },
     handleEditTask(task) {
       selectedTask.value = task;
-      this.openEditTaskModal();
+      this.openEditTaskModal(task);
     },
     handleMoveTask(task) {
       selectedTask.value = task;
