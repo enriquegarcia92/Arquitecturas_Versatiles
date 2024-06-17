@@ -26,6 +26,16 @@ const router = createRouter({
       path: '/passwordRecovery', 
       name: 'passwordRecovery', 
       component: PasswordRecovery
+    },
+    {
+      path: '/', 
+      name: 'emptyUrl', 
+      component: Login
+    }, 
+    {
+      path: '/.*', 
+      name: 'NotFound', 
+      component: Login
     }
   ]
 })
