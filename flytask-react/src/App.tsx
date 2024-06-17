@@ -7,7 +7,6 @@ import PrivateRoutes from "./utils/PrivateRoute";
 import PasswordRecovery from "./pages/PasswordRecovery";
 
 const BASE_PATH = import.meta.env.VITE_BASE_ROUTES
-console.log(BASE_PATH);
 function App() {
   return (
     <>

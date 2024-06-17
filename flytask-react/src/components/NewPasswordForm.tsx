@@ -21,17 +21,14 @@ const NewPasswordForm: React.FC = () => {
     },
     validationSchema: NewPasswordSchema,
     onSubmit: (values) => {
-        console.log(values);
         setNewPassword
             .setPassword(values)
             .then((response) => {
-                console.log(response);
                 if(response.status === 200){
                     window.location.href = "/react/sign-in"
                 }
             })
             .catch((error) => {
-                console.log(error); 
             })
     },
   });

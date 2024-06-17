@@ -69,6 +69,17 @@ services:
       - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
     depends_on:
       - db
+#CONTENEDOR DE EXPRESS CON BASE DE DATOS MONGODB
+  express_mongo:
+    container_name: express_MONGO_container
+    image: flytaskmdb-node-app:1.0.0
+    build: flytaskexpressmongo/.
+    ports:
+      - 3001:3001
+    environment:
+      - SECRET_KEY=$SECRET_KEY
+      - EMAIL_HOST_USER=$EMAIL_HOST_USER
+      - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
 #CONTENEDOR DE REACT QUE SE CONECTA A STREAM DE POSTGRE
   react:
     container_name: react_container

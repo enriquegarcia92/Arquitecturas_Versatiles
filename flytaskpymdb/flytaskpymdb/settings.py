@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'flytaskpymdb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'flytask_django',
+        'NAME': 'flytask',
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb+srv://00093619:flytask580@flytaskcluster.xlycw9x.mongodb.net/flytask?retryWrites=true&w=majority',
