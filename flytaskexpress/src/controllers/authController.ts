@@ -54,6 +54,7 @@ export const loginUser = async (req: Request, res: Response) => {
 };
 
 export const registerUser = async (req: Request, res: Response) => {
+    console.log("creating user")
     try {
         const { name, email, password, confirmPassword } = req.body;
 

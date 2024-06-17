@@ -15,8 +15,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia el código de la aplicación al contenedor
 COPY . /app/
 
-# Puerto en el que la aplicación Django va a ejecutarse
-EXPOSE 8000
+# Copia el entrypoint.sh y dale permisos de ejecución
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Comando para ejecutar la aplicación Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]
+# Puerto en el que la aplicación Django va a ejecutarse
+EXPOSE 8001
+
+# Usa entrypoint.sh como el punto de entrada
+ENTRYPOINT ["/app/entrypoint.sh"]
