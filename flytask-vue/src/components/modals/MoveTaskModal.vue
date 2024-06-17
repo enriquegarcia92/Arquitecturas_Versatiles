@@ -3,8 +3,10 @@
     v-if="isOpen"
     class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50"
   >
-    <div class="bg-white w-96 p-8 rounded-lg shadow-md relative">
-      <header class="flex justify-between items-center p-4 border-b">
+    <div
+      class="bg-white w-5/6 md:w-2/3 lg:w-1/3 p-8 rounded-lg shadow-md relative"
+    >
+      <header class="flex justify-between items-center mb-4">
         <p class="font-bold">Move task</p>
         <button @click="closeModal" class="text-gray-700">
           <svg
@@ -23,7 +25,7 @@
           </svg>
         </button>
       </header>
-      <div class="mb-4">
+      <div class="flex flex-col gap-2 mb-4">
         <label for="status" class="block text-sm font-medium text-gray-700">
           Where should this task go?
         </label>
@@ -44,18 +46,30 @@
         </select>
       </div>
       <button
+        :disabled="isLoading"
         @click="handleMoveTask"
-        class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-green-500"
+        class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primaryDark"
       >
-        Move task
+        <span v-if="isLoading">
+          <p>Processing...</p>
+        </span>
+        <span v-if="!isLoading">
+          <p>Move</p>
+        </span>
       </button>
     </div>
+    <Notification
+      :message="notificationMessage"
+      :show="showNotification"
+      :color="notificationColor"
+    />
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
 import { moveTask } from "@/api/moveTaskAPI";
+import Notification from "@/components/feedback/Notification.vue";
 
 const statuses = [
   { label: "Upcoming", value: "upcoming" },
@@ -63,6 +77,8 @@ const statuses = [
   { label: "Doing", value: "doing" },
   { label: "Done", value: "done" },
 ];
+
+const selectedStatus = ref("");
 
 export default {
   props: {
@@ -79,31 +95,48 @@ export default {
     closeModal() {
       this.$emit("close");
     },
-  },
-  components: {},
-  setup(props) {
-    const selectedStatus = ref("");
 
-    const handleMoveTask = () => {
-      console.log(selectedStatus.value);
-      console.log(props.task.taskId);
+    triggerNotification(message, color) {
+      this.notificationMessage = message;
+      this.notificationColor = color;
+      this.showNotification = true;
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000); // Hide after 3 seconds
+    },
+
+    handleMoveTask() {
+      this.isLoading = true;
       moveTask
-        .moveTask(selectedStatus.value, props.task.taskId)
+        .moveTask(selectedStatus.value, this.task.taskId)
         .then((response) => {
-          console.log(response);
           if (response.status === 200) {
+            this.triggerNotification("Task moved!", "bg-green-500");
+            this.isLoading = false;
             window.location.reload();
           }
         })
         .catch((error) => {
-          console.log(error);
+          this.triggerNotification(
+            "An error has ocurred, please try again",
+            "bg-red-500"
+          );
+          this.isLoading = false;
         });
-    };
+    },
+  },
+  components: {
+    Notification,
+  },
 
+  data() {
     return {
       selectedStatus,
-      handleMoveTask,
       statuses,
+      showNotification: false,
+      notificationMessage: "",
+      notificationColor: "bg-red-600",
+      isLoading: false,
     };
   },
 };

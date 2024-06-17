@@ -33,11 +33,6 @@ const PasswordRecovery: React.FC = () => {
     },
   });
 
-  const handleNewPasswordSubmit = (values: { newPassword: string; confirmNewPassword: string; token: string }) => {
-    console.log(values);
-    // Handle new password submission here
-  };
-
   return (
     <div className="h-screen bg-signup-background bg-cover bg-center flex justify-center items-center w-screen">
       <div className="relative bg-slate-50 p-8 rounded-lg shadow-md w-full max-w-md">
@@ -50,7 +45,7 @@ const PasswordRecovery: React.FC = () => {
           style={{ transform: 'translate(-50%, -50%)' }}
         />
         {showNewPasswordForm ? (
-          <NewPasswordForm onSubmit={handleNewPasswordSubmit} />
+          <NewPasswordForm/>
         ) : (
           <form onSubmit={formikRecover.handleSubmit} className="space-y-6 mt-2">
             <div>

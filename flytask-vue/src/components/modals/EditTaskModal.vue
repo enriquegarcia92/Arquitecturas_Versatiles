@@ -5,9 +5,9 @@
       v-if="isOpen"
     >
       <div
-        class="bg-white rounded-lg shadow-lg overflow-hidden h-4/5 w-11/12 md:w-1/2 lg:w-1/3"
+        class="bg-white rounded-lg shadow-lg overflow-hidden h-fit p-8 w-5/6 md:w-2/3 lg:w-1/3"
       >
-        <header class="flex justify-between items-center p-4 border-b">
+        <header class="flex justify-between items-center">
           <p class="font-bold">Edit task</p>
           <button @click="closeModal" class="text-gray-700">
             <svg
@@ -29,17 +29,15 @@
         <div class="p-4">
           <slot></slot>
         </div>
-        <div class="h-4/5 w-full flex flex-col justify-center items-center">
+        <div class="h-fit w-full flex flex-col justify-center items-center">
           <Form
             :validation-schema="EditTaskSchema"
             @submit="onSubmit"
-            class="h-full w-4/5 flex flex-col justify-evenly items-center"
+            class="h-fit w-full flex flex-col justify-evenly items-center"
             v-slot="{ errors }"
           >
             <div class="mb-4 w-full">
-              <label
-                for="title"
-                class="block text-sm font-medium text-gray-700"
+              <label for="title" class="block text-sm font-medium text-gray-700"
                 >Title</label
               >
               <Field
@@ -80,14 +78,25 @@
               <ErrorMessage name="dueDate" class="text-red-500 text-sm mt-1" />
             </div>
             <button
+              :disabled="isLoading"
               type="submit"
-              class="p-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100"
+              class="p-2 mt-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100"
             >
-              Save
+              <span v-if="isLoading">
+                <p>Processing...</p>
+              </span>
+              <span v-if="!isLoading">
+                <p>Update</p>
+              </span>
             </button>
           </Form>
         </div>
       </div>
+      <Notification
+        :message="notificationMessage"
+        :show="showNotification"
+        :color="notificationColor"
+      />
     </div>
   </transition>
 </template>
@@ -97,6 +106,7 @@ import { Field, Form, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { editTask } from "@/api/editTaskAPI";
 import { isoToYYYYMMDD } from "@/utils/dataConversions";
+import Notification from "@/components/feedback/Notification.vue";
 
 const EditTaskSchema = yup.object().shape({
   title: yup.string().required("Task Name is required"),
@@ -121,66 +131,57 @@ export default {
   data() {
     return {
       EditTaskSchema,
+      showNotification: false,
+      notificationMessage: "",
+      notificationColor: "bg-red-600",
+      isLoading: false,
     };
   },
   methods: {
     closeModal() {
       this.$emit("close");
     },
+
+    triggerNotification(message, color) {
+      this.notificationMessage = message;
+      this.notificationColor = color;
+      this.showNotification = true;
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000); // Hide after 3 seconds
+    },
+
     onSubmit(values) {
+      this.isLoading = true;
       let taskId = this.task.taskId;
-      console.log(values);
-      console.log(taskId);
-      editTask.editTask(values, taskId)
-      .then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-            window.location.reload()
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      editTask
+        .editTask(values, taskId)
+        .then((response) => {
+          if (response.status === 200) {
+            this.triggerNotification("Task updated!", "bg-green-500");
+            this.isLoading = false;
+            window.location.reload();
+          }
+        })
+        .catch((error) => {
+          this.triggerNotification(
+            "An error has ocurred, please try again",
+            "bg-red-500"
+          );
+          this.isLoading = false;
+        });
     },
     formatDate() {
       console.log(this.task);
       return isoToYYYYMMDD(this.task.dueDate);
     },
   },
-  /*computed: {
-    DueDate: {
-      get() {
-        return this.task;
-      },
-      set(value) {
-        this.$emit('update:modelValue', value);
-      }
-    },
-    formattedDueDate: {
-      get() {
-        return isoToYYYYMMDD(this.task.selectedTask.dueDate)
-      },
-      set(value) {
-        this.task.selectedTask.dueDate
-        this.$emit({...this.task.selectedTask, dueDate: value})
-      }
-    }
-  },*/
+
   components: {
     Form,
     Field,
     ErrorMessage,
+    Notification,
   },
 };
 </script>
-
-<style scoped>
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s;
-}
-.modal-enter,
-.modal-leave-to {
-  opacity: 0;
-}
-</style>

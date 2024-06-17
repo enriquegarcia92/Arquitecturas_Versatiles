@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@headlessui/vue": "^1.7.22",
     "vee-validate": "^4.13.1",
     "vue": "^3.4.21",
-    "vue-icons": "^2.0.0",
+
     "vue-router": "^4.3.0",
     "yup": "^1.4.0"
   },

@@ -5,7 +5,7 @@
         <DisclosureButton
           class="flex justify-between items-center border-b-2 border-primary w-full px-4 py-2 text-sm font-medium text-left text-black bg-glacierWhite rounded-lg hover:bg-mint"
         >
-          <span :class="`${statusColor} p-2 rounded-md w-1/6 text-center`">{{
+          <span :class="`${statusColor} p-2 rounded-md fit text-center`">{{
             title
           }}</span>
         </DisclosureButton>
@@ -13,22 +13,22 @@
           <div
             v-for="task in tasks"
             :key="task.taskId"
-            class="cursor-pointer p-2 w-full hover:bg-mint"
+            class="p-2 w-full hover:bg-mint"
           >
-            <div class="flex justify-between items-center">
-              <div class="flex flex-col justify-center">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col justify-start w-2/4">
                 <div class="font-medium">{{ task.title }}</div>
-                <div>{{ task.description }}</div>
+                <div class="overflow-x-auto">{{ task.description }}</div>
               </div>
-              <div class="flex justify-evenly items-center">
+              <div class="flex justify-end items-center w-2/4 gap-2">
                 <button
-                  class="flex items-center gap-2 text-white bg-primary p-2 rounded-md hover:bg-green-500"
+                  class="flex items-center gap-2 text-white bg-primary p-2 rounded-md hover:bg-primaryDark"
                   @click="handleMoveTask(task)"
                 >
                   Move
                 </button>
                 <button
-                  class="flex items-center gap-2 text-white bg-primary p-2 rounded-md hover:bg-green-"
+                  class="flex items-center gap-2 text-white bg-charcoal p-2 rounded-md hover:bg-gray-500"
                   @click="handleEditTask(task)"
                 >
                   Edit

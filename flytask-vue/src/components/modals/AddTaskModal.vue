@@ -5,9 +5,9 @@
       v-if="isOpen"
     >
       <div
-        class="bg-white rounded-lg shadow-lg overflow-hidden h-4/5 w-11/12 md:w-1/2 lg:w-1/3"
+        class="bg-white rounded-lg shadow-lg overflow-hidden h-fit p-8 w-5/6 md:w-2/3 lg:w-1/3"
       >
-        <header class="flex justify-between items-center p-4 border-b">
+        <header class="flex justify-between items-center mb-3">
           <p class="font-bold">Add Task</p>
           <button @click="closeModal" class="text-gray-700">
             <svg
@@ -26,14 +26,11 @@
             </svg>
           </button>
         </header>
-        <div class="p-4">
-          <slot></slot>
-        </div>
-        <div class="h-4/5 w-full flex flex-col justify-center items-center">
+        <div class="h-fit w-full flex flex-col justify-center items-center">
           <Form
             :validation-schema="AddTaskSchema"
             @submit="onSubmit"
-            class="h-full w-4/5 flex flex-col justify-evenly items-center"
+            class="w-4/5 flex flex-col justify-evenly items-center"
           >
             <div class="mb-4 w-full">
               <label for="title" class="block text-sm font-medium text-gray-700"
@@ -74,14 +71,25 @@
               <ErrorMessage name="dueDate" class="text-red-500 text-sm mt-1" />
             </div>
             <button
+              :disabled="isLoading"
               type="submit"
-              class="p-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100"
+              class="p-2 text-center bg-yellow rounded-md text-white w-full hover:bg-yellow-100 mt-2"
             >
-              Add
+              <span v-if="isLoading">
+                <p>Processing...</p>
+              </span>
+              <span v-if="!isLoading">
+                <p>Add</p>
+              </span>
             </button>
           </Form>
         </div>
       </div>
+      <Notification
+        :message="notificationMessage"
+        :show="showNotification"
+        :color="notificationColor"
+      />
     </div>
   </transition>
 </template>
@@ -90,6 +98,7 @@
 import { Field, Form, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { createTask } from "@/api/createTaskAPI";
+import Notification from "@/components/feedback/Notification.vue";
 
 const AddTaskSchema = yup.object().shape({
   title: yup.string().required("Task Name is required"),
@@ -111,41 +120,51 @@ export default {
     closeModal() {
       this.$emit("close");
     },
+
+    triggerNotification(message, color) {
+      this.notificationMessage = message;
+      this.notificationColor = color;
+      this.showNotification = true;
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000); // Hide after 3 seconds
+    },
+
     onSubmit(values) {
+      this.isLoading = true;
       let userId = localStorage.getItem("id");
-      console.log(values);
       createTask
         .createTask(values, userId)
         .then((response) => {
           if (response.status === 200) {
-            window.location.reload();
+            this.triggerNotification("Task created!", "bg-green-500");
+            this.isLoading = false;
+            window.location.reload()
           }
         })
         .catch((error) => {
-          console.log(error);
+          this.triggerNotification(
+            "An error has ocurred, please try again",
+            "bg-red-500"
+          );
+          this.isLoading = false;
         });
     },
   },
   data() {
     return {
       AddTaskSchema,
+      showNotification: false,
+      notificationMessage: "",
+      notificationColor: "bg-red-600",
+      isLoading: false,
     };
   },
   components: {
     Form,
     Field,
     ErrorMessage,
+    Notification,
   },
 };
 </script>
-
-<style scoped>
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s;
-}
-.modal-enter,
-.modal-leave-to {
-  opacity: 0;
-}
-</style>
