@@ -78,6 +78,7 @@ import { Field, Form, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import Notification from "@/components/feedback/Notification.vue";
 import { setNewPassword } from "@/api/newPasswordAPI";
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
 
 export default {
   components: {
@@ -102,6 +103,7 @@ export default {
       notificationColor: "bg-red-600",
       isLoading: false,
       showNewPasswordForm: false,
+      BASE_PATH
     };
   },
   methods: {
@@ -127,7 +129,7 @@ export default {
               "bg-green-500"
             );
             this.isLoading = false;
-            window.location.href = "/login"
+            window.location.href = `${BASE_PATH}login`;
           }
         })
         .catch((error) => {

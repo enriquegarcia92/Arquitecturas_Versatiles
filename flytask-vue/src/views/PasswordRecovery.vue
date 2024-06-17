@@ -62,6 +62,7 @@ const RecoverPasswordSchema = yup.object({
     .email("Invalid email format")
     .required("Email is required"),
 });
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
 
 export default {
   name: "PasswordRecovery",
@@ -107,6 +108,7 @@ export default {
   },
   data() {
     return {
+      BASE_PATH,
       RecoverPasswordSchema,
       showNotification: false,
       notificationMessage: "",

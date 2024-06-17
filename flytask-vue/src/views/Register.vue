@@ -76,7 +76,7 @@
             <p>Register</p>
           </span>
         </button>
-        <a href="/login">I already have an account!</a>
+        <a v-bind:href="BASE_PATH + 'login'">I already have an account!</a>
       </Form>
     </div>
     <Notification
@@ -126,6 +126,7 @@ const registerSchema = yup.object({
       "Password must contain at least one special character"
     ),
 });
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
 
 export default {
   name: "Register",
@@ -157,7 +158,7 @@ export default {
               "bg-green-500"
             );
             this.isLoading = false;
-            window.location.href = "/login";
+            window.location.href = `${BASE_PATH}login`;
           }
         })
         .catch((error) => {
@@ -171,11 +172,12 @@ export default {
   },
   data() {
     return {
+      BASE_PATH,
       registerSchema,
       showNotification: false,
       notificationMessage: "",
       notificationColor: "bg-red-600",
-      isLoading: false
+      isLoading: false,
     };
   },
 };

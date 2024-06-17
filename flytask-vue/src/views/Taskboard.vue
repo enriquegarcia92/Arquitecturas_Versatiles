@@ -66,10 +66,12 @@ import Notification from "@/components/feedback/Notification.vue";
 const taskData = ref([]);
 const list = false;
 const kanban = false;
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
 
 export default {
   data() {
     return {
+      BASE_PATH,
       taskData,
       list,
       kanban,
@@ -111,7 +113,7 @@ export default {
     handleLogout() {
       localStorage.clear()
       this.triggerNotification("Session closed!", "bg-green-500")
-      window.location.href = "/login"; 
+      window.location.href = `${BASE_PATH}login`;
     },
 
     fetchTasks() {
@@ -141,7 +143,7 @@ export default {
       })
       .catch((error) => {
         localStorage.clear()
-        window.location.href = "/login";
+        window.location.href = `${BASE_PATH}login`;
       })
   },
 };

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const BASE_URL = 'http://localhost:7070/api'
+export const BASE_URL = import.meta.env.VITE_URL_API;
 
 const userToken = localStorage.getItem('token')
 

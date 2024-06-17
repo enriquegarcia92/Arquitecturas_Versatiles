@@ -53,8 +53,8 @@
             <p>Sign in</p>
           </span>
         </button>
-        <a href="/passwordRecovery">Forgot your password?</a>
-        <a href="/register">New to Flytask? create an account</a>
+        <a v-bind:href="BASE_PATH + 'passwordRecovery'">Forgot your password?</a>
+        <a v-bind:href="BASE_PATH + 'register'">New to Flytask? create an account</a>
       </Form>
     </div>
     <Notification
@@ -71,6 +71,8 @@ import * as yup from "yup";
 import { loginUser } from "@/api/loginAPI";
 import Notification from "@/components/feedback/Notification.vue";
 import { whoami } from "@/api/whoamiAPI";
+
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
 
 const loginSchema = yup.object({
   email: yup
@@ -121,7 +123,7 @@ export default {
             localStorage.setItem("token", token);
             localStorage.setItem("id", response.data.id);
             this.isLoading = false;
-            window.location.href = "/board";
+            window.location.href = `${BASE_PATH}board`;
           }
         })
         .catch((error) => {
@@ -140,16 +142,16 @@ export default {
       .then((response) => {
         if (response.status === 200) {
           this.triggerNotification("Session restored!", "bg-green-500");
-          window.location.href = "/board";
+          window.location.href = `${BASE_PATH}board`;
         }
       })
       .catch((error) => {
         
       });
   },
-
   data() {
     return {
+      BASE_PATH,
       loginSchema,
       showNotification: false,
       notificationMessage: "",
