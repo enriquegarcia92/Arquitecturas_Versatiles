@@ -5,7 +5,15 @@ import * as Yup from 'yup';
 import { setNewPassword } from '../api/newPasswordAPI';
 
 const NewPasswordSchema = Yup.object().shape({
-  newPassword: Yup.string().min(8, 'Password is too short - should be 8 chars minimum.').required('Required'),
+  newPassword: Yup.string()
+  .required("Password is required")
+  .min(8, "Password must be at least 8 characters long")
+  .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+  .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+  .matches(
+    /[!@#$%^&*(),.?":{}|<>]/,
+    "Password must contain at least one special character"
+  ),
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('newPassword')], 'Passwords must match')
     .required('Required'),

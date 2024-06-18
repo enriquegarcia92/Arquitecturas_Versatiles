@@ -19,7 +19,7 @@ export default {
         charcoal: '#3E4856'        
       },
       backgroundImage: {
-        'signup-background': "url('./src/images/signup-bg.jpg')",
+        'appBg': "url('./src/images/signup-bg.jpg')",
       }
     },
   },

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Field, Form, Formik } from "formik";
 import { MdClose } from "react-icons/md";
 import * as Yup from "yup";
 import { Task } from "../../utils/types";
 import { editTask } from "../../api/editTaskAPI";
 import { yyyymmddToISO } from "../../utils/dataConversions";
+import Notification from "../Notification";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Task Name is required"),
@@ -27,9 +28,22 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
   const idValue = localStorage.getItem("id");
   const userId: number = Number(idValue);
 
+  const [notification, setNotification] = useState({
+    message: 'Hello, this is a notification!',
+    color: 'bg-green-500',
+    showNotification: false
+  });
+
+  const setShowNotification = (show: boolean) => {
+    setNotification({
+      ...notification,
+      showNotification: show,
+    });
+  };
+
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white w-96 p-8 rounded-lg shadow-md relative">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden h-fit p-8 w-5/6 md:w-2/3 lg:w-2/3 xl:w-1/3 relative">
         <button
           className="absolute top-2 right-2 text-gray-700"
           onClick={closeEditTaskModal}
@@ -58,11 +72,20 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
               )
               .then((response) => {
                 if (response.status === 200) {
-                  window.location.reload()
+                  setNotification({
+                    message: 'Task updated!',
+                    color: 'bg-green-500',
+                    showNotification: true,
+                  });
+                 window.location.reload()
                 }
               })
               .catch((error) => {
-                console.log(error);
+                setNotification({
+                  message: 'An error has ocurred, try again!',
+                  color: 'bg-red-500',
+                  showNotification: true,
+                });
               });
           }}
         >
@@ -130,6 +153,12 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
           )}
         </Formik>
       </div>
+      <Notification
+          message={notification.message}
+          color={notification.color}
+          showNotification={notification.showNotification}
+          setShowNotification={setShowNotification}
+        />
     </div>
   );
 };

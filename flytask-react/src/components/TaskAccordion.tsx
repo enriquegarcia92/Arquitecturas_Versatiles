@@ -59,35 +59,37 @@ export const TaskAccordion: React.FC<AccordionProps> = ({
           <>
             <DisclosureButton className="flex justify-between border-b-2 border-primary items-center w-full px-4 py-2 text-sm font-medium text-left text-black bg-glacierWhite rounded-lg hover:bg-mint">
               <span
-                className={`p-2 ${statusColor} rounded-md w-1/6 text-center`}
+                className={`p-2 ${statusColor} p-2 rounded-md fit text-center`}
               >
                 {title}
               </span>
               <BiChevronDown
                 className={`${
                   open ? "transform rotate-180" : ""
-                } w-5 h-5 text-purple-500`}
+                } w-5 h-5 text-black`}
               />
             </DisclosureButton>
-            <DisclosurePanel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+            <DisclosurePanel className="text-sm text-gray-500 rounded-md w-full">
               {tasks.map((task, index) => (
-                <div key={index} className="cursor-pointer p-2 rounded-md">
-                  <div className="flex justify-between items-center border border-gray-500 rounded-md">
+                <div key={index} className="p-2 w-full hover:bg-mint">
+                  <div className="flex items-center justify-between">
                     <div
-                      className="flex flex-col w-4/5 justify-center hover:bg-mint p-2"
+                      className="flex flex-col w-2/4 justify-center hover:bg-mint p-2"
                       onClick={() => handleEditTask(task)}
                     >
                       <div className="font-medium text-black">{task.title}</div>
                       <div>{task.description}</div>
                     </div>
-                    <div className="flex gap-1 w-1/5 justify-center items-center p-2">
+                    <div className="flex gap-1 w-2/4 md:w-1/4 justify-center items-center p-2">
                       <button
-                        className="flex items-center gap-2 text-white bg-charcoal p-2 rounded-md hover:bg-gray-500"
+                        className="flex justify-center items-center gap-2 w-1/2 text-white bg-primary p-1 rounded-md hover:bg-gray-500"
                         onClick={() => handleMoveTask(task)}
                       >
                         Move <BiMoveHorizontal />
                       </button>
-                      <DeleteButton task={task} />
+                      <div className="w-1/2">
+                        <DeleteButton task={task} />
+                      </div>
                     </div>
                   </div>
                 </div>

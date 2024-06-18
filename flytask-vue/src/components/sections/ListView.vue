@@ -46,7 +46,6 @@
               </p>
             </div>
             <div class="flex flex-col w-1/4 items-end gap-1 p-2">
-              <div class="flex flex-row w-full justify-end"></div>
               <button
                 class="bg-primary text-white p-1 w-full rounded-md hover:bg-primaryDark flex gap-1 items-center justify-center"
                 @click="handleMoveTask(task)"

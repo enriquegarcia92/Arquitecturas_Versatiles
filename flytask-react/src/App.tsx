@@ -13,6 +13,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<SignupPage />} path={`${BASE_PATH}register`} />
+          <Route element={<LoginPage />} path={`${BASE_PATH}/*`} />
+          <Route element={<LoginPage />} path={`${BASE_PATH}/`} />
           <Route element={<LoginPage />} path={`${BASE_PATH}sign-in`} />
           <Route element={<PasswordRecovery />} path={`${BASE_PATH}recover-password`} />
           <Route element={<PrivateRoutes />} path={`${BASE_PATH}`}>

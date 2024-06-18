@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import chincheta from '../images/chincheta.png';
 import { recoverPRequest } from '../api/recoverPasswordAPI';
 import NewPasswordForm from '../components/NewPasswordForm';
+import Notification from '../components/Notification';
 
 const RecoverPSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -12,6 +13,18 @@ const RecoverPSchema = Yup.object().shape({
 
 const PasswordRecovery: React.FC = () => {
   const [showNewPasswordForm, setShowNewPasswordForm] = useState(false);
+  const [notification, setNotification] = useState({
+    message: 'Hello, this is a notification!',
+    color: 'bg-green-500',
+    showNotification: false
+  });
+
+  const setShowNotification = (show: boolean) => {
+    setNotification({
+      ...notification,
+      showNotification: show,
+    });
+  };
 
   const formikRecover = useFormik({
     initialValues: {
@@ -24,24 +37,33 @@ const PasswordRecovery: React.FC = () => {
         .recoverPassword(values.email)
         .then((response) => {
           if(response.status === 200){
+            setNotification({
+              message: 'Email sent!',
+              color: 'bg-green-500',
+              showNotification: true,
+            });
             setShowNewPasswordForm(true); // Show the new password form on successful request
           }
         })
         .catch((error) => {
-          console.log(error);
+          setNotification({
+            message: 'An error ocurred, try again!',
+            color: 'bg-red-500',
+            showNotification: true,
+          });
         });
     },
   });
 
   return (
-    <div className="h-screen bg-signup-background bg-cover bg-center flex justify-center items-center w-screen">
-      <div className="relative bg-slate-50 p-8 rounded-lg shadow-md w-full max-w-md">
+    <div className="flex flex-col justify-center items-center h-screen w-full md:bg-signup-bg md:bg-cover">
+      <div className="relative md:h-fit md:border md:rounded-md md:p-8 md:w-2/4 md:shadow-lg md:bg-white xl:w-1/3">
         <h1 className='text-center font-bold text-lg'>{showNewPasswordForm ? 'Reset Your Password' : 'Forgot your password?'}</h1>
         <h1 className='text-center text-sm'>{showNewPasswordForm ? 'Enter your new password and the token you received' : 'Enter your email and receive a temporary access code'}</h1>
         <img
           src={chincheta}
           alt="Decorative"
-          className="absolute top-0 left-0 w-20 h-20 object-cover"
+          className="invisible absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:visible"
           style={{ transform: 'translate(-50%, -50%)' }}
         />
         {showNewPasswordForm ? (
@@ -66,6 +88,12 @@ const PasswordRecovery: React.FC = () => {
           </form>
         )}
       </div>
+      <Notification
+          message={notification.message}
+          color={notification.color}
+          showNotification={notification.showNotification}
+          setShowNotification={setShowNotification}
+        />
     </div>
   );
 };
