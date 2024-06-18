@@ -54,6 +54,7 @@ class GetMyTasks(APIView):
             # Return a JSON response with the serialized data
             response = {
                 "data": serializer.data,
+                "totalTasks": len(tasks),
                 "message": "Tasks retrieved successfully",
                 "status": "success"
             }
@@ -74,8 +75,11 @@ class CreateTaskView(APIView):
             due_date_str = request.data['dueDate']
             user_id = request.data['userId']
 
-            # Convert dueDate string to datetime object
-            due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            # Try to parse dueDate string to datetime object with different formats
+            try:
+                due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except ValueError:
+                due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%d"))
 
             # Create Task instance
             task = Task.objects.create(
@@ -103,7 +107,6 @@ class CreateTaskView(APIView):
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class UpdateTaskView(APIView):
     @token_required
     def put(self, request, id):
@@ -112,11 +115,17 @@ class UpdateTaskView(APIView):
             task = Task.objects.filter(tsk_id=id).first()
             if task is None:
                 raise Exception("Task not found")
+
             # Update the Task instance with the new values
             task.tsk_title = request.data['title']
             task.tsk_desc = request.data['description']
             due_date_str = request.data['dueDate']
-            task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            
+            # Try to parse dueDate string to datetime object with different formats
+            try:
+                task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except ValueError:
+                task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%d"))
 
             # Save the updated Task instance
             task.save()
@@ -133,7 +142,6 @@ class UpdateTaskView(APIView):
                 "status": "error",
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class SetTodoView(APIView):
     @token_required

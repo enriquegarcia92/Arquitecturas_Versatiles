@@ -11,10 +11,6 @@ export const getTasks = async (req: Request, res: Response) => {
         // Build the query criteria
         const whereClause: any = { usr_id: userId };
 
-        if (status) {
-            whereClause.tsk_status = status;
-        }
-
         if (keyword) {
             whereClause[Op.or] = [
                 { tsk_title: { [Op.iLike]: `%${keyword}%` } },

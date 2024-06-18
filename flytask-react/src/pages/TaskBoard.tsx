@@ -7,10 +7,13 @@ import KanBan from "../components/KanBan";
 import { BiExit } from "react-icons/bi";
 import Notification from "../components/Notification";
 
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
+
 const TaskBoard: React.FC = () => {
   const [listMode, setListMode] = useState(false);
   const [kanBanMode, setKanbanMode] = useState(false);
   const [tasks, setTasks] = useState<any>(null);
+  const [tasksNumber, setTasksNumber] = useState<any>(null);
   const [notification, setNotification] = useState({
     message: 'Hello, this is a notification!',
     color: 'bg-green-500',
@@ -29,8 +32,10 @@ const TaskBoard: React.FC = () => {
       .getTasks()
       .then((response) => {
         if (response.status === 201) {
+          console.log(response.data)
           let tasks = response.data.data;
           setTasks(tasks);
+          setTasksNumber(response.data.totalTasks);
         }
       })
       .catch((error) => {
@@ -59,7 +64,7 @@ const TaskBoard: React.FC = () => {
       showNotification: true,
     });
     localStorage.clear();
-    window.location.href = "/react/sign-in"
+    window.location.href = `${BASE_PATH}sign-in`;
   };
 
   return (
@@ -99,7 +104,7 @@ const TaskBoard: React.FC = () => {
       </div>
 
       <div className="h-[90vh]">
-        {tasks ? (
+        {(tasksNumber > 0) ? (
           listMode ? (
             <ListView tasks={tasks} />
           ) : kanBanMode ? (

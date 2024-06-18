@@ -23,8 +23,7 @@ class GetMyTasks(APIView):
         try:
             # Construct the MongoDB-like filter using djongo's Q object
             filter_query = Q(
-                usr_id = user._id,
-                tsk_status=tsk_status
+                usr_id = user._id
             )
 
             # Query the Tasks collection with the constructed filter
@@ -36,6 +35,7 @@ class GetMyTasks(APIView):
             # Return a JSON response with the serialized data
             response = {
                 "data": serializer.data,
+                "totalTasks": len(tasks_queryset),
                 "message": "Tasks retrieved successfully",
                 "status": "success"
             }
@@ -55,11 +55,15 @@ class CreateTaskView(APIView):
             title = request.data['title']
             description = request.data['description']
             due_date_str = request.data['dueDate']
-            usr_id = request.data['userId']
-            obj_id = ObjectId(usr_id)
+            user_id = request.data['userId']
+             obj_id = ObjectId(usr_id)
 
-            # Convert dueDate string to datetime object
-            due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+
+            # Try to parse dueDate string to datetime object with different formats
+            try:
+                due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except ValueError:
+                due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%d"))
             user = User.objects.filter(_id=obj_id).first()
 
             # Create Task instance
@@ -69,13 +73,14 @@ class CreateTaskView(APIView):
                 tsk_status=0,  # Assuming 0 represents an initial status
                 tsk_creation_date=datetime.now(),
                 tsk_due_date=due_date,
-                usr=user
+                usr_id=user
             )
+            user = User.objects.filter(_id=user_id).first()
             serializer = TaskSerializer(task)
 
             response = {
-                "data": str(task._id),
-                "message": f"Task created successfully for user {str(user._id)}",
+                "data": task._id,
+                "message": f"Task created successfully for user  {str(user._id)}",
                 "status": "success"
             }
             # Return success response
@@ -87,7 +92,6 @@ class CreateTaskView(APIView):
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class UpdateTaskView(APIView):
     @token_required
     def put(self, request, id):
@@ -97,11 +101,17 @@ class UpdateTaskView(APIView):
             task = Task.objects.filter(_id=obj_id).first()
             if task is None:
                 raise Exception("Task not found")
+
             # Update the Task instance with the new values
             task.tsk_title = request.data['title']
             task.tsk_desc = request.data['description']
             due_date_str = request.data['dueDate']
-            task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            
+            # Try to parse dueDate string to datetime object with different formats
+            try:
+                task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except ValueError:
+                task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%d"))
 
             # Save the updated Task instance
             task.save()
@@ -118,7 +128,6 @@ class UpdateTaskView(APIView):
                 "status": "error",
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class SetTodoView(APIView):
     @token_required

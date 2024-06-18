@@ -5,6 +5,8 @@ import chincheta from "../images/chincheta.png";
 import { registerUser } from "../api/registerAPI";
 import Notification from "../components/Notification";
 
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
+
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Required"),
@@ -52,7 +54,7 @@ const SignupPage: React.FC = () => {
               color: 'bg-green-500',
               showNotification: true,
             });
-            window.location.href = "/react/login"
+            window.location.href = `${BASE_PATH}login`
           }
         })
         .catch((error) => {
@@ -66,7 +68,7 @@ const SignupPage: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen w-full md:bg-appBg md:bg-cover">
+    <div className="flex flex-col justify-center items-center h-screen w-full md:bg-signup-bg md:bg-cover">
       {/* Container for the card and the image */}
       <div className="relative md:h-fit md:border md:rounded-md md:p-8 md:w-2/4 md:shadow-lg md:bg-white xl:w-1/3">
         <h1 className="text-center font-bold">{
@@ -161,7 +163,9 @@ const SignupPage: React.FC = () => {
                 Register
             </button>
           </div>
-          <a href="" className="text-center">I already have an account!</a>
+          <a href={`${BASE_PATH}sign-in`} className="text-center mb-4">
+          I already have an account!
+          </a>
         </form>
       </div>
       <Notification

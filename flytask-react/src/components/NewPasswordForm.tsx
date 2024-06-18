@@ -4,6 +4,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { setNewPassword } from '../api/newPasswordAPI';
 
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
+
 const NewPasswordSchema = Yup.object().shape({
   newPassword: Yup.string()
   .required("Password is required")
@@ -33,7 +35,7 @@ const NewPasswordForm: React.FC = () => {
             .setPassword(values)
             .then((response) => {
                 if(response.status === 200){
-                    window.location.href = "/react/sign-in"
+                    window.location.href = `${BASE_PATH}sign-in`
                 }
             })
             .catch((error) => {

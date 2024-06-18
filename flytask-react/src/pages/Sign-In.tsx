@@ -5,6 +5,7 @@ import { loginUser } from "../api/loginAPI";
 import { useEffect, useState } from "react";
 import Notification from "../components/Notification";
 import { whoami } from "../api/whoamiAPI";
+const BASE_PATH = import.meta.env.VITE_BASE_ROUTES;
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -35,7 +36,7 @@ const LoginPage: React.FC = () => {
             color: 'bg-green-500',
             showNotification: true,
           });
-          window.location.href = "/react/board"
+          window.location.href = `${BASE_PATH}board`
         }
       })
       .catch((error) => {
@@ -66,7 +67,7 @@ const LoginPage: React.FC = () => {
               localStorage.setItem("name", response.data.name);
               localStorage.setItem("token", token);
               localStorage.setItem("id", response.data.id);
-              window.location.href = "/react/board";
+              window.location.href = `${BASE_PATH}board`;
             }
           }
         })
@@ -81,7 +82,7 @@ const LoginPage: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen w-full md:bg-appBg md:bg-cover">
+    <div className="flex flex-col justify-center items-center h-screen w-full md:bg-signup-bg md:bg-cover">
       {/* Container for the card and the image */}
       <div className="relative md:h-fit md:border md:rounded-md md:p-8 md:w-2/4 md:shadow-lg md:bg-white xl:w-1/3">
         <h1 className="text-center font-bold text-lg">Welcome</h1>
@@ -144,10 +145,10 @@ const LoginPage: React.FC = () => {
               Login
             </button>
           </div>
-          <a href="/react/register" className="text-center mb-4">
+          <a href={`${BASE_PATH}register`} className="text-center mb-4">
             New around here? register for free!
           </a>
-          <a href="/react/recover-password" className="text-center">
+          <a href={`${BASE_PATH}recover-password`} className="text-center">
             Forgot your password?
           </a>
         </form>

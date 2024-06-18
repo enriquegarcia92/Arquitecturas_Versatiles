@@ -20,10 +20,10 @@ export function numberToStatusConverter(num){
 
 export function numberToStatusColorConverter(num) {
   const statusMap = {
-    0: "bg-upcoming",
-    1: "bg-toDo",
-    2: "bg-doing",
-    3: "bg-done",
+    0: "bg-toDo",
+    1: "bg-doing",
+    2: "bg-done",
+    3: "bg-upcoming",
   };
 
   // Check if the number is within the valid range

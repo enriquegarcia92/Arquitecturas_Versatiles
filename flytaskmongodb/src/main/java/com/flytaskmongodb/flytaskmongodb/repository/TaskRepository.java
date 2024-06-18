@@ -14,7 +14,7 @@ public interface TaskRepository extends MongoRepository<Tasks, ObjectId> {
             + "{ 'title': { $regex: ?0, $options: 'i' } },"
             + "{ 'description': { $regex: ?0, $options: 'i' } }"
             + "]},"
-            + "{ 'usr_id': ?2 }, { 'status': ?1 }"
+            + "{ 'usr_id': ?2 }"
             + "]}")
     List<Tasks> searchTasksByKeywordAndStatusAndUserId(String keyword, Integer status, ObjectId userId);
 }
