@@ -12,9 +12,6 @@ public interface TaskService {
     public ResponseEntity<HashMap<String, Object>> createTask (TaskDto task);
     public ResponseEntity<HashMap<String, Object>> editTask(ObjectId TaskID , EditTaskDTO Task);
     public ResponseEntity<HashMap<String, Object>> deleteTask(ObjectId taskId);
-    public ResponseEntity<HashMap<String, Object>> setTodo(ObjectId TaskID);
-    public ResponseEntity<HashMap<String, Object>> setDoing(ObjectId TaskID);
-    public ResponseEntity<HashMap<String, Object>> setDone(ObjectId TaskID);
-    public ResponseEntity<HashMap<String, Object>> setUpcoming(ObjectId TaskID);
+    public ResponseEntity<HashMap<String, Object>> setState(ObjectId TaskID, String state);
 }
 

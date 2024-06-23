@@ -19,7 +19,6 @@ import java.util.Map;
 public class TaskController {
     @Autowired
     private TaskService taskService;
-
     @GetMapping("/search")
     public ResponseEntity<?> searchTasksByKeywordAndStatus(
             @RequestParam String keyword,
@@ -27,36 +26,18 @@ public class TaskController {
             @RequestParam(required = true) ObjectId userId) {
         return taskService.searchTasksByKeywordAndStatus(keyword, status, userId);
     }
-
     @PostMapping("/create")
     public ResponseEntity<?> register(@RequestBody @Valid TaskDto task) {
         return taskService.createTask(task);
     }
-
     @PutMapping("/edit/{taskid}")
     public ResponseEntity<?> update(@PathVariable ObjectId taskid, @RequestBody @Valid EditTaskDTO newTask) {
         return taskService.editTask(taskid, newTask);
     }
-
-
-    @PutMapping("/todo/{taskid}")
-    public ResponseEntity<?> setTaskTodo(@PathVariable ObjectId taskid) {
-        return taskService.setTodo(taskid);
+    @PutMapping("/{newState}/{taskid}")
+    public ResponseEntity<?> setState(@PathVariable ObjectId taskid, @PathVariable String newState) {
+        return taskService.setState(taskid, newState);
     }
-
-    @PutMapping("/done/{taskid}")
-    public ResponseEntity<?> setTaskDone(@PathVariable ObjectId taskid) {
-        return taskService.setDone(taskid);
-    }
-    @PutMapping("/doing/{taskid}")
-    public ResponseEntity<?> setTaskDoing(@PathVariable ObjectId taskid) {
-        return taskService.setDoing(taskid);
-    }
-    @PutMapping("/upcoming/{taskid}")
-    public ResponseEntity<?> setTaskUpconing(@PathVariable ObjectId taskid) {
-        return taskService.setUpcoming(taskid);
-    }
-
     @DeleteMapping("/delete/{taskid}")
     public ResponseEntity<?> update(@PathVariable ObjectId taskid) {
         return taskService.deleteTask(taskid);

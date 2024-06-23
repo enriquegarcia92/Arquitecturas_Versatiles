@@ -19,9 +19,6 @@ import java.util.Date;
 @Setter
 @Getter
 public class Tasks {
-    @Transient
-    public static final String SEQUENCE_NAME = "task_sequence";
-
     @Id
     @Field("tsk_id")
     private ObjectId taskId;

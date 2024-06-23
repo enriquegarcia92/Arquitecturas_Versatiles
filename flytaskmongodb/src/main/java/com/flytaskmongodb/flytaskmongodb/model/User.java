@@ -21,13 +21,9 @@ import java.util.*;
 @Getter
 public class User implements UserDetails {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "users_sequence";
-
     @Id
     @Field("usr_id")
     private ObjectId userId;
-
     @Field("usr_name")
     @JsonAlias("name")
     private String name;
