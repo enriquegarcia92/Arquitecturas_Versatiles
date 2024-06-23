@@ -143,94 +143,26 @@ class UpdateTaskView(APIView):
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class SetTodoView(APIView):
+class SetStateView(APIView):
     @token_required
-    def put(self, request, id):
+    def put(self, request, id, newstatus):
         try:
+            status = 0;
+            if newstatus == 'todo':
+                status = 0
+            if newstatus == 'doing':
+                status = 1
+            if newstatus == 'dong':
+                status = 2
+            if newstatus == 'upcoming':
+                status = 3
+
             # Retrieve the Task instance from the database
             task = Task.objects.filter(tsk_id=id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Update the Task instance with the new values
-            task.tsk_status = 0
-            # Save the updated Task instance
-            task.save()
-            response = {
-                "message": "Task Changed to TODO",
-                "status": "success"
-            }
-            # Return success response
-            return Response(response, status=status.HTTP_200_OK)
-        except Exception as e:
-            response = {
-                "message": str(e),
-                "status": "error",
-            }
-            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-class SetDoingView(APIView):
-    @token_required
-    def put(self, request, id):
-        try:
-            # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
-            if task is None:
-                raise Exception(f"Task not found with ID: {id}")
-            # Update the Task instance with the new values
-            task.tsk_status = 1
-            # Save the updated Task instance
-            task.save()
-            response = {
-                "message": "Task Changed to DOING",
-                "status": "success"
-            }
-            # Return success response
-            return Response(response, status=status.HTTP_200_OK)
-        except Exception as e:
-            response = {
-                "message": str(e),
-                "status": "error",
-            }
-            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-class SetDoneView(APIView):
-    @token_required
-    def put(self, request, id):
-        try:
-            # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
-            if task is None:
-                raise Exception(f"Task not found with ID: {id}")
-            # Update the Task instance with the new values
-            task.tsk_status = 2
-            # Save the updated Task instance
-            task.save()
-            response = {
-                "message": "Task Changed to DONE",
-                "status": "success"
-            }
-            # Return success response
-            return Response(response, status=status.HTTP_200_OK)
-        except Exception as e:
-            response = {
-                "message": str(e),
-                "status": "error",
-            }
-            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-class SetUpcomingView(APIView):
-    @token_required
-    def put(self, request, id):
-        try:
-            # Retrieve the Task instance from the database
-            task = Task.objects.filter(tsk_id=id).first()
-            if task is None:
-                raise Exception(f"Task not found with ID: {id}")
-            # Update the Task instance with the new values
-            task.tsk_status = 3
+            task.tsk_status = status
             # Save the updated Task instance
             task.save()
             response = {
