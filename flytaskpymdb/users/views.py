@@ -148,7 +148,7 @@ class LoginView(APIView):
                 'status': 'success',
                 'token': generate_logintoken(user)
             })
-            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(response, status=status.HTTP_200_OK)
         except Exception as e:
             response = {
                 "message": str(e),
