@@ -147,22 +147,22 @@ class SetStateView(APIView):
     @token_required
     def put(self, request, id, newstatus):
         try:
-            status = 0;
+            changeState = 0;
             if newstatus == 'todo':
-                status = 0
+                changeState = 0
             if newstatus == 'doing':
-                status = 1
-            if newstatus == 'dong':
-                status = 2
+                changeState = 1
+            if newstatus == 'done':
+                changeState = 2
             if newstatus == 'upcoming':
-                status = 3
+                changeState = 3
 
             # Retrieve the Task instance from the database
             task = Task.objects.filter(tsk_id=id).first()
             if task is None:
                 raise Exception(f"Task not found with ID: {id}")
             # Update the Task instance with the new values
-            task.tsk_status = status
+            task.tsk_status = changeState
             # Save the updated Task instance
             task.save()
             response = {

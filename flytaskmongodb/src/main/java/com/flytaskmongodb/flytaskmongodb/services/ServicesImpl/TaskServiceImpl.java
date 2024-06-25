@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
                     .collect(Collectors.toList());
             response.put("status", "success");
             response.put("message", "Tasks retrieved successfully");
-            response.put("data", tasks);
+            response.put("data", taskResponseDTOs);
             response.put("totalTasks", tasks.size());
             return ResponseEntity.status(201).body(response);
         } catch (Exception e) {
@@ -131,9 +131,9 @@ public class TaskServiceImpl implements TaskService {
         Integer newStatus= 0;
         if(state.equals("todo")){
             newStatus =  0;
-        }else if(state.equals("done")){
-            newStatus =  1;
         }else if(state.equals("doing")){
+            newStatus =  1;
+        }else if(state.equals("done")){
             newStatus =  2;
         }else if(state.equals("upcoming")){
             newStatus =  3;

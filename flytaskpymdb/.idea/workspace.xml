@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2b08d99-7999-4ec5-a8f3-4689b3b3f406" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flytaskpy/flytaskpy/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flytaskpy/flytaskpy/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytask-react/src/components/modals/AddTaskModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../flytask-react/src/components/modals/AddTaskModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytask-react/src/components/modals/EditTaskModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../flytask-react/src/components/modals/EditTaskModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytask-vue/src/components/modals/AddTaskModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../flytask-vue/src/components/modals/AddTaskModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytask-vue/src/components/modals/EditTaskModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../flytask-vue/src/components/modals/EditTaskModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytask/src/main/java/com/flytask/flytask/Services/ServiceImpl/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../flytask/src/main/java/com/flytask/flytask/Services/ServiceImpl/TaskServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytaskmongodb/src/main/java/com/flytaskmongodb/flytaskmongodb/services/ServicesImpl/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../flytaskmongodb/src/main/java/com/flytaskmongodb/flytaskmongodb/services/ServicesImpl/TaskServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flytaskpy/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flytaskpy/tasks/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/migrations/0002_alter_task_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0002_alter_user_table.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nginx/default.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../nginx/default.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +50,7 @@
     "Python.manage.executor": "Debug",
     "Python.views.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "vueDev",
+    "git-widget-placeholder": "dev",
     "last_opened_file_path": "/Users/enriquegarcia/Desktop/Entoro_de_Proyectos/Arquitecturas_Versatiles/flytaskpymdb"
   }
 }]]></component>
@@ -109,9 +108,19 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="a035c997-0204-4f32-b020-e1b8be8971e4" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="a035c997-0204-4f32-b020-e1b8be8971e4">
           <value>
             <State />
           </value>
@@ -159,31 +168,6 @@
           <url>file://$PROJECT_DIR$/users/views.py</url>
           <line>167</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks/views.py</url>
-          <line>62</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks/views.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks/views.py</url>
-          <line>65</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks/views.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tasks/views.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

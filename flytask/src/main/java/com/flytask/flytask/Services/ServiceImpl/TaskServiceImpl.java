@@ -124,9 +124,9 @@ public class TaskServiceImpl implements TaskService {
         Integer newStatus= 0;
         if(state.equals("todo")){
             newStatus =  0;
-        }else if(state.equals("done")){
-            newStatus =  1;
         }else if(state.equals("doing")){
+            newStatus =  1;
+        }else if(state.equals("done")){
             newStatus =  2;
         }else if(state.equals("upcoming")){
             newStatus =  3;
