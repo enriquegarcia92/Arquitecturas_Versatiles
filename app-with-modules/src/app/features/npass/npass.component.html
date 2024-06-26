@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>New Password</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-center mb-1">New Password</h1>
+        <p class="text-center text-sm mb-6">Recover your password here!</p>
+        <form>
+            <div class="mb-4">
+                <label for="recoveryToken" class="block text-sm font-medium text-gray-700">Recovery Token</label>
+                <input type="text" id="recoveryToken" name="recoveryToken" placeholder="ADWAWF$%/%/$(%)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="mb-4">
+                <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+                <input type="password" id="newPassword" placeholder="******************" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-pink-500">
+            </div>
+            <div class="mb-6">
+                <label for="confirmNewPassword" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" placeholder="******************" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-pink-500">
+            </div>
+            <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Reset Password</button>
+        </form>
+    </div>
+</body>
+</html>
