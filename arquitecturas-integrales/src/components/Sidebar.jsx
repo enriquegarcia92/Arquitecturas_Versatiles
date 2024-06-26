@@ -60,6 +60,14 @@ const Sidebar = () => {
         )}
         {isSidebarOpen && (
           <>
+          <DisclosureMenu
+              title="Metodologia"
+              subtitles={[
+                { label: "Introduction", link: "/main/methodology/intro" },
+    
+              ]}
+              icon={FaCheck}
+            />
             <DisclosureMenu
               title="First Principles"
               subtitles={[
@@ -124,6 +132,7 @@ const Sidebar = () => {
               ]}
               icon={FaCheck}
             />
+            
             <DisclosureMenu
               title="Back-End Guide"
               subtitles={[

@@ -3,8 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import MainLayout from "./pages/MainLayout";
-import GettingStartedPage from "./pages/subPages/GettingStartedPage";
-import BackEndPage from "./pages/subPages/BackEndPage";
+import IntroduccionMetodologia from "./pages/subPages/metodologia/IntroduccionMetodologia";
 
 const BASE_URL = "/"
 
@@ -14,7 +13,7 @@ const App = () => {
       <Routes>
         <Route path={BASE_URL} element={<Landing />} />
         <Route path={`${BASE_URL}main`} element={<MainLayout />}>
-          <Route path={`${BASE_URL}main/methodology`} element={<GettingStartedPage />} />
+          <Route path={`${BASE_URL}main/methodology/intro`} element={<IntroduccionMetodologia/>} />
         </Route>
       </Routes>
     </Router>
