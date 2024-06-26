@@ -3,7 +3,7 @@ import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
 import test from "../../../img/test.png";
 import ImageComponent from "../../../components/ImageComponent";
-import { texto1, texto2 } from "../../../metodologiacontent/txtmetodologia";
+import { texto1, texto2, texto3 } from "../../../metodologiacontent/txtmetodologia";
 
 const Code1 = `
 /* objeto user*/ 
@@ -39,7 +39,8 @@ const IntroduccionMetodologia = () => {
  />
 
         <TextBlock  title="Fases para el desarrollo de un proyecto" textContent = <pre>{texto2}</pre>/>
-        
+        <TextBlock  title="Resultados" textContent = <pre>{texto3}</pre>/>
+
         <CodeBlock code={Code1} language="javascript" />
         <CodeBlock code={Code2} language="javascript" />
        <ImageComponent
