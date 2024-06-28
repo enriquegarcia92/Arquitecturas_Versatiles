@@ -3,7 +3,7 @@ import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
 //import {test, } from "../../../img";
 import ImageComponent from "../../../components/ImageComponent";
-import { texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15 } from "../../../metodologiacontent/txtmetodologia";
+import { texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21 } from "../../../metodologiacontent/txtmetodologia";
 import login from "../../../img/login.png";
 import signup from "../../../img/signup.png";
 import emailsent from "../../../img/emailsent.png";
@@ -42,6 +42,40 @@ tsk_due_date:
 usr_id: ObjectId( '66705a3c66cb3f7cd9f2501d' )
 }
   `;
+
+
+  const Code3 = `
+/*AddTaskModal.vue*/
+
+triggerNotification (message, color) {
+this.notificationMessage = message;
+this notificationColor = color;
+this. showNotification = true;
+setTimeout ( ( ) => {
+this-showNotification = false;
+}, 3000); // Hide after 3 seconds
+},
+}
+  `;
+
+
+
+  const Code4 = `
+/* TaskBoard */
+
+«div className="h-[90vh]">
+{ (tasksNumber > 0) ? (
+listMode ? (
+«ListView tasks={tasks} />
+) : kanBanMode ? (
+<KanBan tasks={tasks} />
+): (
+«ListView tasks={tasks) />
+) : (
+<EmptyTaskboard />
+)}
+</div>
+    `;
 const IntroduccionMetodologia = () => {
     return (
       <div className='flex flex-col'>
@@ -116,6 +150,23 @@ const IntroduccionMetodologia = () => {
         <TextBlock textContent={<pre>{texto14}</pre>} />
 
         <TextBlock textContent={<pre>{texto15}</pre>} />
+
+        <TextBlock textContent={<pre>{texto16}</pre>} />
+
+        <TextBlock textContent={<pre>{texto17}</pre>} />
+
+        <CodeBlock code={Code3} language="javascript" />
+
+        <TextBlock textContent={<pre>{texto18}</pre>} />
+
+        <CodeBlock code={Code4} language="javascript" />
+
+        <TextBlock textContent={<pre>{texto19}</pre>} />
+
+        <TextBlock textContent={<pre>{texto20}</pre>} />
+
+        <TextBlock textContent={<pre>{texto21}</pre>} />
+
 
       </div>
        )

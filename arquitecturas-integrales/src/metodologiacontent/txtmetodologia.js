@@ -313,13 +313,15 @@ Requerimientos técnicos de hardware:
 Requerimientos técnicos de software:
 
 Visual Studio Code:
-  - Sistema operativo: Windows 10 y 11 (64-bit), macOS x, Linux (Debian: Ubuntu Desktop 20.04, Debian 10; Red Hat: Red Hat Enterprise Linux 8, Fedora 36).
+  - Sistema operativo: Windows 10 y 11 (64-bit), macOS x, Linux (Debian: Ubuntu Desktop 20.04, Debian 10; 
+  Red Hat: Red Hat Enterprise Linux 8, Fedora 36).
   - Procesador: 1.6 GHz o más rápido.
   - Memoria: 1 GB de RAM.
   - Espacio en disco: Visual Studio Code es una descarga pequeña (< 200 MB) y tiene una huella de disco de < 500 MB.
 
 Angular:
-  - Sistema operativo: Windows 10, macOS x 10.10 (Yosemite) o posterior, o una distribución reciente de Linux (como Ubuntu 18.04 o posterior).
+  - Sistema operativo: Windows 10, macOS x 10.10 (Yosemite) o posterior, o una distribución reciente de Linux 
+  (como Ubuntu 18.04 o posterior).
   - Memoria: Al menos 4 GB de RAM.
   - Espacio de almacenamiento: Al menos 10 GB de espacio libre en disco.
 
@@ -330,11 +332,13 @@ React:
 Spring Boot:
   - Procesador: Mínimo Pentium 2 a 266 MHz.
   - RAM: Al menos 128 MB.
-  - Espacio en disco: 124 MB para JRE; 2 MB para Java Update; 10MB para la instalación de Maven; 500MB para el repositorio local de Maven.
+  - Espacio en disco: 124 MB para JRE; 2 MB para Java Update; 10MB para la instalación de Maven; 500MB para 
+  el repositorio local de Maven.
   - Sistema operativo: JDK 8 o superior para Maven.
 
 Django:
-  - Sistema operativo: Windows 7 o 10, macOS X 10.11 o superior, Linux: RHEL 6/7, 64-bit (casi todas las bibliotecas también funcionan en Ubuntu).
+  - Sistema operativo: Windows 7 o 10, macOS X 10.11 o superior, Linux: RHEL 6/7, 64-bit (casi todas las 
+  bibliotecas también funcionan en Ubuntu).
   - Procesador: Dual-core Intel Core i5 o similar.
   - RAM y espacio libre en disco: 4 GB de RAM, 5 GB de espacio libre en disco.
 
@@ -361,7 +365,8 @@ Vue.js:
   - Espacio de almacenamiento: 75 MB de espacio disponible en disco o más.
 
 Docker:
-  - Sistema operativo: Windows 10 64-bit: Home o Pro (build 19043 o posterior), Enterprise o Education (build 19042 o posterior). 
+  - Sistema operativo: Windows 10 64-bit: Home o Pro (build 19043 o posterior), Enterprise o Education 
+  (build 19042 o posterior). 
   Windows 11 64-bit: Home, Pro, Enterprise, o Education versión 21H2 o más reciente.
   - Procesador: Procesador de 64 bits.
   - Memoria: 4 GB de RAM.
@@ -436,7 +441,7 @@ Para React se utiliza el patrón Contenedor-Presentador (o Contenedor-Componente
     - Common: Contiene componentes reutilizables como barras de navegación.
     - Feature: Contiene componentes específicos para funcionalidades como gráficos.
   - Containers: Contiene componentes que conectan los componentes presentacionales con la lógica de la aplicación y 
-  manejo de datos.
+    manejo de datos.
   - Services: Contiene funciones para interactuar con la API utilizando bibliotecas como Axios, proporcionando métodos 
   para operaciones CRUD.
   - Utils: Contiene funciones auxiliares para procesar la información devuelta por la API.
@@ -487,7 +492,7 @@ asegurando un código limpio y fácil de mantener.
   
 - Principio de inversión de dependencias:
   - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel no 
-  dependan de módulos de bajo nivel.
+    dependan de módulos de bajo nivel.
 
 Implementación de prácticas en codificación: React y Vue para Front End
 
@@ -497,4 +502,148 @@ comprensible para cualquier desarrollador. La estructura de archivos y carpetas 
 funcionalidades de la aplicación, como se detalla más adelante en el apartado de "Patrones de Diseño".
    `;
 
-export const texto15 = `   `;
+export const texto15 = `Single Responsibility Principle (Principio de la única responsabilidad)
+En el desarrollo web este principio es muy predominante, ya que debe aislar cada tarea y función 
+de cada componente, conexión y página lo más posible; esto permite que se puedan manejar las 
+conexiones con los distintos Back Ends disponibles y no requiera de ningún cambio del lado del 
+Front End, más allá de la ruta de conexión solicitada. (Casero, 2024)
+Una de las partes que innegablemente siguen este principio, se localizan en la carpeta api,
+para ambos desarrollos, en esta se encuentran los archivos que permiten la conexión con el 
+Back End que se encargan de manera independiente del manejo y llamada a los métodos 
+disponibles para FlyTask, un ejemplo claro del buen uso de SRP* es el uso de un solo 
+archivo llamado Task.ts que se encarga del manejo de todos los métodos DELETE, PUT, GET y 
+POST además se separa cada método en componentes separados y que su nombre de una breve 
+descripción de lo que se está realizando. 
+Las carpetas API contiene los archivos .ts y .js que realizan el mapeo de los endpoints que 
+la aplicación web consume, al haber seis Back Ends distintos a los cuales la aplicación puede 
+consumir, el tener archivos que permitan el manejo aislado de los endpoints disponibles hace que la 
+versatilidad sea posible. Los archivos que realizan esta tarea son el base.api.ts y el base.api
+   `;
+
+   export const texto16 = `Otro lado de la aplicación en la que se puede observar buen uso de este principio es en la carpeta components, 
+en ella se contienen los elementos visuales principales que son renderizados dentro de la aplicación, 
+los modales están separados en una subcarpeta y los componentes "grandes" se encuentran dentro de la principal. 
+El buen uso de SRP También se ve aplicado en los componentes de la sección modals ya que se contienen 3 
+modales diferentes, que a simple vista se podría inducir que basta con desarrollar uno y renderizar según el uso 
+que se le vaya a dar. Lo ideal es separar los componentes, ya que cada uno desarrolla una tarea diferente y por 
+cuestiones de orden e integridad resulta mejor separarlos.   `;
+   
+   
+   
+export const texto17 = `
+El principio abierto/cerrado se manifiesta en el desarrollo del Front End a través de la reutilización de componentes. 
+En lugar de crear un componente monolítico, se divide la funcionalidad en componentes más pequeños que pueden ser 
+utilizados en diferentes partes de la aplicación.
+
+Por ejemplo, se tiene un componente Notification.ts que se encarga de mostrar mensajes de error o éxito después de 
+una petición. Este componente puede ser llamado desde cualquier página de la aplicación y mostrar el mensaje deseado. 
+Está diseñado para aceptar ciertos parámetros que se pasan durante su llamada en otras partes de la aplicación.
+
+En la página Sign-Up.tsx, se instancia el componente Notification con diferentes personalizaciones como el mensaje, 
+el color y el estado de visibilidad, demostrando así cómo un componente puede ser reutilizado con diferentes 
+configuraciones sin necesidad de modificar su código base.
+
+Otro ejemplo es el componente AddTaskModal.vue, que se utiliza para la creación de tareas. Cuando se necesita 
+comunicar un mensaje, este componente se invoca de manera similar, aprovechando la flexibilidad y 
+la extensibilidad del diseño.
+
+Este enfoque permite que los componentes estén abiertos a la extensión mediante la configuración y personalización 
+en lugar de la modificación, lo que facilita el mantenimiento y la escalabilidad de la aplicación.   `;
+
+   export const texto18 = `El principio de la sustitución de Liskov en el desarrollo Front End asegura que los 
+componentes puedan ser reemplazados por otros componentes sin afectar el funcionamiento de la aplicación.
+
+Por ejemplo, en la página TaskBoard.tsx, los componentes ListView y KanBan reciben una propiedad llamada tasks. 
+Este diseño asegura que estos componentes puedan ser intercambiados por otros que también reciban la misma 
+propiedad tasks sin romper la funcionalidad original de la página. Esto facilita la refactorización del 
+Front End en caso de que se requieran cambios en los estilos o la estructura general del sitio.
+
+En el framework Vue, los componentes ListView y KanbanView reciben las mismas propiedades de TaskData. 
+Aunque en la práctica no se intercambian debido a diferencias en diseño y usabilidad, el principio se 
+sigue cumpliendo ya que el reemplazo de estos componentes no rompería la aplicación web.
+
+Este enfoque permite una mayor flexibilidad y mantenimiento en el desarrollo, ya que se pueden hacer 
+cambios y mejoras sin comprometer la funcionalidad existente.   `;
+
+
+   export const texto19 = `El principio de segregación de interfaz establece que los usuarios o clientes no deben depender de componentes 
+y páginas que no necesitan. En lugar de tener una única página grande que consulte muchos métodos y realice 
+todas las tareas, se utilizan múltiples interfaces que realizan tareas específicas dentro de la aplicación. 
+Esto significa que las clases solo se ocupan de las tareas relevantes en su contexto, reduciendo la dependencia 
+innecesaria entre el código.
+
+En el desarrollo Front End de FlyTask, este principio es fundamental. Todo se maneja de manera independiente entre clases, 
+métodos y componentes, lo que se evidencia en la estructura de las carpetas donde todo está correctamente aislado.
+
+Un buen ejemplo de este principio en FlyTask es el componente TaskAccordion.tsx. Este componente se utiliza para 
+mostrar todas las tareas del usuario, independientemente de su estado, fecha y nombre. El componente se llama una sola 
+vez y se "dibuja" según las tareas del usuario en la base de datos, evitando renderizaciones innecesarias en el Front End 
+y dependiendo del Back End para su actualización.   `;
+  
+
+export const texto20 = `Implementación de los patrones de diseño
+En FlyTask, los patrones de diseño se implementan desde la arquitectura cliente-servidor, que divide 
+la lógica de negocios de la presentación de datos mediante una arquitectura de capas. En estas capas, 
+se utilizan patrones de diseño optimizados para sus responsabilidades específicas: MVC para la capa 
+de servidor y Screaming Architecture para la capa de clientes en React y Vue.js. Esto permite aplicar 
+los principios SOLID y mantener un orden interno en los archivos, facilitando la construcción y 
+escalabilidad de la aplicación.
+
+Arquitectura en Spring Boot:
+La arquitectura de Spring Boot comienza en la carpeta src/main/, que contiene el archivo principal de Java.
+
+Arquitectura en Express:
+El framework Express sigue un patrón de diseño específico que se refleja en su jerarquía de carpetas.
+
+Arquitectura en Django:
+En Django, la estructura se organiza como un proyecto general llamado FlyTask, que contiene:
+
+Un archivo settings con las configuraciones de Django y la base de datos.
+Un archivo URLs con el mapeo general de las URL.
+Carpetas específicas por aplicación, como users y tasks.
+Dentro de cada aplicación se encuentran:
+
+    -URLs: Contienen las rutas de la API para cada modelo.
+    -Views: Contienen las funciones con la lógica de negocio.
+    -Models: Mapean cada modelo a la base de datos.
+    -Serializers: Contienen funciones para serializar datos.
+    -Este patrón de diseño en Django se basa en MVC, con equivalentes en Models, Views, y URLs.   `;
+   
+export const texto21 = `Implementación de buenas prácticas de seguridad
+
+Las prácticas de seguridad se integran en la base de código de dos maneras.
+La primera es en la programación manual de patrones que evitan el acceso a datos sensibles y el uso 
+de versiones vigentes de las tecnologías (lenguajes, frameworks).
+La segunda es a través del uso de herramientas de terceros (librerías, primitivos) que implementan
+
+métodos de validación, encriptación y redirección que han sido probados y se actualizan de manera 
+constante para responder a las necesidades de los programadores.
+    
+En el caso de la aplicación se implementan bearer tokens para la autenticación de los usuarios y 
+su acceso a la información, y se utilizan librerías como Spring Security del lado del servidor y 
+validadores como Yup en la capa de cliente.
+    
+Desarrollo del Front End
+
+Esta etapa consiste en el desarrollo de un cliente web que utiliza servicios y consume datos desde 
+una API que maneja la lógica de negocio de flytask.
+Para este documento se presentan dos clientes web: uno desarrollado con React (utilizando Typescript)
+y uno desarrollado con Vue (utilizando JavaScript) que realizan las mismas funciones con el 
+mismo diseño y utilizan patrones que permiten la reutilización de código dentro de sus 
+componentes e incluso entre proyectos.
+    
+Arquitectura de cliente
+
+El cliente web de flytask permite al usuario interactuar con la lógica de negocio para
+manejar sus tareas.
+Este manejo de tareas involucra un conjunto de operaciones que la API realiza al recibir la 
+información del usuario.
+La implementación del cliente debe considerar la comunicación con el servidor y garantizar 
+que tenga una estructura reutilizable y comportamiento predecible.
+De la misma manera, los componentes visuales deben utilizar estructuras que permitan reutilización 
+y tengan la segregación suficiente para ser manejables a medida que una aplicación crece en tamaño 
+y complejidad.
+    
+Con el propósito de garantizar los requerimientos anteriores, se utilizan los principios de 
+Screaming Architecture en el desarrollo de los proyectos en React y VueJS.
+    `;
