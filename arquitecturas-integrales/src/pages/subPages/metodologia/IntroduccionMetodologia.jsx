@@ -1,9 +1,12 @@
 import React from "react"
 import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
-import test from "../../../img/test.png";
+//import {test, } from "../../../img";
 import ImageComponent from "../../../components/ImageComponent";
-import { texto1, texto2, texto3 } from "../../../metodologiacontent/txtmetodologia";
+import {texto1, texto2, texto3, texto4 } from "../../../metodologiacontent/txtmetodologia";
+import login from "../../../img/login.png";
+
+
 
 const Code1 = `
 /* objeto user*/ 
@@ -39,17 +42,20 @@ const IntroduccionMetodologia = () => {
  />
 
         <TextBlock  title="Fases para el desarrollo de un proyecto" textContent = <pre>{texto2}</pre>/>
+
         <TextBlock  title="Resultados" textContent = <pre>{texto3}</pre>/>
 
         <CodeBlock code={Code1} language="javascript" />
+
         <CodeBlock code={Code2} language="javascript" />
-       <ImageComponent
-        image={test}
+
+        <TextBlock   textContent = <pre>{texto4}</pre>/>
+
+        <ImageComponent image = {login}
         width="w-24"
-        height="h-24" // Example of using Tailwind CSS height utility class
-        title="Example Image"
-        description="This is an example image description."
-      />
+        height="h-24" 
+        title="login page" />
+
       </div>
        )
     }

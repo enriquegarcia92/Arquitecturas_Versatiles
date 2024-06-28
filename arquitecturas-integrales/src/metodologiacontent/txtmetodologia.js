@@ -229,4 +229,54 @@ Aplicar filtros:
 Administrar mi perfil:
    - Cambiar la información de perfil desde el módulo My Account.
 
+-Definición diagrama de clases
+La aplicación web está diseñada para poder consultar una base de datos relacional y una no relacional.
+
+-Base de Datos Relacional:
+
+En esta fase se definen las entidades que integran la base de datos relacional con postgres, definimos los 
+nombres, tipos de datos y relaciones entre las tablas.
+
+Tabla USER: 
+La tabla user contiene la data que el usuario ingresa en la creación de una cuenta en la aplicación, 
+es lo que va a permitir la validación para el inicio de sesión y la creación de tareas, los campos de la tabla son: 
+
+   ●	UserID: será autogenerado, único y funcionará como la llave principal. 
+
+   ●	Name: nombre del usuario, tipo VARCHAR.
+
+   ●	Email: correo del usuario, tipo VARCHAR.
+
+   ●	Password: contraseña del usuario, tipo VARCHAR.
+
+Tabla TASK: 
+
+La tabla task contiene las tareas que el usuario administre, son las que se presentan en la vista principal de la aplicación web.
+
+   ●	TaskID: autogenerado, único y funciona como la llave principal.
+
+   ●	UserID: llave foránea que permite relacionar la tarea con el usuario al que pertenece, se encuentra en la tabla USER.
+
+   ●	Title: título de la tarea, tipo VARCHAR.
+
+   ●	Description: descripción de la tarea, tipo VARCHAR.
+
+   ●	Status: estado de la tarea, se manejan los diferentes estados con número, de tipo NUMERIC.
+
+   ●	Creation_Date: fecha de creación de la tarea, no será ingresada por el usuario será tomada de forma automática, tipo DATE.
+
+   ●	Due_Date: fecha de finalización de la tarea, tipo DATE.	
+
+Base de datos No Relacional: 
+
+Para la base de datos no relacional se utiliza MongoDB, una base de datos documental que almacenará la información sobre Users y Task
+
 `;
+
+export const texto4 = `
+
+●	Desarrollo de mockup para un “To-do List” 
+Para el caso de ejemplo actual el diseño de los mockups se realizó en la aplicación web Figma, estos representan una guía visual de 
+la aplicación.`;
+
+
