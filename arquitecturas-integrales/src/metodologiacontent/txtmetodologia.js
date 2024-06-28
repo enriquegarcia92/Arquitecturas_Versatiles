@@ -280,3 +280,221 @@ Para el caso de ejemplo actual el diseño de los mockups se realizó en la aplic
 la aplicación.`;
 
 
+export const texto5 = `
+se presenta la pantalla de Login es la primera vista de la aplicación, acá el usuario ingresa las credenciales para poder entrar al 
+Dashboard de Tareas, si el usuario no tiene cuenta se muestra la opción de Signup here.  `;
+
+export const texto6 = `Se presenta la pantalla Signup contiene los datos requeridos para crear una cuenta, los campos están validados
+para que acepten texto en formato correo y los campos de password muestran/ocultan la contraseña que el usuario ingrese.  `;
+
+export const texto7 = `se presenta el dashboard de un usuario y si no tiene tareas agregadas se muestra el empty state, la opción 
+para agregar una tarea. `;
+
+export const texto8 = `se presenta un modal que se despliega para la creación de tareas con los diferentes campos.    `;
+
+export const texto9 = `se presenta la vista principal de las tareas contenidas por estado (Upcoming, To Do, Doing, Done) en donde 
+las tareas pueden ser movidas por el usuario manualmente o de acuerdo a las fechas que se hayan ingresado previamente.  `;
+
+export const texto10 = `se presenta el modal con la información actual de la tarea seleccionada con los campos disponibles 
+para editar y la empresa para Guardar Cambios o Borrar Tarea.  `;
+
+export const texto11 = ` Requerimientos técnicos de hardware y software
+
+Para el desarrollo de la aplicación Flytask se pretende levantar seis contenedores con el uso de Docker Compose, aprovechando las 
+distintas tecnologías. A continuación, se detalla el hardware requerido por cada una de las tecnologías y se presenta una 
+recomendación de hardware para desarrollar Flytask.
+
+Requerimientos técnicos de hardware:
+  - Procesador: 2.5 GHz o superior.
+  - Memoria RAM: 16 GB como mínimo.
+  - Espacio en disco: 256 GB SSD como mínimo.
+  - Sistema operativo: Windows 10 64-bit (build 19043 o posterior), macOS x 10.10 o posterior, o Ubuntu 18.04 o posterior.
+
+Requerimientos técnicos de software:
+
+Visual Studio Code:
+  - Sistema operativo: Windows 10 y 11 (64-bit), macOS x, Linux (Debian: Ubuntu Desktop 20.04, Debian 10; Red Hat: Red Hat Enterprise Linux 8, Fedora 36).
+  - Procesador: 1.6 GHz o más rápido.
+  - Memoria: 1 GB de RAM.
+  - Espacio en disco: Visual Studio Code es una descarga pequeña (< 200 MB) y tiene una huella de disco de < 500 MB.
+
+Angular:
+  - Sistema operativo: Windows 10, macOS x 10.10 (Yosemite) o posterior, o una distribución reciente de Linux (como Ubuntu 18.04 o posterior).
+  - Memoria: Al menos 4 GB de RAM.
+  - Espacio de almacenamiento: Al menos 10 GB de espacio libre en disco.
+
+React:
+  - Sistema operativo: Windows 10, macOS x 10.10, o Ubuntu 16.
+  - Hardware: Al menos 4 GB de RAM y 10 GB de espacio de almacenamiento.
+
+Spring Boot:
+  - Procesador: Mínimo Pentium 2 a 266 MHz.
+  - RAM: Al menos 128 MB.
+  - Espacio en disco: 124 MB para JRE; 2 MB para Java Update; 10MB para la instalación de Maven; 500MB para el repositorio local de Maven.
+  - Sistema operativo: JDK 8 o superior para Maven.
+
+Django:
+  - Sistema operativo: Windows 7 o 10, macOS X 10.11 o superior, Linux: RHEL 6/7, 64-bit (casi todas las bibliotecas también funcionan en Ubuntu).
+  - Procesador: Dual-core Intel Core i5 o similar.
+  - RAM y espacio libre en disco: 4 GB de RAM, 5 GB de espacio libre en disco.
+
+Express.js:
+  - Procesador: 1.6 GHz o más rápido.
+  - Memoria: 4 GB de RAM.
+  - Espacio en disco: 512 MB de espacio libre en disco.
+  - Sistemas operativos soportados: macOS, Windows (incluyendo WSL), y Linux.
+
+MongoDB:
+  - Procesador: 1 GHz.
+  - Memoria: 2 GB de RAM.
+  - Espacio en disco: 512 MB de HDD.
+
+PostgreSQL:
+  - Procesador: 1 GHz.
+  - Memoria: 2 GB de RAM.
+  - Espacio en disco: 512 MB de HDD.
+
+Vue.js:
+  - Sistema operativo: Windows 10.
+  - Procesador: Frecuencia base de 1.8 GHz o superior.
+  - Memoria: 4 GB de RAM o más.
+  - Espacio de almacenamiento: 75 MB de espacio disponible en disco o más.
+
+Docker:
+  - Sistema operativo: Windows 10 64-bit: Home o Pro (build 19043 o posterior), Enterprise o Education (build 19042 o posterior). 
+  Windows 11 64-bit: Home, Pro, Enterprise, o Education versión 21H2 o más reciente.
+  - Procesador: Procesador de 64 bits.
+  - Memoria: 4 GB de RAM.
+  - Espacio en disco: 100 GB de SSD.
+
+Docker Compose:
+  - Sistema operativo: Linux, Mac y Windows.
+  - Procesador: Procesador de 64 bits.
+  - Memoria: 4 GB de RAM.
+  - Espacio en disco: Docker Desktop es una descarga pequeña (< 200 MB) y tiene una huella de disco de < 500 MB.
+  - Docker Compose se instala con Docker Desktop.
+
+Nginx:
+  - 512 MB de RAM y 50 MB de espacio libre en disco.
+  `;
+export const texto12 = ` Diseño de la Arquitectura de la aplicación
+
+La arquitectura de la aplicación Flytask se ha diseñado considerando una combinación óptima de tecnologías para el Front End, 
+Back End y la base de datos. La característica más importante para el caso de aplicación es que estas tecnologías seleccionadas 
+pueden ser independientes, y se configura para interactuar entre sí. Para el caso del ejemplo práctico, se realizará una 
+integración de todos con todos, lo que implica que se desarrollarán los seis Back Ends, tres con PostgreSQL y tres con MongoDB, 
+y se realizarán tres Front End uno para cada tecnología. Con las 9 aplicaciones creadas se utilizará dockerización, 
+reverse proxy para el formateo de las URL, y un balanceador de carga que se configurará en el servidor a la hora de desplegar. 
+Esto permitirá que todas las tecnologías de Front End sean capaces de consultar a todas las API.
+
+Selección de tecnologías para el Front End de Flytask: 
+  - Frameworks a utilizar: Vue, React.
+
+Selección de tecnologías para el Back End de Flytask:
+  - Spring Boot, Django, Express.
+
+Selección de bases de datos de Flytask:
+  - NoSQL MongoDB o PostgreSQL.
+
+La combinación de estas tecnologías proporciona una solución robusta y flexible para el desarrollo de la aplicación. 
+Cada tecnología ha sido seleccionada por su eficiencia, flexibilidad y capacidad para integrarse con otras tecnologías. 
+Esta combinación permite que la aplicación sea escalable, mantenible y capaz de proporcionar una experiencia de usuario 
+de alta calidad.
+  `;
+export const texto13 = `Patrones de diseño
+
+A continuación, se detalla el patrón de diseño a utilizar para cada una de las API y cada uno de los Clientes que serán 
+desarrollados para Flytask.
+
+Patrón de diseño para Spring Boot y Express.js:
+En el caso de Spring Boot y Express.js se aplica un patrón de diseño MVC (Modelo Vista Controlador). Ambos frameworks utilizan 
+una estructura de carpetas similar, que será la siguiente:
+  - Config: Contiene los archivos de configuración de la API, incluyendo configuraciones específicas como Spring Security.
+  - Controller: Carpeta que contiene todas las clases RESTController con las rutas para las consultas HTTP.
+  - Model
+    - DTO: Contiene las clases de DTO que facilitan la manipulación de datos entre capas.
+    - Entities: Contiene las clases de entidades que reflejan la estructura de la base de datos gracias a JPA.
+  - Repository: Contiene funciones para interactuar directamente con las entidades y realizar operaciones CRUD.
+  - Service
+    - Service: Contiene interfaces que definen la estructura de los servicios.
+    - ServiceImpl: Implementaciones de los servicios que manejan la lógica de negocio, construyen DTOs y realizan cálculos 
+    complejos para inserciones y consultas.
+
+Patrón de diseño para Django:
+Para desarrollar una API en Django se utiliza el patrón de diseño MTV (Model Template View):
+  - Migrations: Contiene todas las migraciones autogeneradas por Django para configurar la estructura de la base de datos.
+  - Utils: Contiene archivos estáticos y funciones de utilidad.
+  - Models: Contiene las clases de entidades que se mapean a la base de datos.
+  - Views: Contiene la lógica de las llamadas a la API (equivalente a los controladores en otros frameworks).
+  - URL: Contiene las rutas utilizadas por las vistas para las consultas HTTP.
+  - Apps: Configura la aplicación como un proyecto de Django, cada una con sus propias Migrations, Models, Views, y URLs.
+  - Settings: Contiene las configuraciones de conexión a bases de datos, configuraciones de Spring Security y CORS.
+
+Patrón de diseño para React:
+Para React se utiliza el patrón Contenedor-Presentador (o Contenedor-Componente):
+  - Components
+    - Common: Contiene componentes reutilizables como barras de navegación.
+    - Feature: Contiene componentes específicos para funcionalidades como gráficos.
+  - Containers: Contiene componentes que conectan los componentes presentacionales con la lógica de la aplicación y 
+  manejo de datos.
+  - Services: Contiene funciones para interactuar con la API utilizando bibliotecas como Axios, proporcionando métodos 
+  para operaciones CRUD.
+  - Utils: Contiene funciones auxiliares para procesar la información devuelta por la API.
+  - Pages: Contiene las páginas principales de la aplicación que llaman a los contenedores y componentes.
+  - Assets: Contiene archivos estáticos como imágenes e iconos utilizados por los componentes.
+  - Styles: Contiene configuraciones de estilos utilizando bibliotecas como Tailwind.
+
+Patrón de diseño para Vue.js:
+En Vue.js se utilizan buenas prácticas más que un patrón específico, utilizando una arquitectura de componentes con 
+servicios para llamadas HTTP:
+  - Assets: Contiene elementos estáticos como imágenes e iconos.
+  - Componentes: Contiene todos los componentes utilizados en la aplicación.
+  - Services: Contiene funciones para realizar llamadas HTTP.
+  - Views: Contiene las vistas o páginas principales que consumen los componentes.
+
+Buenas prácticas de programación y seguridad se describen a continuación en otro apartado.
+   `;
+
+export const texto14 = `Implementación de buenas prácticas de codificación
+
+Al implementar las buenas prácticas de codificación, también se utilizan herramientas que facilitan la creación de 
+aplicaciones de alta calidad y seguridad. Estas librerías, frameworks y dependencias son bloques o recopilaciones de 
+funcionalidades probadas a lo largo del tiempo, cuyo código se puede reutilizar fácilmente. Los programadores pueden 
+diseñar operaciones específicas de lógica de negocios utilizando estas herramientas, basándose en los principios SOLID.
+
+En el desarrollo Back End, la implementación de buenas prácticas de codificación y el uso de SOLID están presentes 
+a lo largo del framework utilizado. Estos marcos de trabajo proporcionan una base sólida y previamente estudiada. 
+El uso de patrones de diseño garantiza que los archivos y sus responsabilidades estén adecuadamente separados, 
+asegurando un código limpio y fácil de mantener.
+
+- Principio de responsabilidad única:
+  - En Spring Boot, se aplica en los servicios que manejan la lógica de negocios por encima de los controladores.
+  - En Django, se ve en las vistas que cumplen funciones similares.
+  - En Express, se refleja en middlewares enfocados en tareas específicas como la validación de datos.
+
+- Principio abierto/cerrado:
+  - En Spring Boot, aplicado a los repositorios.
+  - En Django, a las vistas basadas en clases.
+  - En Express, a los middlewares personalizados.
+
+- Principio de sustitución de Liskov:
+  - En Spring Boot, se refleja en la programación basada en interfaces y la inyección automática de dependencias.
+  - En Django, se aplica en el uso de clases modelos que definen la estructura de modelos expandibles y heredables.
+  - En Express, se manifiesta en la modularidad de sus componentes y su facilidad de mantenimiento e interoperabilidad.
+
+- Principio de segregación de interfaces:
+  - Implementado junto con los principios de abierto/cerrado y responsabilidad única.
+  
+- Principio de inversión de dependencias:
+  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel no 
+  dependan de módulos de bajo nivel.
+
+Implementación de prácticas en codificación: React y Vue para Front End
+
+Para el desarrollo del Front End con React y Vue, se sigue el lineamiento SOLID y se utiliza el concepto de 
+"Clean Architecture", basado en SOLID. El objetivo es mantener el desarrollo de la aplicación limpio y 
+comprensible para cualquier desarrollador. La estructura de archivos y carpetas debe reflejar claramente las 
+funcionalidades de la aplicación, como se detalla más adelante en el apartado de "Patrones de Diseño".
+   `;
+
+export const texto15 = `   `;

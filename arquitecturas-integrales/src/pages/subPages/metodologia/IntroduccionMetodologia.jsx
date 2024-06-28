@@ -3,8 +3,16 @@ import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
 //import {test, } from "../../../img";
 import ImageComponent from "../../../components/ImageComponent";
-import {texto1, texto2, texto3, texto4 } from "../../../metodologiacontent/txtmetodologia";
+import { texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15 } from "../../../metodologiacontent/txtmetodologia";
 import login from "../../../img/login.png";
+import signup from "../../../img/signup.png";
+import emailsent from "../../../img/emailsent.png";
+import createntask from "../../../img/createntask.png";
+import dashboard from "../../../img/dashboard.png";
+import emptylist from "../../../img/emptylist.png";
+import editask from "../../../img/editask.png";
+
+
 
 
 
@@ -55,6 +63,59 @@ const IntroduccionMetodologia = () => {
         width="w-24"
         height="h-24" 
         title="login page" />
+
+        <TextBlock textContent={<pre> {texto5} </pre>} />
+
+        <ImageComponent image = {signup}
+        width="w-24"
+        height="h-24" 
+        title="login page" />
+
+        <TextBlock textContent={<pre>{texto6}</pre>} />
+
+        <ImageComponent image = {emailsent}
+        width="w-24"
+        height="h-24" 
+        title="email sent" />
+
+        <TextBlock textContent={<pre>{texto7}</pre>} />
+
+        <ImageComponent image = {emptylist}
+        width="w-24"
+        height="h-24" 
+        title="emty list" />
+ 
+
+        <TextBlock textContent={<pre>{texto8}</pre>} />
+
+       <ImageComponent image = {createntask}
+        width="w-24"
+        height="h-24" 
+        title="create new task" />
+
+        <TextBlock textContent={<pre>{texto9}</pre>} />
+
+        <ImageComponent image = {dashboard}
+        width="w-24"
+        height="h-24" 
+        title="dashboard" />
+
+        <TextBlock textContent={<pre>{texto10}</pre>} />
+
+        <ImageComponent image = {editask}
+        width="w-24"
+        height="h-24" 
+        title="edit task" />
+
+        <TextBlock textContent={<pre>{texto11}</pre>} />
+
+        <TextBlock textContent={<pre>{texto12}</pre>} />
+
+        <TextBlock textContent={<pre>{texto13}</pre>} />
+
+        <TextBlock textContent={<pre>{texto14}</pre>} />
+
+        <TextBlock textContent={<pre>{texto15}</pre>} />
 
       </div>
        )
