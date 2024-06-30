@@ -3,7 +3,7 @@ import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
 //import {test, } from "../../../img";
 import ImageComponent from "../../../components/ImageComponent";
-import { texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21 } from "../../../metodologiacontent/txtmetodologia";
+import { texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21, texto100, texto101, texto102} from "../../../metodologiacontent/txtmetodologia";
 import login from "../../../img/login.png";
 import signup from "../../../img/signup.png";
 import emailsent from "../../../img/emailsent.png";
@@ -80,9 +80,11 @@ const IntroduccionMetodologia = () => {
     return (
       <div className='flex flex-col'>
         
-        <TextBlock title="Metodologia de Flytask" textContent = <pre>{texto1}</pre>
- />
-
+        <TextBlock title="Metodologia de Flytask"/>
+        <TextBlock textContent={texto100}/>
+        <TextBlock textContent={texto101}/>
+        <TextBlock textContent={texto102}/>
+        <TextBlock textContent=<pre>{texto1}</pre>/>
         <TextBlock  title="Fases para el desarrollo de un proyecto" textContent = <pre>{texto2}</pre>/>
 
         <TextBlock  title="Resultados" textContent = <pre>{texto3}</pre>/>

@@ -1,16 +1,6 @@
 /* */
 
 export const texto1 = `
-La metodología para el desarrollo del proyecto se basará en SCRUM, 
-el cual está basado en un enfoque iterativo e incremental, permitiendo la flexibilidad necesaria 
-para adaptarse a las necesidades cambiantes del proyecto.
-
-Scrum es un marco de trabajo ágil utilizado para gestionar y desarrollar proyectos complejos, especialmente
-en el ámbito del software. Se basa en principios de colaboración, autoorganización y mejora continua.
-
-Se basa en la metodología ágil y ayuda a los equipos a estructurar y gestionar el trabajo a través
-de un conjunto de valores, principios y prácticas.
-
 Aunque se utiliza con mayor frecuencia en equipos de desarrollo de software, los principios y 
 lecciones de Scrum se pueden aplicar a todo tipo de trabajo en equipo. Esto ha llevado a su popularidad 
 en una variedad de industrias.
@@ -19,6 +9,15 @@ Scrum se compone de una serie de reuniones, herramientas y roles que ayudan a lo
 y gestionar su trabajo. En Scrum, el trabajo se divide en ciclos cortos y repetitivos llamados sprints, 
 que generalmente duran de dos a cuatro semanas, durante los cuales los equipos trabajan para completar 
 una cantidad específica de trabajo.`;
+
+export const texto100 = `La metodología para el desarrollo del proyecto se basará en SCRUM, 
+el cual está basado en un enfoque iterativo e incremental, permitiendo la flexibilidad necesaria 
+para adaptarse a las necesidades cambiantes del proyecto.`
+export const texto101 = `Scrum es un marco de trabajo ágil utilizado para gestionar y desarrollar proyectos complejos, especialmente
+en el ámbito del software. Se basa en principios de colaboración, autoorganización y mejora continua.
+`
+export const texto102 = `Se basa en la metodología ágil y ayuda a los equipos a estructurar y gestionar el trabajo a través
+de un conjunto de valores, principios y prácticas.`
 
 export const texto2 = `
 - Análisis de requerimientos de la aplicación a desarrollar
