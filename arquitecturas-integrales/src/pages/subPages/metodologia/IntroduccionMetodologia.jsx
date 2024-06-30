@@ -3,7 +3,7 @@ import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
 //import {test, } from "../../../img";
 import ImageComponent from "../../../components/ImageComponent";
-import { texto1, texto2, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21, texto100, texto101, texto102} from "../../../metodologiacontent/txtmetodologia";
+import { texto1, texto2,texto2a, texto2b, texto2c, texto2d, texto2e, texto2f, texto2g, texto2h, texto2i, texto2j, texto2k, texto2l, texto2m, texto2n, texto2o, texto2p, texto2q, texto2r, texto2s, texto2t, texto2u, texto2v, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21, texto100, texto101, texto102} from "../../../metodologiacontent/txtmetodologia";
 import login from "../../../img/login.png";
 import signup from "../../../img/signup.png";
 import emailsent from "../../../img/emailsent.png";
@@ -84,8 +84,54 @@ const IntroduccionMetodologia = () => {
         <TextBlock textContent={texto100}/>
         <TextBlock textContent={texto101}/>
         <TextBlock textContent={texto102}/>
-        <TextBlock textContent=<pre>{texto1}</pre>/>
+        <TextBlock textContent={texto1}/>
       <TextBlock title="Fases para el desarrollo de un proyecto" textContent={texto2} />
+
+      <TextBlock textContent={texto2} />
+      
+      <TextBlock textContent={texto2a} />
+      
+      <TextBlock textContent={texto2b} />
+      
+      <TextBlock textContent={texto2c} />
+      
+      <TextBlock textContent={texto2d} />
+      
+      <TextBlock textContent={texto2e} />
+      
+      <TextBlock textContent={texto2f} />
+      
+      <TextBlock textContent={texto2g} />
+      
+      <TextBlock textContent={texto2h} />
+      
+      <TextBlock textContent={texto2i} />
+      
+      <TextBlock textContent={texto2j} />
+      
+      <TextBlock textContent={texto2k} />
+      
+      <TextBlock textContent={texto2l} />
+      
+      <TextBlock textContent={texto2m} />
+      
+      <TextBlock textContent={texto2n} />
+      
+      <TextBlock textContent={texto2o} />
+      
+      <TextBlock textContent={texto2p} />
+      
+      <TextBlock textContent={texto2q} />
+      
+      <TextBlock textContent={texto2r} />
+      
+      <TextBlock textContent={texto2s} />
+      
+      <TextBlock textContent={texto2t} />
+      
+      <TextBlock textContent={texto2u} />
+      
+      <TextBlock textContent={texto2v} />
 
       <TextBlock title="Resultados" textContent={texto3} />
       

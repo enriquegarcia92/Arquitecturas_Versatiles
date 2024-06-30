@@ -19,23 +19,31 @@ en el ámbito del software. Se basa en principios de colaboración, autoorganiza
 export const texto102 = `Se basa en la metodología ágil y ayuda a los equipos a estructurar y gestionar el trabajo a través
 de un conjunto de valores, principios y prácticas.`
 
-export const texto2 = `
+export const texto2 = `Análisis de requerimientos de la aplicación a desarrollar`;
 
-Análisis de requerimientos de la aplicación a desarrollar
-La fase de levantamiento de requerimientos comprende la base del proyecto en la cual se debe identificar, comprender y documentar las necesidades de los usuarios, las funcionalidades de la aplicación y las características técnicas que debe cumplir.
+export const texto2a = `
+La fase de levantamiento de requerimientos comprende la base del proyecto en la cual se debe identificar, 
+comprender y documentar las necesidades de los usuarios, las funcionalidades de la aplicación y 
+las características técnicas que debe cumplir.`;
 
+export const texto2b = `
 Para esta fase es necesario realizar las siguientes sub-fases:
-
 Comprender las necesidades de los usuarios.
 Definir funcionalidades del sistema.
-Especificar las características técnicas (definición de diagrama de clases).
+Especificar las características técnicas (definición de diagrama de clases).`;
+
+export const texto2c = `
 Diseño
-Los requerimientos y funcionalidades de la aplicación definidos son la base para el flujo de la aplicación, la cual se diseña gráficamente antes de iniciar con la programación. Existen diferentes herramientas que permiten el diseño de mockups estáticos e interactivos, como por ejemplo Figma.
+Los requerimientos y funcionalidades de la aplicación definidos son la base para el flujo de la aplicación, la cual se diseña gráficamente antes de iniciar con la programación. Existen diferentes herramientas que permiten el diseño de mockups estáticos e interactivos, como por ejemplo Figma.`;
 
+export const texto2d = `
 Para esta fase es necesario realizar las siguientes sub-fases:
+Desarrollo de mockup.`;
 
-Desarrollo de mockup.
-Requerimientos técnicos de hardware y software.
+export const texto2e = `
+Requerimientos técnicos de hardware y software.`;
+
+export const texto2f = `
 Requerimiento de hardware:
 Procesador: 2.5 GHz o superior
 Memoria RAM: 16 GB mínimo
@@ -43,86 +51,106 @@ Espacio en disco: 256 GB SSD mínimo
 Sistema operativo:
 Windows 10 64-bit (build 19043 o posterior)
 macOS 10.10 o posterior
-Ubuntu 18.04 o posterior
+Ubuntu 18.04 o posterior`;
+
+export const texto2g = `
 Requerimiento de software:
 IDE: Visual Studio Code
 Control de versiones: Git
 Frameworks: Angular, React, Spring Boot, Django, Express.js, Vue.js
 Bases de datos: MongoDB, PostgreSQL
 Contenedores: Docker, Docker Compose
-Servidor web: Nginx
-Estas herramientas son comúnmente utilizadas en el desarrollo de aplicaciones modernas y proporcionan un entorno consistente y controlado para el desarrollo y la implementación de la aplicación.
+Servidor web: Nginx`;
 
+export const texto2h = `
+Estas herramientas son comúnmente utilizadas en el desarrollo de aplicaciones modernas y proporcionan un entorno consistente y controlado para el desarrollo y la implementación de la aplicación.`;
+
+export const texto2i = `
 Diseño de arquitectura de la aplicación
-Para el desarrollo de aplicaciones basadas en una arquitectura Cliente-Servidor, se facilita el manejo de las tecnologías de lógica de negocios y la interfaz de usuario, ya que se comunican de manera efectiva para establecer el flujo de datos necesarios para el funcionamiento de una aplicación.
+Para el desarrollo de aplicaciones basadas en una arquitectura Cliente-Servidor, se facilita el manejo de las tecnologías de lógica de negocios y la interfaz de usuario, ya que se comunican de manera efectiva para establecer el flujo de datos necesarios para el funcionamiento de una aplicación.`;
 
-Se elige este tipo de arquitectura específicamente porque permite que mediante el protocolo HTTP y el formato JSON todas las aplicaciones implementadas puedan ser consumidas por clientes diversos, lo que facilita el acceso a la lógica de negocios desde cualquier parte mediante internet.
+export const texto2j = `
+Se elige este tipo de arquitectura específicamente porque permite que mediante el protocolo HTTP y el formato JSON todas las aplicaciones implementadas puedan ser consumidas por clientes diversos, lo que facilita el acceso a la lógica de negocios desde cualquier parte mediante internet.`;
 
+export const texto2k = `
 Para esta fase es necesario realizar las siguientes sub-fases:
-
 Selección de tecnologías para el frontend
 Selección de tecnologías para el backend
-Selección de bases de datos
+Selección de bases de datos`;
+
+export const texto2l = `
 Patrones de diseño
-Facilitan la mantenibilidad y manipulación del código, permiten escalabilidad, separan las responsabilidades y facilitan la detección y corrección de errores. Según el programador, puede variar el patrón de diseño implementado, además de que está sujeto a cómo funciona la tecnología.
+Facilitan la mantenibilidad y manipulación del código, permiten escalabilidad, separan las responsabilidades y facilitan la detección y corrección de errores. Según el programador, puede variar el patrón de diseño implementado, además de que está sujeto a cómo funciona la tecnología.`;
 
+export const texto2m = `
 Para esta fase es necesario realizar la siguiente sub-fase:
+Selección de patrones de diseño`;
 
-Selección de patrones de diseño
+export const texto2n = `
 Buenas prácticas de seguridad
-La seguridad para un proyecto es de vital importancia. No es posible proveer al usuario una experiencia de alta calidad al utilizar la aplicación si no se puede garantizar la seguridad de sus datos y del sistema en sí.
 
+La seguridad para un proyecto es de vital importancia. No es posible proveer al usuario una experiencia de alta calidad al utilizar la aplicación si no se puede garantizar la seguridad de sus datos y del sistema en sí.`;
+
+export const texto2o = `
 Para esta fase es necesario realizar la siguiente sub-fase:
+Identificar algunas buenas prácticas de seguridad para el acceso remoto a los servidores, controlar el flujo del tráfico entre los clientes y servidores, manejo y autenticación de usuarios en la aplicación.`;
 
-Identificar algunas buenas prácticas de seguridad para el acceso remoto a los servidores, controlar el flujo del tráfico entre los clientes y servidores, manejo y autenticación de usuarios en la aplicación.
-
+export const texto2p = `
 A continuación, se listan algunos ejemplos:
-
-a. SSH (Secure Shell): Se selecciona cuando se necesita un acceso remoto seguro a los servidores. Es útil cuando se requiere administrar los servidores remotos o transferir archivos de manera segura.
-
+a. SSH (Secure Shell): Se selecciona cuando se necesita un acceso remoto seguro a los servidores. 
+Es útil cuando se requiere administrar los servidores remotos o transferir archivos de manera segura.
 b. Reverse Proxy: Se elige cuando se necesita controlar y optimizar el flujo de tráfico entre los clientes y los servidores. Es útil para balancear la carga, proporcionar seguridad adicional y mejorar la velocidad y eficiencia de las aplicaciones web.
-
 c. NoSQL: Se selecciona cuando se trabaja con grandes volúmenes de datos distribuidos. Es útil cuando los datos no se ajustan a un esquema rígido, se necesitan escalabilidad horizontal y alta disponibilidad, o se requiere un rendimiento rápido con grandes volúmenes de datos.
+d. JWT (JSON Web Token): Se elige cuando se necesita manejar la autenticación o autorización de los usuarios en la aplicación. Es útil cuando se requiere una manera segura de transmitir información entre partes como la identidad de usuario, los roles y los privilegios.`;
 
-d. JWT (JSON Web Token): Se elige cuando se necesita manejar la autenticación o autorización de los usuarios en la aplicación. Es útil cuando se requiere una manera segura de transmitir información entre partes como la identidad de usuario, los roles y los privilegios.
-
+export const texto2q = `
 Programación
-Para esta fase es necesario realizar las siguientes sub-fases:
 
+Para esta fase es necesario realizar las siguientes sub-fases:
 Implementación de buenas prácticas de codificación
 Implementación de los patrones de diseño
 Implementación de buenas prácticas de seguridad con JWT
 Desarrollo del front-end
 Desarrollo del back-end
-Integración del back-end y front-end
-Pruebas
-Para esta fase es necesario realizar la siguiente sub-fase:
+Integración del back-end y front-end`;
 
+export const texto2r = `
+Pruebas
+
+Para esta fase es necesario realizar la siguiente sub-fase:
 Pruebas unitarias: Verifican la precisión de un bloque de código aislado.
 Pruebas de integración: Evalúan cómo interactúan varios módulos de software.
-Pruebas de aceptación: Verifican si un sistema cumple con los requisitos empresariales.
+Pruebas de aceptación: Verifican si un sistema cumple con los requisitos empresariales.`;
+
+export const texto2s = `
 Despliegue
+
 El despliegue es una etapa esencial en el desarrollo de software que implica la transición de aplicaciones a producción. Para esta fase es necesario realizar las siguientes sub-fases:
+Contenedores`;
 
-Contenedores
+export const texto2t = `
 Los contenedores ofrecen varias ventajas que los convierten en una opción ideal para el despliegue moderno:
-
 Aislamiento: Las aplicaciones se ejecutan en entornos aislados, evitando conflictos y problemas de compatibilidad.
 Portabilidad: Se pueden implementar en diferentes entornos, desde servidores locales hasta nubes públicas.
 Escalabilidad: Se pueden escalar fácilmente para satisfacer las demandas cambiantes de tráfico y carga de trabajo.
-Agilidad: Agilizan el proceso de despliegue, ya que no requieren la instalación de un sistema operativo completo para cada aplicación.
+Agilidad: Agilizan el proceso de despliegue, ya que no requieren la instalación de un sistema operativo completo para cada aplicación.`;
+
+export const texto2u = `
 Servidor web
+
 Infraestructura confiable: El servidor web cuenta con una infraestructura robusta y confiable para garantizar la disponibilidad y el rendimiento óptimos de la aplicación.
 Conectividad de alta velocidad: Una conexión a Internet de alta velocidad es esencial para garantizar un acceso rápido y fluido a la aplicación por parte de los usuarios.
 Seguridad sólida: El servidor web cuenta con medidas de seguridad sólidas para proteger la aplicación y los datos de los usuarios contra amenazas cibernéticas.
-Escalabilidad: El proveedor de alojamiento web ofrece opciones de escalabilidad para que la infraestructura pueda adaptarse al crecimiento de la aplicación y la demanda de los usuarios.
+Escalabilidad: El proveedor de alojamiento web ofrece opciones de escalabilidad para que la infraestructura pueda adaptarse al crecimiento de la aplicación y la demanda de los usuarios.`;
+
+export const texto2v = `
 Herramientas de integración continua y entrega continua (CI/CD)
+
 Mayor velocidad: Automatizan tareas repetitivas, permitiendo a los equipos desarrollar y entregar software con mayor rapidez.
 Mejor calidad: La automatización de las pruebas ayuda a identificar y corregir errores antes de que se implementen en producción.
 Mayor confiabilidad: Garantizan un proceso de despliegue consistente y confiable, lo que reduce el riesgo de errores y fallos.
-Mayor colaboración: Facilitan la colaboración entre equipos de desarrollo y operaciones.
+Mayor colaboración: Facilitan la colaboración entre equipos de desarrollo y operaciones.`;
 
-`;
 
 export const texto3 = `
 La metodología a utilizar está basada en el enfoque iterativo e incremental “SCRUM”. El proyecto consiste en el diseño de una guía estructurada sobre las fases para el desarrollo de este proyecto, basado en las arquitecturas integrales utilizando un desarrollo multicapa, para lo cual se realizará un ejemplo práctico de una aplicación “To-do List” llamada Flytask, que permite la gestión de tareas por parte del usuario final.
