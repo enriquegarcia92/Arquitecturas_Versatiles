@@ -10,7 +10,14 @@ verificar la validez del token`
 const text2 = `Dependiendo del framework, el interceptor se llama FilterChain en el caso de Spring Boot y además se debe configurar Una cadena seguridad
 la cual ejecuta el interceptor, en Django se le llama decorador y en Express recibe el nombre de middleware.`
 
-const code1 = `//Archivo src/main/Services/JwtService.java
+const code1 = `
+//En el archivo application.properties se debe agregar la clave secreta que será utilizado para el cifrado del token
+
+SECRETKEY=clavesecretaslkdasd92lksmd910sldo0110diskjdad901dj2091jd9slakdsm012c
+
+//Esta clave debe tener cierto nivel de complejdiad dependiendo del algoritmo de cifrado
+
+//Archivo src/main/Services/JwtService.java
 //interfaz que contiene la de declaración de la función de generar token
 public interface JwtService {
     //Función de generación de token

@@ -12,6 +12,8 @@ el uso de excepciones manuales se ejecuta la acción correspondiente y se devuel
 el formato HTTP correspondiente, en caso de que ocurra un error inesperado, todo este proceos está encerrado en un 
 try-catch el cual se encargará de obtener el mensaje de error e informar al cliente del servidor el problema que se presenta
 `
+const text3 = `En el caso especifico de Spring Boot se debe realizar una configuración separada para el envio de correos electrónicos`
+
 const code1 = `//Archivo src/main/Services/AuthService.java
 //Interfaz que declara todos los métodos
 public interface AuthService {
@@ -195,11 +197,13 @@ public interface TaskService {
 //Clase que implementa los métodos de la interfaz
 @Service
 public class TaskServiceImpl implements TaskService {
+    //Inyección de repositorios a utilizar
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
     private UserRepository userRepository;
 
+    //Busqueda de las tareas segun estado usuario y filtrado por titulo y descripción
     @Override
     public ResponseEntity<HashMap<String, Object>> searchTasksByKeywordAndStatus(String keyword, Integer status, Integer userId) {
         HashMap<String, Object> response = new HashMap<>();
@@ -217,6 +221,7 @@ public class TaskServiceImpl implements TaskService {
             return ResponseEntity.status(500).body(response);
         }
     }
+    //Creación de tarea
     @Override
     public ResponseEntity<HashMap<String, Object>> createTask(TaskDto task) {
         HashMap<String, Object> response = new HashMap<>();
@@ -244,6 +249,7 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    //Modificación de tareas
     @Override
     public ResponseEntity<HashMap<String, Object>> editTask(Integer TaskID , EditTaskDTO Task) {
         HashMap<String, Object> response = new HashMap<>();
@@ -272,6 +278,7 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    //Eliminación de tarea
     @Override
     public ResponseEntity<HashMap<String, Object>>deleteTask(Integer taskId) {
         HashMap<String, Object> response = new HashMap<>();
@@ -295,6 +302,7 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    //Modificación del estao de una tarea
     @Override
     public ResponseEntity<HashMap<String, Object>> setState(Integer TaskID, String state) {
         Integer newStatus= 0;
@@ -329,10 +337,42 @@ public class TaskServiceImpl implements TaskService {
             return ResponseEntity.status(500).body(response);
         }
     }
+}`
+
+const code3 = `
+//En el archivo application.properties se deben declarar las siguientes configuraciónes.
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=flytask503@gmail.com
+//Contraseña para aplicacioens de desarrollo de cuenta d egoogle
+spring.mail.password=mailpassword
+
+//Archivo src/main/Config/MailConfig.java
+//Clase de configuración que prepara el proceidimiento para enviar correos
+@Configuration
+public class MailConfig {
+
+    @Autowired
+    private Environment env;
+
+    @Bean
+    public JavaMailSender javaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost(env.getProperty("spring.mail.host"));
+        mailSender.setPort(Integer.parseInt(env.getProperty("spring.mail.port")));
+        mailSender.setUsername(env.getProperty("spring.mail.username"));
+        mailSender.setPassword(env.getProperty("spring.mail.password"));
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.starttls.required", "true");
+        props.put("mail.debug", "true");
+
+        return mailSender;
+    }
 }
-
 `
-
 
 const ServicesSetup = () => {
     return (
@@ -348,6 +388,12 @@ const ServicesSetup = () => {
       <TextBlock title="Lógica de la gestión de las tareas"/>
       <CodeBlock
         code1={code2}
+        language1="java"
+        />
+       <TextBlock title ="Configuración de correos para Spring Boot"/>
+       <TextBlock textContent={text3}/>
+       <CodeBlock
+        code1={code3}
         language1="java"
         />
       </div>
