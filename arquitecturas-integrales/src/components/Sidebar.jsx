@@ -92,10 +92,11 @@ const Sidebar = () => {
               icon={MdComputer}
             />
             <DisclosureMenu
-              title="Deployment"
+              title="Despliegue"
               subtitles={[
-                { label: "Introduction", link: "/deployment/introduction" },
-                { label: "Overview", link: "/deployment/overview" },
+                { label: "Preparación de los proyectos", link: "/main/deloymentdocker" },
+                { label: "Uso de Docker Compose", link: "/main/deploycomposesetup" },
+                { label: "Uso de Nginx", link: "/main/deploynginxsetup" },
               ]}
               icon={AiOutlineDeploymentUnit}
             />
@@ -156,10 +157,11 @@ const Sidebar = () => {
               icon={MdComputer}
             />
             <DisclosureMenu
-              title="Deployment"
+              title="Despliegue"
               subtitles={[
-                { label: "Introduction", link: "/deployment/introduction" },
-                { label: "Overview", link: "/deployment/overview" },
+                { label: "Preparación de los proyectos", link: "/main/deloymentdocker" },
+                { label: "Uso de Docker Compose", link: "/main/deploycomposesetup" },
+                { label: "Uso de Nginx", link: "/main/deploynginxsetup" },
               ]}
               icon={AiOutlineDeploymentUnit}
             />

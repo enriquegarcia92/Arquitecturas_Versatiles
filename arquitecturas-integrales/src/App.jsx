@@ -13,6 +13,9 @@ import ServicesSetup from "./pages/subPages/backend/ServicesSetup";
 import EndpointSetup from "./pages/subPages/backend/EndpointSetup";
 import DTOSetup from "./pages/subPages/backend/DTOSetup";
 import MongoDev from "./pages/subPages/backend/MongoDev";
+import Deployment from "./pages/subPages/deployment/Deployment";
+import ComposeSetup from "./pages/subPages/deployment/ComposeSetup";
+import NginxSetup from "./pages/subPages/deployment/NginxSetup";
 
 const BASE_URL = "/"
 
@@ -32,6 +35,9 @@ const App = () => {
         <Route path={`${BASE_URL}main/backendendpointsetup`} element={<EndpointSetup/>} />
         <Route path={`${BASE_URL}main/backendtosetup`} element={<DTOSetup/>} />
         <Route path={`${BASE_URL}main/backendmongodev`} element={<MongoDev/>} />
+        <Route path={`${BASE_URL}main/deloymentdocker`} element={<Deployment/>} />
+        <Route path={`${BASE_URL}main/deploycomposesetup`} element={<ComposeSetup/>} />
+        <Route path={`${BASE_URL}main/deploynginxsetup`} element={<NginxSetup/>} />
         </Route>
       </Routes>
     </Router>
