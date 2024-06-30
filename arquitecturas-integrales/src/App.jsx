@@ -17,16 +17,15 @@ const App = () => {
   return (
     <Router>
       <Routes>
-      <Route path={BASE_URL} element={<Landing />} />
-        <Route path={`${BASE_URL}main`} element={<MainLayout />}/>
-          <Route path={`${BASE_URL}main/methodology/intro`} element={<IntroduccionMetodologia/>} />
-          <Route path={`${BASE_URL}main`} element={<MainLayout/>} >
-          <Route path={`${BASE_URL}main/backendproyectinit`} element={<ProyectInit/>} />
-          <Route path={`${BASE_URL}main/backenddbconnections`} element={<DatabaseConnection/>} />
-          <Route path={`${BASE_URL}main/backendarchsetup`} element={<ArchitectureSetup/>} />
-          <Route path={`${BASE_URL}main/backendmodelsetup`} element={<ModelSetup/>} />
-          <Route path={`${BASE_URL}main/backendauthsetup`} element={<AuthenticationJwt/>} />
-          <Route path={`${BASE_URL}main/backendservicessetup`} element={<ServicesSetup/>} />
+        <Route path={BASE_URL} element={<Landing />} />
+        <Route path={`${BASE_URL}main`} element={<MainLayout/>} >
+        <Route path={`${BASE_URL}main/methodologyintro`} element={<IntroduccionMetodologia/>} />
+        <Route path={`${BASE_URL}main/backendproyectinit`} element={<ProyectInit/>} />
+        <Route path={`${BASE_URL}main/backenddbconnections`} element={<DatabaseConnection/>} />
+        <Route path={`${BASE_URL}main/backendarchsetup`} element={<ArchitectureSetup/>} />
+        <Route path={`${BASE_URL}main/backendmodelsetup`} element={<ModelSetup/>} />
+        <Route path={`${BASE_URL}main/backendauthsetup`} element={<AuthenticationJwt/>} />
+        <Route path={`${BASE_URL}main/backendservicessetup`} element={<ServicesSetup/>} />
         </Route>
       </Routes>
     </Router>

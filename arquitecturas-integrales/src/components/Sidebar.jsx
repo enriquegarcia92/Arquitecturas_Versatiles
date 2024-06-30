@@ -63,7 +63,7 @@ const Sidebar = () => {
           <DisclosureMenu
               title="Metodologia"
               subtitles={[
-                { label: "Introduction", link: "/main/methodology/intro" },
+                { label: "Introduction", link: "/main/methodologyintro" },
     
               ]}
               icon={FaCheck}
