@@ -129,8 +129,55 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['taskId', 'title', 'description', 'status', 'creationDate', 'dueDate']
-
 `
+const type1 = `
+//En express se crea en la carpeta middleware el archivo que verifica la validación según los DTO
+export const validationMiddleware = (type: any) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const dtoInstance = plainToInstance(type, req.body);
+
+    validate(dtoInstance).then((errors: ValidationError[]) => {
+      if (errors.length > 0) {
+        res.status(400).json({ errors });
+      } else {
+        req.body = dtoInstance;
+        next();
+      }
+    });
+  };
+};
+//DTO para iniciar sesión
+export class LoginDTO {
+    email!: string;
+    password!: string;
+  }
+//DTO para crear un usuario nuevo
+  export class CreateUserDTO {
+    name!: string;
+    email!: string;
+    password!: string;
+    confirmPassword!: string;
+  }
+//DTO para recuperar la contraseña
+  export class RecoverPwDTO {
+    newPassword!: string;
+    passwordConfirmation!: string;
+    token!:string;
+  }
+  `
+const type2 = `//DTO para crear tarea
+export class TaskDTO {
+    title!: string;
+    description!: string;
+    dueDate!: Date;
+    userId!: number;
+}
+//DTO para modificar una tarea
+export class UpdateTaskDTO {
+    title!: string;
+    description!: string;
+    dueDate!: Date;
+}`
 const DTOSetup = () => {
     return (
       <div className="flex flex-col">
@@ -142,6 +189,8 @@ const DTOSetup = () => {
         language1="java"
         code2={python1}
         language2="python"
+        code3={type1}
+        language3="typescript"
         />
         <TextBlock title="DTO´s de las tareas"/>
         <CodeBlock 
@@ -149,6 +198,8 @@ const DTOSetup = () => {
         language1="java"
         code2={python2}
         language2="python"
+        code3={type2}
+        language3="typescript"
         />
       </div>
     );

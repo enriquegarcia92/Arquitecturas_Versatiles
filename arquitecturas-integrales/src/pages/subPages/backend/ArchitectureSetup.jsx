@@ -5,6 +5,7 @@ import ImageComponent from "../../../components/ImageComponent"
 import djangomainarch from "../../../img/djangomainarch.png";
 import djangotaskarch from "../../../img/djangotaskarch.png";
 import djangouserarch from "../../../img/djangouserarch.png";
+import expressarch from "../../../img/expressarch.png";
 import CodeBlock from "../../../components/CodeBlock";
 
 
@@ -24,18 +25,18 @@ const ArchitectureSetup = () => {
         <div className="flex flex-col">
             <TextBlock title="Preparación de la arquitectura."/>
             <TextBlock textContent={text1}/>
-            <TextBlock title="Arquitectura MVC para Spring Boot"/>
+            <TextBlock title="Arquitectura MVC para Spring Boot" textContent="Modelos = Models, Vista = Controllers, Controlador = Services."/>
             <ImageComponent
                 image={mvcspring}
-                width="w-25"
-                height="h-25" // Example of using Tailwind CSS height utility class
-                description="Modelos = Models, Vista = Controllers, Controlador = Services."
+                width="w-64"
+                height="h-64" // Example of using Tailwind CSS height utility class
+                description="Estrucutra del proyecto principal"
              />
             <TextBlock title="Arquitectura MVC para Django" textContent="Modelos = models, Vista = urls, Controlador = views."/>
             <ImageComponent
                 image={djangomainarch}
-                width="w-25"
-                height="h-25" // Example of using Tailwind CSS height utility class
+                width="w-64"
+                height="h-64" // Example of using Tailwind CSS height utility class
                 description="Estructura pricipal del proyecto."
              />
             <TextBlock textContent="Para el caso de Django se debe preparar la arquitectura mediante comandos."/>
@@ -43,15 +44,24 @@ const ArchitectureSetup = () => {
             <TextBlock textContent="Dando como resultado las siguientes estructuras:"/>
             <ImageComponent
                 image={djangouserarch}
-                width="w-25"
-                height="h-25" // Example of using Tailwind CSS height utility class
+                width="w-64"
+                height="h-64" // Example of using Tailwind CSS height utility class
                 description="Estrucutra interna del proyecto para los usuarios."
              />
             <ImageComponent
                 image={djangotaskarch}
-                width="w-25"
-                height="h-25" // Example of using Tailwind CSS height utility class
+                width="w-64"
+                height="h-64" // Example of using Tailwind CSS height utility class
                 description="Estructura interna del proyecto para las tareas."
+             />
+            <TextBlock title="Arquitectura MVC para Express"
+            textContent="Modelo = models, Vista = controllers, Controlador = index"
+            />
+            <ImageComponent
+                image={expressarch}
+                width="w-64"
+                height="h-64" // Example of using Tailwind CSS height utility class
+                description="Estructura del proyecto principal"
              />
         </div>
       

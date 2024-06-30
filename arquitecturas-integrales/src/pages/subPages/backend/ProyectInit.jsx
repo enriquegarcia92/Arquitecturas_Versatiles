@@ -47,11 +47,17 @@ dentro de las tags dependencies: -->
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 			<scope>runtime</scope>
-		</dependency>`
+		</dependency>
+        
+//Finalmente para ejecutar el proyecto se abre se accede al archivo main del proyecto y se da click al boton
+//de ejecutar en el IDE`
 
 const python1 = `
 #Para inicializar el proyecto de Django se debe instalar una versión de python3.9 o superior el cual incluye
 #Internamente el manejador de paquetes de python "pip"
+
+#Se recomienda el uso del IDE Pycharm Comunity Edition
+
 #En el caso del manejo de librerías para Django se recomienda el uso de un entorno virtual de python para
 #Asegurar la separación de las dependencias por proyecto y una mejor integridad estructural del proyecto.
 #Para ello se debe ejecutar en una terminal los siguientes comandos:
@@ -113,6 +119,100 @@ INSTALLED_APPS = [
 #Finalmente se debe agregar las siguientes variables en cualquier parte del archivo
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+#Con todo preparado el proyecto se ejecuta con el siguiente comando
+python manage.py runserver 0.0.0.0
+`
+
+const type1 = `//Para iniciar un proyecto de express se debe tener instalado Node.js 22.0.0 
+//Se recomienda hacer uso del editor Visual Studio Code
+
+//La instalación de Node incluye su propio manejador de paquetes llamado "npm"
+
+//Para crear el proyecto, se crea una carpeta nueva y se ejecuta el comando
+npm init -y
+
+//Este creará el archivo package.json
+{
+  "name": "flytaskexpress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    //Se agrgea este script para que el proyecto funcione con un archivo de typescript index.ts
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+//En este archivo se deben designar todas las dependencias que se utilizarán
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/nodemailer": "^6.4.15",
+    "@types/sequelize": "^4.28.20",
+    "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.13",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
+  },
+//Dependencias principales para crear el proyecto de Express con typescript
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
+
+//Estas dependencias se pueden instalar manualmente ejecutando
+npm install 'nombre de dependencia'
+//Con las dependencias agregadas se ejecuta el comando
+npm install
+
+//Manualmente se crea la carpeta src y dentro de esta el archivo index.ts
+//Luego se debe crear en la carpeta pricipal el archivo tsconfig.json
+{
+    "compilerOptions": {
+      "target": "es2020",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./dist"
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}
+
+//En el archivo index.ts se importa la siguiente configuración
+//de la librería dotenv se inicailziza para que se carguen las variables de entorno
+dotenv.config();
+
+const app = express();
+const port = 3000;
+
+// Middleware para manejar Json en la API
+app.use(express.json());
+
+//Punto de rranque del proyecto
+app.listen(port, () => {
+  console.log(\`Server is running on http://localhost:\${port}\`);
+});
+//El proyecto se corre con el comando
+npm run dev
 `
 const ProyectInit = () => {
     return (
@@ -124,6 +224,8 @@ const ProyectInit = () => {
                 language1="java"
                 code2={python1}
                 language2="python"
+                code3={type1}
+                language3="typescript"
             />
         </div>
       

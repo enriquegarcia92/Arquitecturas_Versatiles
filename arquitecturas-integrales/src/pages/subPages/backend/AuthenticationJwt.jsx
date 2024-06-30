@@ -391,6 +391,85 @@ class WhoamIView(APIView):
         return HttpResponse("Token Valid", status=status.HTTP_200_OK, content_type="text/plain")
 
 `
+
+const type1 = `//En la carpeta jwt se crea un archivo para la configuración de la generación de tokens
+//Archivo jwt/utils.ts
+
+export const generateLoginToken = (user: any) => {
+    //Secret_Key se obtiene de un archivo .env y se coloca de esta forma
+    //SECRET_KEY='clavesecreta1921ikasndlkasdjksj19'
+    const secretKey: string = process.env.SECRET_KEY || 'dummykey';
+    //Se codifica la clave secreta
+    const encodedKey: string = Buffer.from(secretKey).toString('base64');
+    //Se define la expiración
+    const now = new Date();
+    const exp = new Date(now.getTime() + 4 * 60 * 60 * 1000); // Token expires in 4 hours
+    //Se crea el cuerpo
+    const payload = {
+        tokenType: 'LOGIN',
+        sub: user.usr_email,
+        iat: Math.floor(now.getTime() / 1000),
+        exp: Math.floor(exp.getTime() / 1000)
+    };
+    //Se firma el token, se define el algoritmo
+    const token = jwt.sign(payload, secretKey, { algorithm: 'HS256'});
+    return token;
+};
+
+export const generateRecoveryToken = (user: any) => {
+    const secretKey: string = process.env.SECRET_KEY || 'dummykey';
+    console.log(secretKey);
+    const encodedKey: string = Buffer.from(secretKey).toString('base64');
+    console.log(encodedKey);
+    const now = new Date();
+    const exp = new Date(now.getTime() + 4 * 60 * 60 * 1000); // Token expires in 4 hours
+    const payload = {
+        tokenType: 'RECOVERY',
+        sub: user.usr_email,
+        iat: Math.floor(now.getTime() / 1000),
+        exp: Math.floor(exp.getTime() / 1000)
+    };
+    const token = jwt.sign(payload, secretKey, { algorithm: 'HS256'});
+    return token;
+};`
+
+const type2 = `//Gracias a la libería jwt es sumamente sencilla la verificación del token, solo se
+//decodifica mediante la clave secreta.
+const decodedToken = jwt.verify(token, process.env.SECRET_KEY || 'dummykey') as { tokenType: string };`
+
+const type3 = `//En express se debe crear un middleware que utiliza la función de verificación
+//archivo middleware/ahenticate.ts
+export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+      const response = {
+          "error": "Authentication Failed"
+      }
+      return res.status(403).json(response);
+  }
+  try {
+      const decodedToken = jwt.verify(token, process.env.SECRET_KEY || 'dummykey') as { tokenType: string };
+            if (decodedToken.tokenType !== "LOGIN") {
+          const response = {
+              "error": "Invalid Token Type"
+          }
+          return res.status(403).json(response);
+      }      
+      next();
+  } catch (error) {
+      console.error('Token verification failed', error);
+      const response = {
+          "error": "Error Authenticating"
+      }
+      return res.status(403).json(response);
+  }
+};
+
+//Y el uso de este middleware se ve reflejado en los Endpoint del archivo index.ts
+//Se puede ver como ejemplo el uso del whoami como primer Endpoint autenticado
+app.post('/api/auth/whoami', verifyToken, whoami);`
 const AuthenticationJwt = () => {
     return (
       <div className="flex flex-col">
@@ -403,6 +482,8 @@ const AuthenticationJwt = () => {
         language1={"java"}
         code2={python1}
         language2={"python"}
+        code3={type1}
+        language3={"typescript"}
        />
         <TextBlock title="Verificación de token."/>
         <CodeBlock 
@@ -410,6 +491,8 @@ const AuthenticationJwt = () => {
         language1={"java"}
         code2={python2}
         language2={"python"}
+        code3={type2}
+        language3={"typescript"}
        />
         <TextBlock title="Implementación de interceptores."/>
         <CodeBlock 
@@ -417,6 +500,8 @@ const AuthenticationJwt = () => {
         language1={"java"}
         code2={python3}
         language2={"python"}
+        code3={type3}
+        language3={"typescript"}
        />
       </div>
     );

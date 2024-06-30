@@ -37,6 +37,40 @@ DATABASES = {
         },
     }
 }`
+
+const type1 = `//Para preparar la conexión se crea la carpeta config y dentro de esta se coloca un archivo nuevo
+//Archivo config/database.ts
+
+//Uso de la libería sequelie para el manejo de la base de datos.
+import { Sequelize } from 'sequelize';
+
+const sequelize = new Sequelize('flytask', 'postgres', 'password', {
+  host: 'db',
+  dialect: 'postgres',
+  logging: false,
+  define: {
+    timestamps: true,
+    freezeTableName: true
+  },
+});
+
+export default sequelize;
+
+//Despues se debe modificar el archivo index.ts con lo siguiente
+
+  async function initialize() {
+    try {
+      await sequelize.authenticate();
+      console.log('Connection has been established successfully.');
+      // Continue with your application logic here
+    } catch (error) {
+      console.error('Unable to connect to the database:', error);
+    }
+  }
+
+  initialize();
+  
+//Automáticamente la librería se encargará de la conexión`
 const DatabaseConnection = () => {
     return (
         <div>
@@ -50,6 +84,8 @@ const DatabaseConnection = () => {
                 language1="java"
                 code2={python2}
                 language2="python"
+                code3={type1}
+                language3="typescript"
             />
         </div>
       

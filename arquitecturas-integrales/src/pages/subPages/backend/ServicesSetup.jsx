@@ -686,6 +686,376 @@ class DeleteTaksView(APIView):
             }
             return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 `
+const type1 = `//La lógica de negocios se maneja en los archivos de la carpeta controller
+
+//Archivo authController.ts
+
+//Lógica del whoam
+export const whoami  = async (req: Request, res: Response) => {
+    res.status(200).send('Token Valid Ts')
+}
+
+//Lógica de inicio de sesión
+export const loginUser = async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+    try {
+        //Busqueda de usuario se encarga al objeto
+        const user = await User.findOne({ where: { usr_email: email } });
+        if (!user) {
+            throw new Error('Bad credentials');
+        }
+        const isPasswordMatch = await bcrypt.compare(password, user.usr_password);
+        if (!isPasswordMatch) {
+            throw new Error('Bad credentials');
+        }
+        // Generación del token
+        const token = generateLoginToken(user);
+        // Preparación de respuesta
+        const response = {
+            id: user.usr_id,
+            message: 'Logged successfully',
+            status: 'success',
+            token: token
+        };
+        //Envio de respuesta y estado de la respuesta
+        res.status(200).json(response);
+    } catch (error: any) {
+        const response = {
+            message: error.message,
+            status: 'error'
+        };
+        res.status(500).json(response);
+    }
+};
+
+export const registerUser = async (req: Request, res: Response) => {
+    try {
+        //Obtención de información de un objeto Json
+        const { name, email, password, confirmPassword } = req.body;
+
+        if (password !== confirmPassword) {
+            const response = {
+                "message": "Passwords do not match",
+                "status": "error"
+            };
+            return res.status(400).json(response);
+        }
+
+        const existingUser = await User.findOne({ where: { usr_email: email } });
+        if (existingUser) {
+            const response = {
+                "message": "Email already exists",
+                "status": "error"
+            };
+            return res.status(400).json(response);
+        }
+        //Se encripta la contraseña usando la librería bcrypt
+        const saltRounds = 10; // Recommended number of rounds
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        //Creación de un usuario mediante el modelo
+        const user = await User.create({
+            usr_name: name,
+            usr_email: email,
+            usr_password: hashedPassword, // Store hashed password
+            usr_role: Role.CLIENT
+        });
+
+        const response = {
+            "user id": user.usr_id,
+            "message": "User registered successfully",
+            "status": "success"
+        };
+        res.status(200).json(response);
+
+    } catch (error: any) {
+        const response = {
+            "message": error.message || "Failed to register user",
+            "status": "error"
+        };
+        res.status(500).json(response);
+    }
+};
+
+export const passwordRecovery = async (req: Request, res: Response) => {
+    //Obtención de un dato que es enviado por parametro a la petición
+    const email = req.query.email as string;
+    try {
+        if (!email) {
+            throw new Error('Email parameter is required');
+        }
+
+        const user = await User.findOne({ where: { usr_email: email } });
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+        //Generación de token de recuperación
+        const token = generateRecoveryToken(user);
+        
+        //Obtención de plantilla html, esta es una string colocada en la carpeta Utils
+        //Para enviar correos se necesitan los siguientes datos del archivo .env
+        //EMAIL_HOST_USER='flytask503@gmail.com'
+        //EMAIL_HOST_PASSWORD='mailpassword'
+        const htmlMessage = MailTemplate(token);
+        const subject = 'Password Recovery';
+        const fromEmail = process.env.EMAIL_HOST_USER || 'your@example.com';
+        const recipientList = [user.usr_email];
+        
+        //Se utiliza la libería nodemailer para preparar el envío
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_HOST_USER,
+                pass: process.env.EMAIL_HOST_PASSWORD
+            }
+        });
+        //Se ejecuta el envio del correo
+        await transporter.sendMail({
+            from: fromEmail,
+            to: recipientList,
+            subject: subject,
+            html: htmlMessage
+        });
+
+        const response = {
+            message: "Recovery email sent successfully",
+            status: "success"
+        };
+        
+        return res.status(200).json(response);
+    } catch (error:any) {
+        console.error('Error sending recovery email:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: "error"
+        };
+        
+        return res.status(500).json(response);
+    }
+};
+
+export const recoverPassword = async (req: Request, res: Response) => {
+    const { newPassword, passwordConfirmation, token } = req.body;
+
+    try {
+        //Verificación del token de tipo recuperación
+        const decodedToken = jwt.verify(token, process.env.SECRET_KEY || 'dummykey') as DecodedToken;
+
+        if (decodedToken.tokenType !== "RECOVERY") {
+            throw new Error('Invalid Token Type');
+        }      
+        if (newPassword !== passwordConfirmation) {
+            throw new Error('Passwords do not match');
+        }
+
+        const user = await User.findOne({ where: { usr_email: decodedToken.sub } });
+
+        // Encriptación de la contraseña
+        const saltRounds = 10; // Recommended number of rounds
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        // Modificación de la clave del usuario, se encarga el modelo
+        const updatedUser = await User.update(
+            { usr_password: hashedPassword },
+            { where: { usr_id: user?.usr_id } }
+        );
+
+        if (updatedUser[0] === 0) {
+            throw new Error('User not found or password not updated');
+        }
+
+        const response = {
+            message: "Password recovered successfully",
+            status: "success"
+        };
+
+        return res.status(200).json(response);
+    } catch (error: any) {
+        console.error('Error updating password:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: "error"
+        };
+
+        return res.status(500).json(response);
+    }
+};`
+
+const type2 = `//Archivo tasksController.ts
+export const getTasks = async (req: Request, res: Response) => {
+    const { userId, keyword, status } = req.query;
+
+    try {
+        //Para filtrar datos con sequelize se arma una clausula de busqueda
+        //Aca se define que se obtendra lo que coincida con la id del usuario
+        const whereClause: any = { usr_id: userId };
+
+        //Se agrega la concatenación para filtrar por descrición y por titulo
+        if (keyword) {
+            whereClause[Op.or] = [
+                { tsk_title: { [Op.iLike]: \`%\${keyword}%\` } },
+                { tsk_desc: { [Op.iLike]: \`%\${keyword}%\` } }
+            ];
+        }
+
+        //Se ejecuta el query mediante el modelo
+         const { count, rows: tasks } = await Task.findAndCountAll({
+            where: whereClause,
+            include: [{ model: User, as: 'user' }],
+            attributes: ['tsk_id', 'tsk_title', 'tsk_desc', 'tsk_status', 'tsk_creation_date', 'tsk_due_date']
+        });
+
+        // Se serializa en formato json
+        const serializedTasks = tasks.map(task => ({
+            taskId: task.tsk_id,
+            title: task.tsk_title,
+            description: task.tsk_desc,
+            status: task.tsk_status,
+            creationDate: (task.tsk_creation_date as Date), // Format date as ISO string
+            dueDate: (task.tsk_due_date as Date) // Format date as ISO string
+        }));
+
+        //Se retornan los datos
+        const response = {
+            data: serializedTasks,
+            totalTasks: count,
+            message: 'Tasks retrieved successfully',
+            status: 'success'
+        };
+
+        return res.status(200).json(response);
+    } catch (error: any) {
+        console.error('Error retrieving tasks:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: 'error'
+        };
+        return res.status(500).json(response);
+    }
+};
+
+export const createTask = async (req: Request, res: Response) => {
+    const {title, description, dueDate, userId} = req.body
+    try {
+        const user = await User.findByPk(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        // Create task in the database using Sequelize Task model
+        const createdTask = await Task.create({
+            tsk_title: title,
+            tsk_desc: description,
+            tsk_status: 0, // Assuming 0 represents an initial status
+            tsk_creation_date: new Date(),
+            tsk_due_date: new Date(dueDate),
+            usr_id: userId
+        });
+        const response = {
+            data: createdTask.tsk_id,
+            message: \`Task created successfully for user \${user.usr_id}\`
+            status: "success"
+        };
+        return res.status(200).json(response);
+    } catch (error: any) {
+        console.error('Error creating task:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: "error"
+        };
+        return res.status(500).json(response);
+    }
+};
+
+export const updateTask = async (req: Request, res: Response) => {
+    const taskId = req.params.id; // Assuming the task ID is passed as a URL parameter
+    const { title, description, dueDate } = req.body;
+    try {
+        const task = await Task.findByPk(taskId);
+        if (!task) {
+            throw new Error('Task not found');
+        }
+        task.tsk_title = title;
+        task.tsk_desc = description;
+        task.tsk_due_date = new Date(dueDate);
+        await task.save();
+        const response = {
+            data: task.tsk_id,
+            message: 'Task updated successfully',
+            status: 'success'
+        };
+        return res.status(200).json(response);
+    } catch (error: any) {
+        console.error('Error updating task:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: 'error'
+        };
+        return res.status(500).json(response);
+    }
+};
+
+export const changeStatus = async (req: Request, res: Response) => {
+    const status:string = req.params.status; // Assuming the task ID is passed as a URL parameter
+    const taskId = req.params.id;
+    var responseText:String = '';
+    var statusChange: number = 0;
+    if(status == "todo"){
+        statusChange = 0;
+        responseText="TODO";
+    }else if(status =="doing"){
+        statusChange = 1;
+        responseText="DOING";
+    }else if(status =="done"){
+        statusChange = 2;
+        responseText="DONE";
+    }else if(status =="upcoming"){
+        statusChange = 3;
+        responseText="UPCOMING";
+    }
+    try {
+        const task = await Task.findByPk(taskId);
+        if (!task) {
+            throw new Error('Task not found');
+        }
+        task.tsk_status = statusChange;
+        await task.save();
+        const response = {
+            message: \`Task Changed to \${responseText}\`,
+            status: 'success'
+        };
+        return res.status(200).json(response);
+    } catch (error: any) {
+        console.error('Error updating task:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: 'error'
+        };
+        return res.status(500).json(response);
+    }
+};
+export const deleteTask = async (req: Request, res: Response) => {
+    const taskId = req.params.id; // Assuming the task ID is passed as a URL parameter
+    try {
+        const task = await Task.findByPk(taskId);
+        if (!task) {
+            throw new Error(\`Task not found with ID: \${taskId}\`);
+        }
+        await task.destroy();
+        const response = {
+            message: 'Task Deleted Successfully',
+            status: 'success'
+        };
+        return res.status(200).json(response);
+    } catch (error: any) {
+        console.error('Error deleting task:', error);
+        const response = {
+            message: error.message || 'Internal Server Error',
+            status: 'error'
+        };
+        return res.status(500).json(response);
+    }
+};`
 const ServicesSetup = () => {
     return (
       <div className="flex flex-col">
@@ -698,6 +1068,8 @@ const ServicesSetup = () => {
         language1="java"
         code2={python1}
         language2="python"
+        code3={type1}
+        language3="typescript"
         />
       <TextBlock title="Lógica de la gestión de las tareas"/>
       <CodeBlock
@@ -705,6 +1077,8 @@ const ServicesSetup = () => {
         language1="java"
         code2={python2}
         language2="python"
+        code3={type2}
+        language3="typescript"
         />
        <TextBlock title ="Configuración de correos para Spring Boot"/>
        <TextBlock textContent={text3}/>

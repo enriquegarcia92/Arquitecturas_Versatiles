@@ -266,6 +266,153 @@ python3 manage.py makemigrations
 #Realizar todas las migraciones
 python3 manage.py migrate
 `
+const type1 = `//En express la libería sequelize maneja toda la entidad, no requiere migraciónes ni repositorios
+// Interfaz para los atributos
+interface UserAttributes {
+  usr_id: number;
+  usr_name: string;
+  usr_email: string;
+  usr_password: string;
+  usr_role: Role;
+}
+
+// Interface para la creación de los atributos
+interface UserCreationAttributes extends Optional<UserAttributes, 'usr_id'> {}
+
+// Definicion del modelo
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  public usr_id!: number;
+  public usr_name!: string;
+  public usr_email!: string;
+  public usr_password!: string;
+  public usr_role!: Role;
+}
+
+// Inicialzización y definición de las condiciones de los atributos
+User.init(
+  {
+    usr_id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    usr_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    usr_email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    usr_password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    usr_role: {
+      type: DataTypes.ENUM,
+      values: Object.values(Role),
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    timestamps: false, //Se omiten por la sincronización con las otras API que no la tienen
+    tableName: 'user', //Se define el nombre de la tabla en la base
+  }
+);
+
+export default User;`
+const type2 = `//Instanciacion de los atributos
+interface TaskAttributes {
+    tsk_id: number;
+    tsk_title: string;
+    tsk_desc: string;
+    tsk_status: number;
+    tsk_creation_date: Date;
+    tsk_due_date: Date;
+    usr_id: number;
+}
+
+//Se crea una interfaz de creación donde se define tsk_id como la llave primera
+interface TaskCreationAttributes extends Optional<TaskAttributes, 'tsk_id'> {}
+
+//Se crea el modelo
+class Task extends Model<TaskAttributes, TaskCreationAttributes> implements TaskAttributes {
+    public tsk_id!: number;
+    public tsk_title!: string;
+    public tsk_desc!: string;
+    public tsk_status!: number;
+    public tsk_creation_date!: Date;
+    public tsk_due_date!: Date;
+    public usr_id!: number;
+}
+//Se inicializan y definen cada uno de los atributos y sus condiciones
+Task.init(
+    {
+        tsk_id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        tsk_title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        tsk_desc: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        tsk_status: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0 // Default status
+        },
+        tsk_creation_date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+            get() {
+                const rawValue = this.getDataValue('tsk_creation_date');
+                return rawValue ? new Date(rawValue).toISOString() : null;
+            }
+        },
+        tsk_due_date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+            get() {
+                const rawValue = this.getDataValue('tsk_due_date');
+                return rawValue ? new Date(rawValue).toISOString() : null;
+            }
+        },
+        usr_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: User,
+                key: 'usr_id'
+            }
+        }
+    },
+    {
+    //Se omiten las timestamps debido a la sincronización con las otras API que no las tienen
+        sequelize,
+        timestamps: false,
+        tableName: 'tasks'
+    }
+);
+//Se define la relación indicando que las tareas pertencen a los usuarios y se define la llave foranea
+Task.belongsTo(User, { foreignKey: 'usr_id', as: 'user' });
+
+export default Task;
+`
+const type3 = `enum Role {
+    CLIENT = 'CLIENT'
+  }
+
+export { Role };
+`
 const ModelSetup = () => {
     return (
         <div>
@@ -278,6 +425,8 @@ const ModelSetup = () => {
                 language1="java"
                 code2={python1}
                 language2="python"
+                code3={type1}
+                language3="typescript"
             />
             <TextBlock title="Modelo de la tarea"/>
             <CodeBlock
@@ -285,11 +434,15 @@ const ModelSetup = () => {
                 language1="java"
                 code2={python2}
                 language2="python"
+                code3={type2}
+                language3="typescript"
             />
             <TextBlock title="Clase del rol"/>
             <CodeBlock
                 code1={code3}
                 language1="java"
+                code2={type3}
+                language2="typescript"
             />
             <TextBlock title="Clase del tipo de token"/>
             <CodeBlock

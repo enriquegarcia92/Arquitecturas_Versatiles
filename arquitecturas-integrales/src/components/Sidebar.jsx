@@ -79,6 +79,7 @@ const Sidebar = () => {
                 { label: "Autenticación por JWT", link: "/main/backendauthsetup" },
                 { label: "Lógica de negocios", link: "/main/backendservicessetup"},
                 { label: "Endpoints", link: "/main/backendendpointsetup"},
+                { label: "Consideraciónes sobre MongoDB", link: "/main/backendmongodev"},
                 ]}
               icon={FaServer}
             />
@@ -142,6 +143,7 @@ const Sidebar = () => {
                 { label: "Autenticación por JWT", link: "/main/backendauthsetup" },
                 { label: "Lógica de negocios", link: "main/backendservicessetup"},
                 { label: "Endpoints", link: "/main/backendendpointsetup"},
+                { label: "Consideraciónes sobre MongoDB", link: "/main/backendmongodev"},
                 ]}
               icon={FaServer}
             />

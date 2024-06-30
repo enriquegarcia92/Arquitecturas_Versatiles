@@ -12,6 +12,7 @@ import AuthenticationJwt from "./pages/subPages/backend/AuthenticationJwt";
 import ServicesSetup from "./pages/subPages/backend/ServicesSetup";
 import EndpointSetup from "./pages/subPages/backend/EndpointSetup";
 import DTOSetup from "./pages/subPages/backend/DTOSetup";
+import MongoDev from "./pages/subPages/backend/MongoDev";
 
 const BASE_URL = "/"
 
@@ -30,6 +31,7 @@ const App = () => {
         <Route path={`${BASE_URL}main/backendservicessetup`} element={<ServicesSetup/>} />
         <Route path={`${BASE_URL}main/backendendpointsetup`} element={<EndpointSetup/>} />
         <Route path={`${BASE_URL}main/backendtosetup`} element={<DTOSetup/>} />
+        <Route path={`${BASE_URL}main/backendmongodev`} element={<MongoDev/>} />
         </Route>
       </Routes>
     </Router>

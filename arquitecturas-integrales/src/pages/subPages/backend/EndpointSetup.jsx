@@ -120,7 +120,26 @@ urlpatterns = [
     path('api/', include('tasks.urls'))
 ]
 `
+const type1 = `//En el caso de Express los endpints se pueden colocar en un solo archivo
+//Estos deben ser llamados en el index.ts
+//El ultimo parametro que se pasa a la función siempre es la función que se encuentra en los controllers
+//Autenticación
+//El app.post define el tipo de peticion en este caso post
+app.post('/api/auth/whoami', verifyToken, whoami);
+//Esta petición maneja un segundo middleware que se encarga de validar según el DTO
+app.post('/api/auth/register', validationMiddleware(CreateUserDTO), registerUser);
+app.post('/api/auth/login', validationMiddleware(LoginDTO), loginUser);
+app.post('/api/auth/recover-password', passwordRecovery);
+app.post('/api/auth/recover-authenticated',validationMiddleware(RecoverPwDTO), recoverPassword);
 
+//Peticones de las tareas
+//El uso de verify token indica que pasa por el middleware de autenticación
+app.get('/api/task/search', verifyToken, getTasks);
+app.post('/api/task/create', verifyToken, validationMiddleware(TaskDTO), createTask);
+app.put('/api/task/edit/:id', verifyToken, validationMiddleware(UpdateTaskDTO), updateTask);
+//Mediante el uso de los ":" se define que se pasan variables al contorlador por medio de la URL
+app.put('/api/task/:status/:id', verifyToken, changeStatus);
+app.delete('/api/task/delete/:id', verifyToken, deleteTask);`
 const EndpointSetup = () => {
     return (
         <div>
@@ -131,6 +150,8 @@ const EndpointSetup = () => {
         language1="java"
         code2={python1}
         language2="python"
+        code3={type1}
+        language3="typescript"
         />
         </div>
     );
