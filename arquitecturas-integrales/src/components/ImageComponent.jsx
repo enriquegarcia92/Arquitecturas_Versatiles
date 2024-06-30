@@ -2,7 +2,7 @@ import React from 'react';
 
 const ImageComponent = ({ image, width, height, title, description }) => {
   return (
-    <div className="mx-auto bg-gray-900 rounded-lg overflow-hidden shadow-lg p-4">
+    <div className="mx-auto bg-gray-900 rounded-lg shadow-lg p-4">
       {image && (
         <img
           src={image}

@@ -97,8 +97,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={login}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="login page" 
       />
       
@@ -106,8 +106,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={signup}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="signup page" 
       />
       
@@ -115,8 +115,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={emailsent}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="email sent" 
       />
       
@@ -124,8 +124,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={emptylist}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="empty list" 
       />
       
@@ -133,8 +133,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={createntask}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="create new task" 
       />
       
@@ -142,8 +142,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={dashboard}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="dashboard" 
       />
       
@@ -151,8 +151,8 @@ const IntroduccionMetodologia = () => {
       
       <ImageComponent 
         image={editask}
-        width="w-24"
-        height="h-24" 
+        width="w-50"
+        height="h-50" 
         title="edit task" 
       />
       
