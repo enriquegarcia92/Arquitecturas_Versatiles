@@ -1,7 +1,7 @@
-import React from 'react'
-import CodeBlock from '../../components/CodeBlock'
-import TextBlock from '../../components/TextBlock';
-import ImageComponent from '../../components/ImageComponent';
+import React from "react";
+import CodeBlock from "../../components/CodeBlock";
+import TextBlock from "../../components/TextBlock";
+import ImageComponent from "../../components/ImageComponent";
 import chincheta from "../../img/chincheta.png";
 
 const sampleCode = `
@@ -20,9 +20,14 @@ const sampleCode = `
 
 const GettingStartedPage = () => {
   return (
-    <div className='flex flex-col'>
-      <CodeBlock code={sampleCode} language="javascript"/> 
-      <TextBlock title="Titulo de sección" textContent="Ejemplo de texto"/>
+    <div className="flex flex-col">
+      <CodeBlock
+        code1={`console.log('Hello, world!');`}
+        language1="javascript"
+        code2={`print('Hello, world!')`}
+        language2="python"
+      />
+      <TextBlock title="Titulo de sección" textContent="Ejemplo de texto" />
       <ImageComponent
         image={chincheta}
         width="w-24"
@@ -31,7 +36,7 @@ const GettingStartedPage = () => {
         description="This is an example image description."
       />
     </div>
-  )
-}
+  );
+};
 
-export default GettingStartedPage
+export default GettingStartedPage;

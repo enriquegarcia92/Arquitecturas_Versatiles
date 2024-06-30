@@ -69,19 +69,15 @@ const Sidebar = () => {
               icon={FaCheck}
             />
             <DisclosureMenu
-              title="First Principles"
+              title="Desarrollo Back End"
               subtitles={[
-                { label: "Introduction", link: "/main/methodology" },
-                { label: "Overview", link: "/first-principles/overview" },
-              ]}
-              icon={FaCheck}
-            />
-            <DisclosureMenu
-              title="Back-End Guide"
-              subtitles={[
-                { label: "Introduction", link: "/backend/introduction" },
-                { label: "Overview", link: "/backend/overview" },
-              ]}
+                { label: "Inicialización de Proyectos", link: "/main/backendproyectinit" },
+                { label: "Conexión a base de datos", link: "/main/backenddbconnections" },
+                { label: "Preparación de la Arquitectura", link: "/main/backendarchsetup" },
+                { label: "Entidaes y persistencia de datos", link: "/main/backendmodelsetup" },
+                { label: "Autenticación por JWT", link: "/main/backendauthsetup" },
+                { label: "Lógica de negocios", link: "/main/backendservicessetup"},
+                ]}
               icon={FaServer}
             />
             <DisclosureMenu
@@ -134,11 +130,15 @@ const Sidebar = () => {
             />
             
             <DisclosureMenu
-              title="Back-End Guide"
+              title="Desarrollo Back End"
               subtitles={[
-                { label: "Introduction", link: "/backend/introduction" },
-                { label: "Overview", link: "/backend/overview" },
-              ]}
+                { label: "Inicialización de Proyectos", link: "/main/backendproyectinit" },
+                { label: "Conexión a base de datos", link: "/main/backenddbconnections" },
+                { label: "Preparación de la Arquitectura", link: "/main/backendarchsetup" },
+                { label: "Entidaes y persistencia de datos", link: "/main/backendmodelsetup" },
+                { label: "Autenticación por JWT", link: "/main/backendauthsetup" },
+                { label: "Lógica de negocios", link: "main/backendservicessetup"},
+                ]}
               icon={FaServer}
             />
             <DisclosureMenu
