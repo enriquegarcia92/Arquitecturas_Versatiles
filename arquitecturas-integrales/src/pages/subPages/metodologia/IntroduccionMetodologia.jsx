@@ -3,7 +3,18 @@ import TextBlock from "../../../components/TextBlock"
 import CodeBlock from "../../../components/CodeBlock"
 //import {test, } from "../../../img";
 import ImageComponent from "../../../components/ImageComponent";
-import { texto1, texto2,texto2a, texto2b, texto2c, texto2d, texto2e, texto2f, texto2g, texto2h, texto2i, texto2j, texto2k, texto2l, texto2m, texto2n, texto2o, texto2p, texto2q, texto2r, texto2s, texto2t, texto2u, texto2v, texto3, texto4, texto5, texto6, texto7, texto8, texto9, texto10, texto11, texto12, texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21, texto100, texto101, texto102} from "../../../metodologiacontent/txtmetodologia";
+import {
+  texto1,
+  texto2, texto2a, texto2b, texto2c, texto2d, texto2e, texto2f, texto2g, texto2h, texto2i, texto2j,
+  texto2k, texto2l, texto2m, texto2n, texto2o, texto2p, texto2q, texto2r, texto2s, texto2t, texto2u, texto2v,
+  texto3, texto3a, texto3b, texto3c, texto3d, texto3e, texto3f, texto3g, texto3h, texto3i, texto3j, texto3k, texto3l, texto3m,
+  texto4, texto5, texto6, texto7, texto8, texto9, texto10,
+  texto11, texto11a, texto11b, texto11c, texto11d, texto11e, texto11f, texto11g, texto11h, texto11i, texto11j, texto11k, texto11l, texto11m,
+  texto12, texto12a, texto12b, texto12c, texto12d,
+  texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21,
+  texto100, texto101, texto102
+} from "../../../metodologiacontent/txtmetodologia";
+
 import login from "../../../img/login.png";
 import signup from "../../../img/signup.png";
 import emailsent from "../../../img/emailsent.png";
@@ -134,6 +145,33 @@ const IntroduccionMetodologia = () => {
       <TextBlock textContent={texto2v} />
 
       <TextBlock title="Resultados" textContent={texto3} />
+      <TextBlock textContent={texto3} />
+
+<TextBlock textContent={texto3a} />
+
+<TextBlock textContent={texto3b} />
+
+<TextBlock textContent={texto3c} />
+
+<TextBlock textContent={texto3d} />
+
+<TextBlock textContent={texto3e} />
+
+<TextBlock textContent={texto3f} />
+
+<TextBlock textContent={texto3g} />
+
+<TextBlock textContent={texto3h} />
+
+<TextBlock textContent={texto3i} />
+
+<TextBlock textContent={texto3j} />
+
+<TextBlock textContent={texto3k} />
+
+<TextBlock textContent={texto3l} />
+
+<TextBlock textContent={texto3m} />
       
       <CodeBlock code={Code1} language="javascript" />
       
@@ -203,8 +241,42 @@ const IntroduccionMetodologia = () => {
       />
       
       <TextBlock textContent={texto11} />
+
+      <TextBlock textContent={texto11a} />
+
+      <TextBlock textContent={texto11b} />
+
+      <TextBlock textContent={texto11c} />
+
+      <TextBlock textContent={texto11d} />
+
+      <TextBlock textContent={texto11e} />
+
+      <TextBlock textContent={texto11f} />
+
+      <TextBlock textContent={texto11g} />
+
+      <TextBlock textContent={texto11h} />
+
+      <TextBlock textContent={texto11i} />
+
+      <TextBlock textContent={texto11j} />
+
+      <TextBlock textContent={texto11k} />
+
+      <TextBlock textContent={texto11l} />
+
+      <TextBlock textContent={texto11m} />
       
       <TextBlock textContent={texto12} />
+
+      <TextBlock textContent={texto12a} />
+
+      <TextBlock textContent={texto12b} />
+
+      <TextBlock textContent={texto12c} />
+
+      <TextBlock textContent={texto12d} />
       
       <TextBlock textContent={texto13} />
       

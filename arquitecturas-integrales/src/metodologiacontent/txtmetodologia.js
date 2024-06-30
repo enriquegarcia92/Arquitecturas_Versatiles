@@ -153,63 +153,74 @@ Mayor colaboración: Facilitan la colaboración entre equipos de desarrollo y op
 
 
 export const texto3 = `
-La metodología a utilizar está basada en el enfoque iterativo e incremental “SCRUM”. El proyecto consiste en el diseño de una guía estructurada sobre las fases para el desarrollo de este proyecto, basado en las arquitecturas integrales utilizando un desarrollo multicapa, para lo cual se realizará un ejemplo práctico de una aplicación “To-do List” llamada Flytask, que permite la gestión de tareas por parte del usuario final.
+La metodología a utilizar está basada en el enfoque iterativo e incremental “SCRUM”. El proyecto consiste en el diseño de una guía estructurada sobre las fases para el desarrollo de este proyecto, basado en las arquitecturas integrales utilizando un desarrollo multicapa, para lo cual se realizará un ejemplo práctico de una aplicación “To-do List” llamada Flytask, que permite la gestión de tareas por parte del usuario final.`;
 
+export const texto3a = `
 Fases para el desarrollo de un proyecto
 Análisis de requerimientos de la aplicación a desarrollar
-Flytask es una aplicación web que permite a los usuarios crear una cuenta y administrar sus tareas de manera simple y eficiente.
+Flytask es una aplicación web que permite a los usuarios crear una cuenta y administrar sus tareas de manera simple y eficiente.`;
 
+export const texto3b = `
 Identificación de funcionalidades para Flytask
 Crear tareas:
+Agregar título, descripción y fecha límite a la tarea.`;
 
-Agregar título, descripción y fecha límite a la tarea.
+export const texto3c = `
 Editar tareas:
+Modificar el título, descripción y fecha límite de la tarea existente.`;
 
-Modificar el título, descripción y fecha límite de la tarea existente.
+export const texto3d = `
 Eliminar tareas:
+Eliminar las tareas que ya no son necesarias.`;
 
-Eliminar las tareas que ya no son necesarias.
+export const texto3e = `
 Organizar tareas:
+Clasificar las tareas según los estados proporcionados por la aplicación: Upcoming, ToDo, Doing, Done.`;
 
-Clasificar las tareas según los estados proporcionados por la aplicación: Upcoming, ToDo, Doing, Done.
+export const texto3f = `
 Ver el historial de tareas:
+Visualizar las tareas completadas o pendientes.`;
 
-Visualizar las tareas completadas o pendientes.
+export const texto3g = `
 Aplicar filtros:
+Filtrar tareas por estado, nombre y fecha de creación.`;
 
-Filtrar tareas por estado, nombre y fecha de creación.
+export const texto3h = `
 Administrar mi perfil:
+Cambiar la información de perfil desde el módulo My Account.`;
 
-Cambiar la información de perfil desde el módulo My Account.
+export const texto3i = `
 Definición diagrama de clases
-La aplicación web está diseñada para poder consultar una base de datos relacional y una no relacional.
+La aplicación web está diseñada para poder consultar una base de datos relacional y una no relacional.`;
 
+export const texto3j = `
 Base de Datos Relacional:
+En esta fase se definen las entidades que integran la base de datos relacional con PostgreSQL. Definimos los nombres, tipos de datos y relaciones entre las tablas.`;
 
-En esta fase se definen las entidades que integran la base de datos relacional con PostgreSQL. Definimos los nombres, tipos de datos y relaciones entre las tablas.
-
+export const texto3k = `
 Tabla USER:
 La tabla user contiene la data que el usuario ingresa en la creación de una cuenta en la aplicación, es lo que va a permitir la validación para el inicio de sesión y la creación de tareas. Los campos de la tabla son:
-
 UserID: será autogenerado, único y funcionará como la llave principal.
 Name: nombre del usuario, tipo VARCHAR.
 Email: correo del usuario, tipo VARCHAR.
-Password: contraseña del usuario, tipo VARCHAR.
+Password: contraseña del usuario, tipo VARCHAR.`;
+
+export const texto3l = `
 Tabla TASK:
 La tabla task contiene las tareas que el usuario administre, son las que se presentan en la vista principal de la aplicación web.
-
 TaskID: autogenerado, único y funciona como la llave principal.
 UserID: llave foránea que permite relacionar la tarea con el usuario al que pertenece, se encuentra en la tabla USER.
 Title: título de la tarea, tipo VARCHAR.
 Description: descripción de la tarea, tipo VARCHAR.
 Status: estado de la tarea, se manejan los diferentes estados con número, de tipo NUMERIC.
 Creation_Date: fecha de creación de la tarea, no será ingresada por el usuario será tomada de forma automática, tipo DATE.
-Due_Date: fecha de finalización de la tarea, tipo DATE.
+Due_Date: fecha de finalización de la tarea, tipo DATE.`;
+
+export const texto3m = `
 Base de datos No Relacional:
+Para la base de datos no relacional se utiliza MongoDB, una base de datos documental que almacenará la información sobre Users y Task.`;
 
-Para la base de datos no relacional se utiliza MongoDB, una base de datos documental que almacenará la información sobre Users y Task.
 
-`;
 
 export const texto4 = `
 
@@ -234,91 +245,107 @@ las tareas pueden ser movidas por el usuario manualmente o de acuerdo a las fech
 export const texto10 = `se presenta el modal con la información actual de la tarea seleccionada con los campos disponibles 
 para editar y la empresa para Guardar Cambios o Borrar Tarea.  `;
 
-export const texto11 = ` Requerimientos técnicos de hardware y software
+export const texto11 = `
+Requerimientos técnicos de hardware y software
 
 Para el desarrollo de la aplicación Flytask se pretende levantar seis contenedores con el uso de Docker Compose, aprovechando las 
 distintas tecnologías. A continuación, se detalla el hardware requerido por cada una de las tecnologías y se presenta una 
-recomendación de hardware para desarrollar Flytask.
+recomendación de hardware para desarrollar Flytask.`;
 
+export const texto11a = `
 Requerimientos técnicos de hardware:
   - Procesador: 2.5 GHz o superior.
   - Memoria RAM: 16 GB como mínimo.
   - Espacio en disco: 256 GB SSD como mínimo.
-  - Sistema operativo: Windows 10 64-bit (build 19043 o posterior), macOS x 10.10 o posterior, o Ubuntu 18.04 o posterior.
+  - Sistema operativo: Windows 10 64-bit (build 19043 o posterior), macOS x 10.10 o posterior, o Ubuntu 18.04 o posterior.`;
 
+export const texto11b = `
 Requerimientos técnicos de software:
-
 Visual Studio Code:
   - Sistema operativo: Windows 10 y 11 (64-bit), macOS x, Linux (Debian: Ubuntu Desktop 20.04, Debian 10; 
   Red Hat: Red Hat Enterprise Linux 8, Fedora 36).
   - Procesador: 1.6 GHz o más rápido.
   - Memoria: 1 GB de RAM.
-  - Espacio en disco: Visual Studio Code es una descarga pequeña (< 200 MB) y tiene una huella de disco de < 500 MB.
+  - Espacio en disco: Visual Studio Code es una descarga pequeña (< 200 MB) y tiene una huella de disco de < 500 MB.`;
 
+export const texto11c = `
 Angular:
   - Sistema operativo: Windows 10, macOS x 10.10 (Yosemite) o posterior, o una distribución reciente de Linux 
   (como Ubuntu 18.04 o posterior).
   - Memoria: Al menos 4 GB de RAM.
-  - Espacio de almacenamiento: Al menos 10 GB de espacio libre en disco.
+  - Espacio de almacenamiento: Al menos 10 GB de espacio libre en disco.`;
 
+export const texto11d = `
 React:
   - Sistema operativo: Windows 10, macOS x 10.10, o Ubuntu 16.
-  - Hardware: Al menos 4 GB de RAM y 10 GB de espacio de almacenamiento.
+  - Hardware: Al menos 4 GB de RAM y 10 GB de espacio de almacenamiento.`;
 
+export const texto11e = `
 Spring Boot:
   - Procesador: Mínimo Pentium 2 a 266 MHz.
   - RAM: Al menos 128 MB.
   - Espacio en disco: 124 MB para JRE; 2 MB para Java Update; 10MB para la instalación de Maven; 500MB para 
   el repositorio local de Maven.
-  - Sistema operativo: JDK 8 o superior para Maven.
+  - Sistema operativo: JDK 8 o superior para Maven.`;
 
+export const texto11f = `
 Django:
   - Sistema operativo: Windows 7 o 10, macOS X 10.11 o superior, Linux: RHEL 6/7, 64-bit (casi todas las 
   bibliotecas también funcionan en Ubuntu).
   - Procesador: Dual-core Intel Core i5 o similar.
-  - RAM y espacio libre en disco: 4 GB de RAM, 5 GB de espacio libre en disco.
+  - RAM y espacio libre en disco: 4 GB de RAM, 5 GB de espacio libre en disco.`;
 
+export const texto11g = `
 Express.js:
   - Procesador: 1.6 GHz o más rápido.
   - Memoria: 4 GB de RAM.
   - Espacio en disco: 512 MB de espacio libre en disco.
-  - Sistemas operativos soportados: macOS, Windows (incluyendo WSL), y Linux.
+  - Sistemas operativos soportados: macOS, Windows (incluyendo WSL), y Linux.`;
 
+export const texto11h = `
 MongoDB:
   - Procesador: 1 GHz.
   - Memoria: 2 GB de RAM.
-  - Espacio en disco: 512 MB de HDD.
+  - Espacio en disco: 512 MB de HDD.`;
 
+export const texto11i = `
 PostgreSQL:
   - Procesador: 1 GHz.
   - Memoria: 2 GB de RAM.
-  - Espacio en disco: 512 MB de HDD.
+  - Espacio en disco: 512 MB de HDD.`;
 
+export const texto11j = `
 Vue.js:
   - Sistema operativo: Windows 10.
   - Procesador: Frecuencia base de 1.8 GHz o superior.
   - Memoria: 4 GB de RAM o más.
-  - Espacio de almacenamiento: 75 MB de espacio disponible en disco o más.
+  - Espacio de almacenamiento: 75 MB de espacio disponible en disco o más.`;
 
+export const texto11k = `
 Docker:
   - Sistema operativo: Windows 10 64-bit: Home o Pro (build 19043 o posterior), Enterprise o Education 
   (build 19042 o posterior). 
   Windows 11 64-bit: Home, Pro, Enterprise, o Education versión 21H2 o más reciente.
   - Procesador: Procesador de 64 bits.
   - Memoria: 4 GB de RAM.
-  - Espacio en disco: 100 GB de SSD.
+  - Espacio en disco: 100 GB de SSD.`;
 
+export const texto11l = `
 Docker Compose:
   - Sistema operativo: Linux, Mac y Windows.
   - Procesador: Procesador de 64 bits.
   - Memoria: 4 GB de RAM.
   - Espacio en disco: Docker Desktop es una descarga pequeña (< 200 MB) y tiene una huella de disco de < 500 MB.
-  - Docker Compose se instala con Docker Desktop.
+  - Docker Compose se instala con Docker Desktop.`;
 
+export const texto11m = `
 Nginx:
   - 512 MB de RAM y 50 MB de espacio libre en disco.
-  `;
-export const texto12 = ` Diseño de la Arquitectura de la aplicación
+`;
+
+
+export const texto12 = `
+Diseño de la Arquitectura de la aplicación
 
 La arquitectura de la aplicación Flytask se ha diseñado considerando una combinación óptima de tecnologías para el Front End, 
 Back End y la base de datos. La característica más importante para el caso de aplicación es que estas tecnologías seleccionadas 
@@ -326,22 +353,27 @@ pueden ser independientes, y se configura para interactuar entre sí. Para el ca
 integración de todos con todos, lo que implica que se desarrollarán los seis Back Ends, tres con PostgreSQL y tres con MongoDB, 
 y se realizarán tres Front End uno para cada tecnología. Con las 9 aplicaciones creadas se utilizará dockerización, 
 reverse proxy para el formateo de las URL, y un balanceador de carga que se configurará en el servidor a la hora de desplegar. 
-Esto permitirá que todas las tecnologías de Front End sean capaces de consultar a todas las API.
+Esto permitirá que todas las tecnologías de Front End sean capaces de consultar a todas las API.`;
 
+export const texto12a = `
 Selección de tecnologías para el Front End de Flytask: 
-  - Frameworks a utilizar: Vue, React.
+  - Frameworks a utilizar: Vue, React.`;
 
+export const texto12b = `
 Selección de tecnologías para el Back End de Flytask:
-  - Spring Boot, Django, Express.
+  - Spring Boot, Django, Express.`;
 
+export const texto12c = `
 Selección de bases de datos de Flytask:
-  - NoSQL MongoDB o PostgreSQL.
+  - NoSQL MongoDB o PostgreSQL.`;
 
+export const texto12d = `
 La combinación de estas tecnologías proporciona una solución robusta y flexible para el desarrollo de la aplicación. 
 Cada tecnología ha sido seleccionada por su eficiencia, flexibilidad y capacidad para integrarse con otras tecnologías. 
 Esta combinación permite que la aplicación sea escalable, mantenible y capaz de proporcionar una experiencia de usuario 
 de alta calidad.
-  `;
+`;
+
 export const texto13 = `Patrones de diseño
 
 A continuación, se detalla el patrón de diseño a utilizar para cada una de las API y cada uno de los Clientes que serán 
