@@ -21,7 +21,22 @@ spring.jpa.properties.hibernate.default_schema=public
 Esta configuración hace uso de la libería JPA para automáticamente manejar las entidades dentro de la base de datos.
 `
 
+const python2 = `#En el proyecto principal de Django se crea un archivo llamado settings.py, en la sección
+#Databases se debe agregar la siguiente configuración:#Activación
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'flytask',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': '5432',
+        'OPTIONS': {
+            'options': f'-c search_path=public'
+        },
+    }
+}`
 const DatabaseConnection = () => {
     return (
         <div>
@@ -33,6 +48,8 @@ const DatabaseConnection = () => {
             <CodeBlock
                 code1={java1}
                 language1="java"
+                code2={python2}
+                language2="python"
             />
         </div>
       

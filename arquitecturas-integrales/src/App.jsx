@@ -10,6 +10,8 @@ import ArchitectureSetup from "./pages/subPages/backend/ArchitectureSetup";
 import ModelSetup from "./pages/subPages/backend/ModelSetup";
 import AuthenticationJwt from "./pages/subPages/backend/AuthenticationJwt";
 import ServicesSetup from "./pages/subPages/backend/ServicesSetup";
+import EndpointSetup from "./pages/subPages/backend/EndpointSetup";
+import DTOSetup from "./pages/subPages/backend/DTOSetup";
 
 const BASE_URL = "/"
 
@@ -26,6 +28,8 @@ const App = () => {
         <Route path={`${BASE_URL}main/backendmodelsetup`} element={<ModelSetup/>} />
         <Route path={`${BASE_URL}main/backendauthsetup`} element={<AuthenticationJwt/>} />
         <Route path={`${BASE_URL}main/backendservicessetup`} element={<ServicesSetup/>} />
+        <Route path={`${BASE_URL}main/backendendpointsetup`} element={<EndpointSetup/>} />
+        <Route path={`${BASE_URL}main/backendtosetup`} element={<DTOSetup/>} />
         </Route>
       </Routes>
     </Router>

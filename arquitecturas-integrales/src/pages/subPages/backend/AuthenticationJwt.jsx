@@ -270,6 +270,127 @@ public class SecurityConfig {
     }
 
 }`
+
+const python1 = `
+#En el archivo settings.py se coloca la clave secreta de la siguiente forma:
+
+SECRET_KEY = 'clavesecretasd9109210dsakjd901jdksljd190klasd'
+
+#Archivo views.py de la app users
+
+#Generación de token para recuperacion
+def generate_recoverytoken(user):
+#Definicion de tiempos de validez
+    now = datetime.datetime.utcnow()
+    exp = now + datetime.timedelta(minutes=20)
+    #Definicion del cuerpo
+    payload = {
+        'tokenType': 'RECOVERY',
+        'sub': user.usr_email,
+        'iat': int(now.timestamp()),
+        'exp': int(exp.timestamp())
+    }
+    #Definición de los encabezados
+    headers = {
+        'alg': 'HS256',
+        'typ': 'JWT'
+    }
+    #Codificación y cifrado.
+    token = jwt.encode(
+        payload,
+        settings.SECRET_KEY,
+        algorithm='HS256',
+        headers=headers
+    )
+
+    return token
+
+#Generación de token de inicio de sesión.
+def generate_logintoken(user):
+    now = datetime.datetime.utcnow()
+    exp = now + datetime.timedelta(hours=4)
+    payload = {
+        'tokenType': 'LOGIN',
+        'sub': user.usr_email,
+        'iat': int(now.timestamp()),
+        'exp': int(exp.timestamp())
+    }
+    headers = {
+        'alg': 'HS256',
+        'typ': 'JWT'
+    }
+    token = jwt.encode(
+        payload,
+        settings.SECRET_KEY,
+        algorithm='HS256',
+        headers=headers
+    )
+
+    return token
+`
+
+const python2 = `#La librería PyJWT decodifica de forma muy simple el token, solo se requiere de la clave y algoritmo:
+    decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+`
+
+const python3 = `#Archivo views.py de la app users
+#Se crea un decorador que incluye la función de verificación de token y se encarga de manejar todos los errores
+
+def token_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(self, request, *args, **kwargs):
+        authorization_header = request.headers.get('Authorization')
+        if not authorization_header or not authorization_header.startswith('Bearer '):
+            response = {
+                "message": "Invalid Authorization header format",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_401_UNAUTHORIZED)
+
+        token = authorization_header.split('Bearer ')[1].strip()
+
+        if not token:
+            response = {
+                "message": "Token missing",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        try:
+            decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+        except jwt.ExpiredSignatureError as e:
+            response = {
+                "message": str(e),
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except jwt.InvalidTokenError as e:
+            response = {
+                "message": str(e),
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        if decoded_token.get('tokenType') != 'LOGIN':
+            response = {
+                "message": "Token not login type",
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return view_func(self, request, *args, **kwargs)
+
+    return _wrapped_view
+
+#Este decorador se llama de la siguiente forma en cualquier función para indicar que esta requiere autenticación:
+
+class WhoamIView(APIView):
+    #Llamada del decorador
+    @token_required
+    def post(self, request):
+        return HttpResponse("Token Valid", status=status.HTTP_200_OK, content_type="text/plain")
+
+`
 const AuthenticationJwt = () => {
     return (
       <div className="flex flex-col">
@@ -280,16 +401,22 @@ const AuthenticationJwt = () => {
        <CodeBlock 
         code1={code1}
         language1={"java"}
+        code2={python1}
+        language2={"python"}
        />
         <TextBlock title="Verificación de token."/>
         <CodeBlock 
         code1={code2}
         language1={"java"}
+        code2={python2}
+        language2={"python"}
        />
         <TextBlock title="Implementación de interceptores."/>
         <CodeBlock 
         code1={code3}
         language1={"java"}
+        code2={python3}
+        language2={"python"}
        />
       </div>
     );

@@ -75,8 +75,10 @@ const Sidebar = () => {
                 { label: "Conexión a base de datos", link: "/main/backenddbconnections" },
                 { label: "Preparación de la Arquitectura", link: "/main/backendarchsetup" },
                 { label: "Entidaes y persistencia de datos", link: "/main/backendmodelsetup" },
+                { label: "DTO's", link: "/main/backendtosetup"},
                 { label: "Autenticación por JWT", link: "/main/backendauthsetup" },
                 { label: "Lógica de negocios", link: "/main/backendservicessetup"},
+                { label: "Endpoints", link: "/main/backendendpointsetup"},
                 ]}
               icon={FaServer}
             />
@@ -136,8 +138,10 @@ const Sidebar = () => {
                 { label: "Conexión a base de datos", link: "/main/backenddbconnections" },
                 { label: "Preparación de la Arquitectura", link: "/main/backendarchsetup" },
                 { label: "Entidaes y persistencia de datos", link: "/main/backendmodelsetup" },
+                { label: "DTO's", link: "/main/backendtosetup"},
                 { label: "Autenticación por JWT", link: "/main/backendauthsetup" },
                 { label: "Lógica de negocios", link: "main/backendservicessetup"},
+                { label: "Endpoints", link: "/main/backendendpointsetup"},
                 ]}
               icon={FaServer}
             />

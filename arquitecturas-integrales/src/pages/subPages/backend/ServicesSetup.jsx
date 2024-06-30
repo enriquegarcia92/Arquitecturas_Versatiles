@@ -373,7 +373,319 @@ public class MailConfig {
     }
 }
 `
+const python1 = `#En python la lógica de negocios se maneja en los archivos views.py de cada app
+#En el caso de Django no se usan repositorios ni DAO, el modelo mismo se encarga de la persistencia
+#Archivo views.py de la app users
 
+#Cada vista o funcionalidad debe instanciarse como una clase aparte
+class RegisterView(APIView):
+    #La definición indica el tipo de variable que será en este caso tipo post
+    def post(self, request):
+        try:
+            #Obtención de datos de un json vienen en request.data
+            serializer = UserSerializer(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                user = serializer.save()
+                #Generación de la respuesta, no se necesita declarar
+                response = {
+                    "user id": user.usr_id,
+                    "message": "User registered successfully",
+                    "status": "success"
+                }
+                #Finalización de la función, ejecución de la respuesta y se coloca el estado correspondiente
+                return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class LoginView(APIView):
+    def post(self, request):
+        #Obtención de datos de un json vienen en request.data
+        email = request.data['email']
+        password = request.data['password']
+        try:
+            user = User.objects.filter(usr_email=email).first()
+            stored_hashed_password = user.usr_password.encode('utf-8')  # Ensure the stored hash is in bytes
+            provided_password = password.encode('utf-8')  # Encode the provided password to bytes
+            if user is None:
+                raise Exception('Bad credentials')
+            if not bcrypt.checkpw(provided_password, stored_hashed_password):
+                raise Exception('Bad credentials')
+            response = ({
+                'id': user.usr_id,
+                'message': 'Logged succesfully',
+                'status': 'success',
+                'token': generate_logintoken(user)
+            })
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class PasswordRecoveryView(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            #obtención de un parametro
+            email = request.GET.get("email")
+            user = User.objects.filter(usr_email=email).first()
+            if user is None:
+                raise Exception("User not found")
+            token = generate_recoverytoken(user)
+            #Plantilla html del correo, esta es un simple string en una carpeta llamada Utils
+            html_message = Utils.getTemplate(token)
+            subject = 'Password Recovery'
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            # Send the email
+            #Django tiene integrada una función para enviar correos, se requiere colocar las siguientes variables en settings.py:
+            #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+            #EMAIL_HOST = 'smtp.gmail.com'
+            #EMAIL_PORT = 587
+            #EMAIL_USE_TLS = True
+            #EMAIL_HOST_USER = 'flytask503@gmail.com'
+            #EMAIL_HOST_PASSWORD = 'mailpassword
+            send_mail(subject, '', from_email, recipient_list, html_message=html_message)
+            response = {
+                "message": "Recovery email send successfully",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class RestePasswordView(APIView):
+    def post(self, request):
+        try:
+            new_password = request.data['newPassword']
+            password_confirmation = request.data['passwordConfirmation']
+            token = request.data['token']
+            # Validate token
+            decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=['HS256'])
+            # Check token type
+            if decoded_token.get('tokenType') != 'RECOVERY':
+                raise Exception("Invalid token type")
+            # Get email from token
+            email = decoded_token.get('sub')
+            # Get user
+            user = User.objects.filter(usr_email=email).first()
+            # Validate passwords
+            if new_password != password_confirmation:
+                raise Exception("Passwords do not patch")
+            # Set new password
+            salt = bcrypt.gensalt()
+            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), salt)
+            user.usr_password = hashed_password.decode('utf-8')
+            user.save()
+            response = {
+                "message": "Password recovered successfully",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error"
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+`
+const python2 = `#Archivo views.py de la app tasks
+class GetMyTasks(APIView):
+    @token_required #Aca se hace uso de la autenticación mediante la llamada del decorador
+    def get(self, request):
+        user_id = request.GET.get("userId")
+        keyword = request.GET.get("keyword")
+        tsk_status = request.GET.get("status")
+
+        try:
+        #Se realiza un query mediante un connection cursor para realizar una busqueda de datos filtrada
+        #Y personalizada
+            query = """
+                select * 
+                from Tasks t 
+                join "user" u on t.usr_id = u.usr_id 
+                where t.usr_id = %s 
+                AND (LOWER(t.tsk_title) like lower(concat('%%', %s, '%%')) 
+                     OR LOWER(t.tsk_desc) like lower(concat('%%', %s, '%%')) 
+                     OR t.tsk_status = %s)
+            """
+            #Se ejecuta el query
+            with connection.cursor() as cursor:
+                cursor.execute(query, (user_id, keyword, keyword, tsk_status))
+
+                rows = cursor.fetchall()
+
+            #Se coloca en una lista los datos obtenidos
+            tasks = []
+            for row in rows:
+                task = {
+                    'tsk_id': row[0],
+                    'tsk_title': row[1],
+                    'tsk_desc': row[2],
+                    'tsk_status': row[3],
+                    'tsk_creation_date': row[4].isoformat(),
+                    'tsk_due_date': row[5].isoformat(),
+                    'usr_id': row[6]
+                }
+            tasks.append(task)
+            
+            # Se serializa la información obtenida en un formato json más legible
+            serializer = TaskSerializer(data=tasks, many=True)
+            serializer.is_valid()
+
+            #Se retorna el Json
+            response = {
+                "data": serializer.data,
+                "totalTasks": len(tasks),
+                "message": "Tasks retrieved successfully",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CreateTaskView(APIView):
+    @token_required
+    def post(self, request):
+        try:
+            title = request.data['title']
+            description = request.data['description']
+            due_date_str = request.data['dueDate']
+            user_id = request.data['userId']
+
+            #Parseo de fechas para garantizar consistencia
+            try:
+                due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except ValueError:
+                due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%d"))
+
+            #Se crea la instancia de las tareas, el objeto directamente maneja la persistenica
+            task = Task.objects.create(
+                tsk_title=title,
+                tsk_desc=description,
+                tsk_status=0,  # Assuming 0 represents an initial status
+                tsk_creation_date=datetime.now(),
+                tsk_due_date=due_date,
+                usr_id=user_id
+            )
+            user = User.objects.filter(usr_id=user_id).first()
+            serializer = TaskSerializer(task)
+
+            response = {
+                "data": task.tsk_id,
+                "message": f"Task created successfully for user {user.usr_id}",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class UpdateTaskView(APIView):
+    @token_required
+    def put(self, request, id): #el id viene de una variable de url
+        try:
+            #Se obtiene tarea de la base de datos
+            task = Task.objects.filter(tsk_id=id).first()
+            if task is None:
+                raise Exception("Task not found")
+
+            # Modificación de la tarea
+            task.tsk_title = request.data['title']
+            task.tsk_desc = request.data['description']
+            due_date_str = request.data['dueDate']
+
+            try:
+                task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%dT%H:%M:%SZ"))
+            except ValueError:
+                task.tsk_due_date = make_aware(datetime.strptime(due_date_str, "%Y-%m-%d"))
+
+            # Se confirma la modificación
+            task.save()
+            response = {
+                "data": task.tsk_id,
+                "message": "Task Updated Successfully",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class SetStateView(APIView):
+    @token_required
+    def put(self, request, id, newstatus):
+        try:
+            changeState = 0;
+            if newstatus == 'todo':
+                changeState = 0
+            if newstatus == 'doing':
+                changeState = 1
+            if newstatus == 'done':
+                changeState = 2
+            if newstatus == 'upcoming':
+                changeState = 3
+
+            task = Task.objects.filter(tsk_id=id).first()
+            if task is None:
+                raise Exception(f"Task not found with ID: {id}")
+            task.tsk_status = changeState
+            task.save()
+            response = {
+                "message": "Task Changed to Upcoming",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class DeleteTaksView(APIView):
+    @token_required
+    def delete(self, request, id):
+        try:
+            task = Task.objects.filter(tsk_id=id).first()
+            if task is None:
+                raise Exception(f"Task not found with ID: {id}")
+            task.delete()
+            response = {
+                "message": "Task Deleted Successfully",
+                "status": "success"
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        except Exception as e:
+            response = {
+                "message": str(e),
+                "status": "error",
+            }
+            return Response(response, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+`
 const ServicesSetup = () => {
     return (
       <div className="flex flex-col">
@@ -384,11 +696,15 @@ const ServicesSetup = () => {
       <CodeBlock
         code1={code1}
         language1="java"
+        code2={python1}
+        language2="python"
         />
       <TextBlock title="Lógica de la gestión de las tareas"/>
       <CodeBlock
         code1={code2}
         language1="java"
+        code2={python2}
+        language2="python"
         />
        <TextBlock title ="Configuración de correos para Spring Boot"/>
        <TextBlock textContent={text3}/>

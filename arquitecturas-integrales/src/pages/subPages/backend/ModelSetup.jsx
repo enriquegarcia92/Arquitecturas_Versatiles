@@ -12,6 +12,11 @@ se encargan de la persistencia de la base de datos, es decir, las operaciones CR
 confirmadas en la base de datos, respentando la arquitectura estos deben colocarse en la carpeta repository`
 const text4 = `Es importante clarar que esta configuración solo es requerida en Spring Boot, Djagno y Express manejan la persistencia directamente
 con el uso de los objetos`
+const text5 = `En el caso particuar de Django es requerido ejecutar el proceso de migracion de entidades, lo que implica que 
+manualmente se le inidca a django que cree los archivos necesarios para luego ejecutar manualmente la creación de las entidades
+dentro de la base.`
+const text6 = `Django creará automáticamente migraciones internas no creadas por el usuario requeridas para su funcinamiento debido 
+a que controla su proceso de autenticación mediante esas tablas.`
 const code1 = `//Archivo src/main/model/User.java
 //Anotaciones de lombok y spring JPA para facilitar la difinición de la entidad
 
@@ -204,6 +209,63 @@ public interface TaskRepository extends JpaRepository<Tasks, Integer> {
             "t.status = :status)")
     List<Tasks> searchTasksByKeywordAndStatusAndUserId(String keyword, Integer status, Integer userId);
 }`
+
+const python1 = `#Archivo dentro de users/models.py
+#User hereda de AbstractUser que es la clase de autorización de python
+class User(AbstractUser):
+    #Definición de la llave primaria.
+    usr_id = models.AutoField(primary_key=True)
+    usr_name = models.CharField(max_length=255, blank=True)
+    usr_email = models.CharField(max_length=255, unique=True)
+    usr_password = models.CharField(max_length=255)
+
+    #En este caso el rol se coloca directamente no se requiere de entidad
+    usr_role = models.CharField(max_length=10)
+
+    #Todos estos campos son requerimientos de django, es recomendable utilizarlos
+    #Debido a que se debe integrar para el ejemplo flytask con las API de Spring y Express se 
+    #sobreescriben y vuelven nulleables
+    username = models.CharField(max_length=255, blank=True, null=True)  
+    password = models.CharField(max_length=255, unique=True, null=True)
+    is_superuser = models.BooleanField(blank=True, default=False, null=True)  
+    first_name = models.CharField(max_length=255, blank=True, null=True)  
+    last_name = models.CharField(max_length=255, blank=True, null=True) 
+    email = models.CharField(max_length=255, blank=True, null=True) 
+    is_staff = models.BooleanField(blank=True, default=False, null=True)  
+    is_active = models.BooleanField(blank=True, default=True, null=True) 
+    date_joined = models.DateTimeField(null=True)
+    USERNAME_FIELD = 'usr_email'
+    REQUIRED_FIELDS = ['usr_id', 'usr_name', 'usr_password', 'usr_role']  
+
+    class Meta:
+        db_table = 'user'
+
+#Debido al uso de la clase abstarct user se debe definir en el archvivo settigns.py que este modelo será el modelo
+#De autenticación de esta forma:
+
+AUTH_USER_MODEL = 'users.User'
+`
+
+const python2 = `class Task(models.Model):
+    _id = ObjectIdField(primary_key=True, default=ObjectId)
+    tsk_title = models.CharField(max_length=255)
+    tsk_desc = models.CharField(max_length=255, blank=True)
+    tsk_status = models.IntegerField()
+    tsk_creation_date = models.DateTimeField()
+    tsk_due_date = models.DateTimeField()
+    usr = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'Tasks'`
+
+const python3 = `
+#El proceso de migración se realiza mediante la terminal, se deben ejecutar en la localización del proyecto manage.py
+
+#Crear todas las migraciones
+python3 manage.py makemigrations
+#Realizar todas las migraciones
+python3 manage.py migrate
+`
 const ModelSetup = () => {
     return (
         <div>
@@ -214,11 +276,15 @@ const ModelSetup = () => {
             <CodeBlock
                 code1={code1}
                 language1="java"
+                code2={python1}
+                language2="python"
             />
             <TextBlock title="Modelo de la tarea"/>
             <CodeBlock
                 code1={code2}
                 language1="java"
+                code2={python2}
+                language2="python"
             />
             <TextBlock title="Clase del rol"/>
             <CodeBlock
@@ -243,6 +309,9 @@ const ModelSetup = () => {
                 code1={code6}
                 language1="java"
             />
+            <TextBlock title="Migraciones de Django"/>
+            <TextBlock textContent={text5}/>
+            <CodeBlock code1={python3} language1="python"/>
         </div>
       
     );
