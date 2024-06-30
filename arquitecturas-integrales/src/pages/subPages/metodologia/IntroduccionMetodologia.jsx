@@ -85,89 +85,103 @@ const IntroduccionMetodologia = () => {
         <TextBlock textContent={texto101}/>
         <TextBlock textContent={texto102}/>
         <TextBlock textContent=<pre>{texto1}</pre>/>
-        <TextBlock  title="Fases para el desarrollo de un proyecto" textContent = <pre>{texto2}</pre>/>
+      <TextBlock title="Fases para el desarrollo de un proyecto" textContent={texto2} />
 
-        <TextBlock  title="Resultados" textContent = <pre>{texto3}</pre>/>
-
-        <CodeBlock code={Code1} language="javascript" />
-
-        <CodeBlock code={Code2} language="javascript" />
-
-        <TextBlock   textContent = <pre>{texto4}</pre>/>
-
-        <ImageComponent image = {login}
+      <TextBlock title="Resultados" textContent={texto3} />
+      
+      <CodeBlock code={Code1} language="javascript" />
+      
+      <CodeBlock code={Code2} language="javascript" />
+      
+      <TextBlock textContent={texto4} />
+      
+      <ImageComponent 
+        image={login}
         width="w-24"
         height="h-24" 
-        title="login page" />
-
-        <TextBlock textContent={<pre> {texto5} </pre>} />
-
-        <ImageComponent image = {signup}
+        title="login page" 
+      />
+      
+      <TextBlock textContent={texto5} />
+      
+      <ImageComponent 
+        image={signup}
         width="w-24"
         height="h-24" 
-        title="login page" />
-
-        <TextBlock textContent={<pre>{texto6}</pre>} />
-
-        <ImageComponent image = {emailsent}
+        title="signup page" 
+      />
+      
+      <TextBlock textContent={texto6} />
+      
+      <ImageComponent 
+        image={emailsent}
         width="w-24"
         height="h-24" 
-        title="email sent" />
-
-        <TextBlock textContent={<pre>{texto7}</pre>} />
-
-        <ImageComponent image = {emptylist}
+        title="email sent" 
+      />
+      
+      <TextBlock textContent={texto7} />
+      
+      <ImageComponent 
+        image={emptylist}
         width="w-24"
         height="h-24" 
-        title="emty list" />
- 
-
-        <TextBlock textContent={<pre>{texto8}</pre>} />
-
-       <ImageComponent image = {createntask}
+        title="empty list" 
+      />
+      
+      <TextBlock textContent={texto8} />
+      
+      <ImageComponent 
+        image={createntask}
         width="w-24"
         height="h-24" 
-        title="create new task" />
-
-        <TextBlock textContent={<pre>{texto9}</pre>} />
-
-        <ImageComponent image = {dashboard}
+        title="create new task" 
+      />
+      
+      <TextBlock textContent={texto9} />
+      
+      <ImageComponent 
+        image={dashboard}
         width="w-24"
         height="h-24" 
-        title="dashboard" />
-
-        <TextBlock textContent={<pre>{texto10}</pre>} />
-
-        <ImageComponent image = {editask}
+        title="dashboard" 
+      />
+      
+      <TextBlock textContent={texto10} />
+      
+      <ImageComponent 
+        image={editask}
         width="w-24"
         height="h-24" 
-        title="edit task" />
-
-        <TextBlock textContent={<pre>{texto11}</pre>} />
-
-        <TextBlock textContent={<pre>{texto12}</pre>} />
-
-        <TextBlock textContent={<pre>{texto13}</pre>} />
-
-        <TextBlock textContent={<pre>{texto14}</pre>} />
-
-        <TextBlock textContent={<pre>{texto15}</pre>} />
-
-        <TextBlock textContent={<pre>{texto16}</pre>} />
-
-        <TextBlock textContent={<pre>{texto17}</pre>} />
-
-        <CodeBlock code={Code3} language="javascript" />
-
-        <TextBlock textContent={<pre>{texto18}</pre>} />
-
-        <CodeBlock code={Code4} language="javascript" />
-
-        <TextBlock textContent={<pre>{texto19}</pre>} />
-
-        <TextBlock textContent={<pre>{texto20}</pre>} />
-
-        <TextBlock textContent={<pre>{texto21}</pre>} />
+        title="edit task" 
+      />
+      
+      <TextBlock textContent={texto11} />
+      
+      <TextBlock textContent={texto12} />
+      
+      <TextBlock textContent={texto13} />
+      
+      <TextBlock textContent={texto14} />
+      
+      <TextBlock textContent={texto15} />
+      
+      <TextBlock textContent={texto16} />
+      
+      <TextBlock textContent={texto17} />
+      
+      <CodeBlock code={Code3} language="javascript" />
+      
+      <TextBlock textContent={texto18} />
+      
+      <CodeBlock code={Code4} language="javascript" />
+      
+      <TextBlock textContent={texto19} />
+      
+      <TextBlock textContent={texto20} />
+      
+      <TextBlock textContent={texto21} />
+      
 
 
       </div>
