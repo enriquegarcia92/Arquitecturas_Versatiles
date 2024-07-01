@@ -19,7 +19,7 @@ services:
 #CONTENEDOR PAGINA INFORMATIVA
   arquitecturas_integrales:
     image: arquitecturas_integrales:1.0.0
-    build: arquitecturas_integrales/.
+    build: arquitecturas-integrales/.
     container_name: arquitecturas_integrales_container
     ports:
       - 5176:5176

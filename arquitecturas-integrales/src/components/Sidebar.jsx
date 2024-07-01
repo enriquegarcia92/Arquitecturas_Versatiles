@@ -93,7 +93,7 @@ const Sidebar = () => {
               icon={MdComputer}
             />
             <DisclosureMenu
-              title="QA Testing Guide"
+              title="Guía de Proceso QA"
               subtitles={[
                 { label: "Pruebas de Control de Calidad", link: "/main/qatesting" },
               ]}
