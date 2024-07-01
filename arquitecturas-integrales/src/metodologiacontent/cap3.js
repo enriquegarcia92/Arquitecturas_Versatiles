@@ -123,3 +123,14 @@ export const ciCd2 = `Mejor calidad: La automatización de las pruebas ayuda a i
 export const ciCd3 = `Mayor confiabilidad: Garantizan un proceso de despliegue consistente y confiable, lo que reduce el riesgo de errores y fallos.`;
 
 export const ciCd4 = `Mayor colaboración: Facilitan la colaboración entre equipos de desarrollo y operaciones.`;
+
+export const resultados = `RESULTADOS`;
+
+export const resultados1 = `La metodología a utilizar está basada en el enfoque iterativo e incremental “SCRUM”.`;
+
+export const resultados2 = `El proyecto consiste en el diseño de una guía estructurada sobre las fases para el desarrollo de este proyecto, basado en las arquitecturas integrales utilizando un desarrollo multicapa.`;
+
+export const resultados3 = `Para lo cual se realizará un ejemplo práctico de una aplicación “To-do List” llamada Flytask, que permite la gestión de tareas por parte del usuario final.`;
+
+
+
