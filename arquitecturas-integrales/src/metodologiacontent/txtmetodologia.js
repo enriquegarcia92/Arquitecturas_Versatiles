@@ -374,7 +374,8 @@ Esta combinación permite que la aplicación sea escalable, mantenible y capaz d
 de alta calidad.
 `;
 
-export const texto13 = `Patrones de diseño
+export const texto13 = `
+Patrones de diseño
 
 A continuación, se detalla el patrón de diseño a utilizar para cada una de las API y cada uno de los Clientes que serán 
 desarrollados para Flytask.
@@ -392,7 +393,9 @@ una estructura de carpetas similar, que será la siguiente:
     - Service: Contiene interfaces que definen la estructura de los servicios.
     - ServiceImpl: Implementaciones de los servicios que manejan la lógica de negocio, construyen DTOs y realizan cálculos 
     complejos para inserciones y consultas.
+`;
 
+export const texto13a = `
 Patrón de diseño para Django:
 Para desarrollar una API en Django se utiliza el patrón de diseño MTV (Model Template View):
   - Migrations: Contiene todas las migraciones autogeneradas por Django para configurar la estructura de la base de datos.
@@ -402,7 +405,9 @@ Para desarrollar una API en Django se utiliza el patrón de diseño MTV (Model T
   - URL: Contiene las rutas utilizadas por las vistas para las consultas HTTP.
   - Apps: Configura la aplicación como un proyecto de Django, cada una con sus propias Migrations, Models, Views, y URLs.
   - Settings: Contiene las configuraciones de conexión a bases de datos, configuraciones de Spring Security y CORS.
+`;
 
+export const texto13b = `
 Patrón de diseño para React:
 Para React se utiliza el patrón Contenedor-Presentador (o Contenedor-Componente):
   - Components
@@ -416,77 +421,81 @@ Para React se utiliza el patrón Contenedor-Presentador (o Contenedor-Componente
   - Pages: Contiene las páginas principales de la aplicación que llaman a los contenedores y componentes.
   - Assets: Contiene archivos estáticos como imágenes e iconos utilizados por los componentes.
   - Styles: Contiene configuraciones de estilos utilizando bibliotecas como Tailwind.
+`;
 
-Patrón de diseño para Vue.js:
-En Vue.js se utilizan buenas prácticas más que un patrón específico, utilizando una arquitectura de componentes con 
-servicios para llamadas HTTP:
-  - Assets: Contiene elementos estáticos como imágenes e iconos.
-  - Componentes: Contiene todos los componentes utilizados en la aplicación.
-  - Services: Contiene funciones para realizar llamadas HTTP.
-  - Views: Contiene las vistas o páginas principales que consumen los componentes.
+export const texto14 = `
+Implementación de buenas prácticas de codificación
 
-Buenas prácticas de programación y seguridad se describen a continuación en otro apartado.
-   `;
+Al implementar las buenas prácticas de codificación, se utilizan herramientas que facilitan la creación de aplicaciones de alta calidad y seguridad. Estas librerías y frameworks son bloques de funcionalidades probadas a lo largo del tiempo, cuyo código se puede reutilizar fácilmente. Los programadores pueden diseñar operaciones específicas de lógica de negocios utilizando estas herramientas, basándose en los principios SOLID.
+`;
 
-export const texto14 = `Implementación de buenas prácticas de codificación
+export const texto14a = `
+Desarrollo Back End con buenas prácticas
 
-Al implementar las buenas prácticas de codificación, también se utilizan herramientas que facilitan la creación de 
-aplicaciones de alta calidad y seguridad. Estas librerías, frameworks y dependencias son bloques o recopilaciones de 
-funcionalidades probadas a lo largo del tiempo, cuyo código se puede reutilizar fácilmente. Los programadores pueden 
-diseñar operaciones específicas de lógica de negocios utilizando estas herramientas, basándose en los principios SOLID.
+En el desarrollo Back End, la implementación de buenas prácticas y el uso de SOLID están presentes a lo largo del framework utilizado. Estos marcos de trabajo proporcionan una base sólida y previamente estudiada, asegurando un código limpio y fácil de mantener. El uso de patrones de diseño garantiza que los archivos y sus responsabilidades estén adecuadamente separados.
+`;
 
-En el desarrollo Back End, la implementación de buenas prácticas de codificación y el uso de SOLID están presentes 
-a lo largo del framework utilizado. Estos marcos de trabajo proporcionan una base sólida y previamente estudiada. 
-El uso de patrones de diseño garantiza que los archivos y sus responsabilidades estén adecuadamente separados, 
-asegurando un código limpio y fácil de mantener.
+export const texto14b = `
+Principios aplicados en Spring Boot, Django y Express.js
 
 - Principio de responsabilidad única:
-  - En Spring Boot, se aplica en los servicios que manejan la lógica de negocios por encima de los controladores.
+  - En Spring Boot, se aplica en los servicios que manejan la lógica de negocios.
   - En Django, se ve en las vistas que cumplen funciones similares.
   - En Express, se refleja en middlewares enfocados en tareas específicas como la validación de datos.
+`;
+
+export const texto14c = `
+Patrones de diseño en Spring Boot, Django y Express.js
 
 - Principio abierto/cerrado:
   - En Spring Boot, aplicado a los repositorios.
   - En Django, a las vistas basadas en clases.
   - En Express, a los middlewares personalizados.
+`;
 
-- Principio de sustitución de Liskov:
-  - En Spring Boot, se refleja en la programación basada en interfaces y la inyección automática de dependencias.
-  - En Django, se aplica en el uso de clases modelos que definen la estructura de modelos expandibles y heredables.
-  - En Express, se manifiesta en la modularidad de sus componentes y su facilidad de mantenimiento e interoperabilidad.
+export const texto14d = `
+Principio de sustitución de Liskov en Spring Boot, Django y Express.js
+
+- En Spring Boot, se refleja en la programación basada en interfaces y la inyección automática de dependencias.
+- En Django, se aplica en el uso de clases modelos expandibles y heredables.
+- En Express, se manifiesta en la modularidad de sus componentes y su facilidad de mantenimiento.
+`;
+
+export const texto14e = `
+Principios adicionales en Spring Boot, Django y Express.js
 
 - Principio de segregación de interfaces:
   - Implementado junto con los principios de abierto/cerrado y responsabilidad única.
   
 - Principio de inversión de dependencias:
-  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel no 
-    dependan de módulos de bajo nivel.
+  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel no dependan de módulos de bajo nivel.
+`;
 
-Implementación de prácticas en codificación: React y Vue para Front End
+export const texto14f = `
+Implementación de prácticas en codificación para React y Vue
 
-Para el desarrollo del Front End con React y Vue, se sigue el lineamiento SOLID y se utiliza el concepto de 
-"Clean Architecture", basado en SOLID. El objetivo es mantener el desarrollo de la aplicación limpio y 
-comprensible para cualquier desarrollador. La estructura de archivos y carpetas debe reflejar claramente las 
-funcionalidades de la aplicación, como se detalla más adelante en el apartado de "Patrones de Diseño".
-   `;
+Para el desarrollo del Front End con React y Vue, se sigue el lineamiento SOLID y se utiliza el concepto de "Clean Architecture". El objetivo es mantener el desarrollo de la aplicación limpio y comprensible para cualquier desarrollador. La estructura de archivos y carpetas debe reflejar claramente las funcionalidades de la aplicación.
+`;
+
 
 export const texto15 = `Single Responsibility Principle (Principio de la única responsabilidad)
 En el desarrollo web este principio es muy predominante, ya que debe aislar cada tarea y función 
 de cada componente, conexión y página lo más posible; esto permite que se puedan manejar las 
 conexiones con los distintos Back Ends disponibles y no requiera de ningún cambio del lado del 
-Front End, más allá de la ruta de conexión solicitada. (Casero, 2024)
-Una de las partes que innegablemente siguen este principio, se localizan en la carpeta api,
+Front End, más allá de la ruta de conexión solicitada. (Casero, 2024)`;
+
+export const texto15a = `Una de las partes que innegablemente siguen este principio, se localizan en la carpeta api,
 para ambos desarrollos, en esta se encuentran los archivos que permiten la conexión con el 
-Back End que se encargan de manera independiente del manejo y llamada a los métodos 
-disponibles para FlyTask, un ejemplo claro del buen uso de SRP* es el uso de un solo 
-archivo llamado Task.ts que se encarga del manejo de todos los métodos DELETE, PUT, GET y 
-POST además se separa cada método en componentes separados y que su nombre de una breve 
-descripción de lo que se está realizando. 
-Las carpetas API contiene los archivos .ts y .js que realizan el mapeo de los endpoints que 
+Back End que se encargan de manera independiente del manejo y llamada a los métodos disponibles 
+para FlyTask, un ejemplo claro del buen uso de SRP* es el uso de un solo archivo llamado Task.ts 
+que se encarga del manejo de todos los métodos DELETE, PUT, GET y POST además se separa cada 
+método en componentes separados y que su nombre de una breve descripción de lo que se está realizando.`;
+
+export const texto15b = `Las carpetas API contiene los archivos .ts y .js que realizan el mapeo de los endpoints que 
 la aplicación web consume, al haber seis Back Ends distintos a los cuales la aplicación puede 
-consumir, el tener archivos que permitan el manejo aislado de los endpoints disponibles hace que la 
-versatilidad sea posible. Los archivos que realizan esta tarea son el base.api.ts y el base.api
-   `;
+consumir, el tener archivos que permitan el manejo aislado de los endpoints disponibles hace que 
+la versatilidad sea posible. Los archivos que realizan esta tarea son el base.api.ts y el base.api.`;
+
 
    export const texto16 = `Otro lado de la aplicación en la que se puede observar buen uso de este principio es en la carpeta components, 
 en ella se contienen los elementos visuales principales que son renderizados dentro de la aplicación, 
@@ -502,51 +511,70 @@ export const texto17 = `
 El principio abierto/cerrado se manifiesta en el desarrollo del Front End a través de la reutilización de componentes. 
 En lugar de crear un componente monolítico, se divide la funcionalidad en componentes más pequeños que pueden ser 
 utilizados en diferentes partes de la aplicación.
+`;
 
+export const texto17a = `
 Por ejemplo, se tiene un componente Notification.ts que se encarga de mostrar mensajes de error o éxito después de 
 una petición. Este componente puede ser llamado desde cualquier página de la aplicación y mostrar el mensaje deseado. 
 Está diseñado para aceptar ciertos parámetros que se pasan durante su llamada en otras partes de la aplicación.
+`;
 
+export const texto17b = `
 En la página Sign-Up.tsx, se instancia el componente Notification con diferentes personalizaciones como el mensaje, 
 el color y el estado de visibilidad, demostrando así cómo un componente puede ser reutilizado con diferentes 
 configuraciones sin necesidad de modificar su código base.
+`;
 
+export const texto17c = `
 Otro ejemplo es el componente AddTaskModal.vue, que se utiliza para la creación de tareas. Cuando se necesita 
 comunicar un mensaje, este componente se invoca de manera similar, aprovechando la flexibilidad y 
 la extensibilidad del diseño.
+`;
 
+export const texto17d = `
 Este enfoque permite que los componentes estén abiertos a la extensión mediante la configuración y personalización 
-en lugar de la modificación, lo que facilita el mantenimiento y la escalabilidad de la aplicación.   `;
+en lugar de la modificación, lo que facilita el mantenimiento y la escalabilidad de la aplicación.
+`;
 
-   export const texto18 = `El principio de la sustitución de Liskov en el desarrollo Front End asegura que los 
+
+export const texto18 = `El principio de la sustitución de Liskov en el desarrollo Front End asegura que los 
 componentes puedan ser reemplazados por otros componentes sin afectar el funcionamiento de la aplicación.
+`;
 
-Por ejemplo, en la página TaskBoard.tsx, los componentes ListView y KanBan reciben una propiedad llamada tasks. 
+export const texto18a = `Por ejemplo, en la página TaskBoard.tsx, los componentes ListView y KanBan reciben una propiedad llamada tasks. 
 Este diseño asegura que estos componentes puedan ser intercambiados por otros que también reciban la misma 
 propiedad tasks sin romper la funcionalidad original de la página. Esto facilita la refactorización del 
 Front End en caso de que se requieran cambios en los estilos o la estructura general del sitio.
+`;
 
-En el framework Vue, los componentes ListView y KanbanView reciben las mismas propiedades de TaskData. 
+export const texto18b = `En el framework Vue, los componentes ListView y KanbanView reciben las mismas propiedades de TaskData. 
 Aunque en la práctica no se intercambian debido a diferencias en diseño y usabilidad, el principio se 
 sigue cumpliendo ya que el reemplazo de estos componentes no rompería la aplicación web.
+`;
 
-Este enfoque permite una mayor flexibilidad y mantenimiento en el desarrollo, ya que se pueden hacer 
-cambios y mejoras sin comprometer la funcionalidad existente.   `;
+export const texto18c = `Este enfoque permite una mayor flexibilidad y mantenimiento en el desarrollo, ya que se pueden hacer 
+cambios y mejoras sin comprometer la funcionalidad existente.
+`;
 
 
-   export const texto19 = `El principio de segregación de interfaz establece que los usuarios o clientes no deben depender de componentes 
+
+export const texto19 = `El principio de segregación de interfaz establece que los usuarios o clientes no deben depender de componentes 
 y páginas que no necesitan. En lugar de tener una única página grande que consulte muchos métodos y realice 
 todas las tareas, se utilizan múltiples interfaces que realizan tareas específicas dentro de la aplicación. 
 Esto significa que las clases solo se ocupan de las tareas relevantes en su contexto, reduciendo la dependencia 
 innecesaria entre el código.
+`;
 
-En el desarrollo Front End de FlyTask, este principio es fundamental. Todo se maneja de manera independiente entre clases, 
+export const texto19a = `En el desarrollo Front End de FlyTask, este principio es fundamental. Todo se maneja de manera independiente entre clases, 
 métodos y componentes, lo que se evidencia en la estructura de las carpetas donde todo está correctamente aislado.
+`;
 
-Un buen ejemplo de este principio en FlyTask es el componente TaskAccordion.tsx. Este componente se utiliza para 
+export const texto19b = `Un buen ejemplo de este principio en FlyTask es el componente TaskAccordion.tsx. Este componente se utiliza para 
 mostrar todas las tareas del usuario, independientemente de su estado, fecha y nombre. El componente se llama una sola 
 vez y se "dibuja" según las tareas del usuario en la base de datos, evitando renderizaciones innecesarias en el Front End 
-y dependiendo del Back End para su actualización.   `;
+y dependiendo del Back End para su actualización.
+`;
+
   
 
 export const texto20 = `Implementación de los patrones de diseño
@@ -556,62 +584,82 @@ se utilizan patrones de diseño optimizados para sus responsabilidades específi
 de servidor y Screaming Architecture para la capa de clientes en React y Vue.js. Esto permite aplicar 
 los principios SOLID y mantener un orden interno en los archivos, facilitando la construcción y 
 escalabilidad de la aplicación.
+`;
 
-Arquitectura en Spring Boot:
+export const texto20a = `Arquitectura en Spring Boot:
 La arquitectura de Spring Boot comienza en la carpeta src/main/, que contiene el archivo principal de Java.
+`;
 
-Arquitectura en Express:
+export const texto20b = `Arquitectura en Express:
 El framework Express sigue un patrón de diseño específico que se refleja en su jerarquía de carpetas.
+`;
 
-Arquitectura en Django:
+export const texto20c = `Arquitectura en Django:
 En Django, la estructura se organiza como un proyecto general llamado FlyTask, que contiene:
 
 Un archivo settings con las configuraciones de Django y la base de datos.
 Un archivo URLs con el mapeo general de las URL.
 Carpetas específicas por aplicación, como users y tasks.
 Dentro de cada aplicación se encuentran:
+`;
 
-    -URLs: Contienen las rutas de la API para cada modelo.
-    -Views: Contienen las funciones con la lógica de negocio.
-    -Models: Mapean cada modelo a la base de datos.
-    -Serializers: Contienen funciones para serializar datos.
-    -Este patrón de diseño en Django se basa en MVC, con equivalentes en Models, Views, y URLs.   `;
+export const texto20d = `  - URLs: Contienen las rutas de la API para cada modelo.
+  - Views: Contienen las funciones con la lógica de negocio.
+  - Models: Mapean cada modelo a la base de datos.
+  - Serializers: Contienen funciones para serializar datos.
+`;
+
+export const texto20e = `Este patrón de diseño en Django se basa en MVC, con equivalentes en Models, Views, y URLs.
+`;
+
    
 export const texto21 = `Implementación de buenas prácticas de seguridad
-
 Las prácticas de seguridad se integran en la base de código de dos maneras.
-La primera es en la programación manual de patrones que evitan el acceso a datos sensibles y el uso 
-de versiones vigentes de las tecnologías (lenguajes, frameworks).
-La segunda es a través del uso de herramientas de terceros (librerías, primitivos) que implementan
+`;
 
+export const texto21a = `La primera es en la programación manual de patrones que evitan el acceso a datos sensibles y el uso 
+de versiones vigentes de las tecnologías (lenguajes, frameworks).
+`;
+
+export const texto21b = `La segunda es a través del uso de herramientas de terceros (librerías, primitivos) que implementan
 métodos de validación, encriptación y redirección que han sido probados y se actualizan de manera 
 constante para responder a las necesidades de los programadores.
-    
-En el caso de la aplicación se implementan bearer tokens para la autenticación de los usuarios y 
+`;
+
+export const texto21c = `En el caso de la aplicación se implementan bearer tokens para la autenticación de los usuarios y 
 su acceso a la información, y se utilizan librerías como Spring Security del lado del servidor y 
 validadores como Yup en la capa de cliente.
-    
-Desarrollo del Front End
+`;
 
+export const texto21d = `Desarrollo del Front End
 Esta etapa consiste en el desarrollo de un cliente web que utiliza servicios y consume datos desde 
 una API que maneja la lógica de negocio de flytask.
-Para este documento se presentan dos clientes web: uno desarrollado con React (utilizando Typescript)
+`;
+
+export const texto21e = `Para este documento se presentan dos clientes web: uno desarrollado con React (utilizando Typescript)
 y uno desarrollado con Vue (utilizando JavaScript) que realizan las mismas funciones con el 
 mismo diseño y utilizan patrones que permiten la reutilización de código dentro de sus 
 componentes e incluso entre proyectos.
-    
-Arquitectura de cliente
+`;
 
+export const texto21f = `Arquitectura de cliente
 El cliente web de flytask permite al usuario interactuar con la lógica de negocio para
 manejar sus tareas.
-Este manejo de tareas involucra un conjunto de operaciones que la API realiza al recibir la 
+`;
+
+export const texto21g = `Este manejo de tareas involucra un conjunto de operaciones que la API realiza al recibir la 
 información del usuario.
-La implementación del cliente debe considerar la comunicación con el servidor y garantizar 
+`;
+
+export const texto21h = `La implementación del cliente debe considerar la comunicación con el servidor y garantizar 
 que tenga una estructura reutilizable y comportamiento predecible.
-De la misma manera, los componentes visuales deben utilizar estructuras que permitan reutilización 
+`;
+
+export const texto21i = `De la misma manera, los componentes visuales deben utilizar estructuras que permitan reutilización 
 y tengan la segregación suficiente para ser manejables a medida que una aplicación crece en tamaño 
 y complejidad.
-    
-Con el propósito de garantizar los requerimientos anteriores, se utilizan los principios de 
+`;
+
+export const texto21j = `Con el propósito de garantizar los requerimientos anteriores, se utilizan los principios de 
 Screaming Architecture en el desarrollo de los proyectos en React y VueJS.
-    `;
+`;

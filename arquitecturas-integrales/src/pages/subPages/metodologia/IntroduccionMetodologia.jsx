@@ -11,7 +11,15 @@ import {
   texto4, texto5, texto6, texto7, texto8, texto9, texto10,
   texto11, texto11a, texto11b, texto11c, texto11d, texto11e, texto11f, texto11g, texto11h, texto11i, texto11j, texto11k, texto11l, texto11m,
   texto12, texto12a, texto12b, texto12c, texto12d,
-  texto13, texto14, texto15, texto16, texto17, texto18, texto19, texto20, texto21,
+  texto13, texto13a, texto13b,
+  texto14, texto14a, texto14b, texto14c, texto14d, texto14e, texto14f,
+  texto15, texto15a, texto15b,
+  texto16, texto17, texto17a, texto17b, texto17c, texto17d,
+  texto18, texto18a, texto18b, texto18c,
+  texto19, 
+  texto19a, texto19b, 
+  texto20, texto20a, texto20b, texto20c, texto20d, texto20e,
+  texto21, texto21a, texto21b, texto21c, texto21d, texto21e, texto21f, texto21g, texto21h, texto21i, texto21j,
   texto100, texto101, texto102
 } from "../../../metodologiacontent/txtmetodologia";
 
@@ -279,29 +287,95 @@ const IntroduccionMetodologia = () => {
       <TextBlock textContent={texto12d} />
       
       <TextBlock textContent={texto13} />
+
+      <TextBlock textContent={texto13a} />
+
+      <TextBlock textContent={texto13b} />
       
       <TextBlock textContent={texto14} />
+
+      <TextBlock textContent={texto14a} />
+
+      <TextBlock textContent={texto14b} />
+
+      <TextBlock textContent={texto14c} />
+
+      <TextBlock textContent={texto14d} />
+
+      <TextBlock textContent={texto14e} />
+
+      <TextBlock textContent={texto14f} />
       
       <TextBlock textContent={texto15} />
+
+      <TextBlock textContent={texto15a} />
+
+      <TextBlock textContent={texto15b} />
       
       <TextBlock textContent={texto16} />
       
       <TextBlock textContent={texto17} />
+
+      <TextBlock textContent={texto17a} />
+     
+      <TextBlock textContent={texto17b} />
+   
+      <TextBlock textContent={texto17c} />
+    
+      <TextBlock textContent={texto17d} />
       
       <CodeBlock code={Code3} language="javascript" />
       
       <TextBlock textContent={texto18} />
+
+      <TextBlock textContent={texto18a} />
+
+      <TextBlock textContent={texto18b} />
+
+      <TextBlock textContent={texto18c} />
       
       <CodeBlock code={Code4} language="javascript" />
       
       <TextBlock textContent={texto19} />
+
+      <TextBlock textContent={texto19a} />
+
+      <TextBlock textContent={texto19b} />
       
       <TextBlock textContent={texto20} />
+
+      <TextBlock textContent={texto20a} />
+
+      <TextBlock textContent={texto20b} />
+
+      <TextBlock textContent={texto20c} />
+
+      <TextBlock textContent={texto20d} />
+
+      <TextBlock textContent={texto20e} />
       
       <TextBlock textContent={texto21} />
+
+      <TextBlock textContent={texto21a} />
+
+      <TextBlock textContent={texto21b} />
+
+      <TextBlock textContent={texto21c} />
+
+      <TextBlock textContent={texto21d} />
+
+      <TextBlock textContent={texto21e} />
+
+      <TextBlock textContent={texto21f} />
+
+      <TextBlock textContent={texto21g} />
+
+      <TextBlock textContent={texto21h} />
+
+      <TextBlock textContent={texto21i} />
+
+      <TextBlock textContent={texto21j} />
       
-
-
       </div>
        )
     }
