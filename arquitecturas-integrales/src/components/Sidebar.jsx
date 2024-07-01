@@ -61,9 +61,18 @@ const Sidebar = () => {
         {isSidebarOpen && (
           <>
           <DisclosureMenu
-              title="Metodologia"
+              title="Diseño de sistemas"
               subtitles={[
-                { label: "Introduction", link: "/main/methodologyintro" },
+                { label: "Metodologia", link: "/main/methodologyintro" },
+                { label: "Resultados ", link: "/main/resintro" },
+                { label: "Analisis de requerimientos", link: "/main/analisisreqintro" },
+                { label: "Buenas practicas de programación", link: "/main/bpprograintro" },
+                { label: "Seguridad", link: "/main/bpseguridad" },
+                { label: "Diseño de arquitectura", link: "/main/diseñoarqcomponent" },
+                { label: "Diseño del sistema", link: "/main/diseñosistemacopomponent" },
+                { label: "Patrones de diseño", link: "/main/patroncomponent" }
+
+
     
               ]}
               icon={FaCheck}
