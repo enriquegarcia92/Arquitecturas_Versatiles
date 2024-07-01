@@ -1,6 +1,7 @@
 // src/components/Sidebar.jsx
 import React, { useState, useEffect } from "react";
 import { MdComputer } from "react-icons/md";
+import { GrTestDesktop } from "react-icons/gr";
 import { AiOutlineDeploymentUnit } from "react-icons/ai";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { FaArrowLeft, FaBars, FaCheck, FaServer } from "react-icons/fa";
@@ -90,6 +91,13 @@ const Sidebar = () => {
                 { label: "Overview", link: "/frontend/overview" },
               ]}
               icon={MdComputer}
+            />
+            <DisclosureMenu
+              title="QA Testing Guide"
+              subtitles={[
+                { label: "Pruebas de Control de Calidad", link: "/main/qatesting" },
+              ]}
+              icon={GrTestDesktop}
             />
             <DisclosureMenu
               title="Despliegue"
