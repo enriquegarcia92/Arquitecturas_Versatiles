@@ -3,7 +3,7 @@ import TextBlock from "../../../components/TextBlock";
 import ImageComponent from "../../../components/ImageComponent";
 import TestingPiramid from "../../../img/TestinPyramid.jpeg";
 import TestTable from "../../../img/table.png";
-
+import Postman from "../../../img/postman.png";
 const text1 = `Como uno de los últimos pasos del proceso de desarrollo, se realizan las 
 pruebas de calidad en el software, estas normalmente las realiza un rol especializado 
 llamado QA Tester que se encarga de garantizar que la aplicación cumpla con las funcionalidades 
@@ -47,6 +47,31 @@ y se deben realizar pruebas de regresión para garantizar que las nuevas funcion
 apropiado mantenimiento a la matriz de pruebas para que esta sea de utilidad en el futuro. Cabe resaltar que cuando esta crece mucho y el número de casos aumenta a un número considerable, es recomendable la automatización de pruebas, ya que estas pueden ser ejecutadas
 de manera más rápida y eficiente que las pruebas manuales, pero para esto es necesario, pero esto no se abordará en esta guía ... por ahora.`;
 
+const text7 = `Las pruebas de API y UI son las que se realizan sobre la interfaz de usuario y sobre las API que se han desarrollado, estas pruebas son realizadas por el QA Tester y son de gran importancia ya que son las que garantizan que la aplicación cuente con una interfaz amigable, limpia y fácil de usar,
+además de que las API funcionen correctamente y devuelvan la información esperada. Para realizar estas pruebas se pueden utilizar herramientas como Postman o Insomnia, que permite realizar pruebas sobre las API y verificar que estas devuelvan la información esperada, 
+también se pueden realizar pruebas de carga y de estrés para verificar que las API soporten la cantidad de peticiones esperadas y que no se caigan en momentos de alta demanda. Para las pruebas de UI se pueden utilizar herramientas como Selenium o Cypress, que permiten realizar pruebas sobre la interfaz de usuario y verificar que esta se comporte de la manera esperada.
+
+Acá se exploran las pruebas de API, que en este ejemplo se realizarán sobre la API de la aplicación de tareas que se ha desarrollado en la guía, para esto se utilizará Postman, que es una herramienta que permite realizar pruebas sobre las API y verificar que estas devuelvan la información esperada. También se verifican los estados de las peticiones
+ya que estas deben seguid cierto estandard para que el front-end pueda interpretarlas correctamente. Esto se hace de la siguiente manera:`;
+
+const text8 = `La herramienta utilizada fue Postman, que es una herramienta que permite realizar pruebas sobre las API y verificar que estas devuelvan la información esperada. 
+En la imagen se puede ver que se ha exportado la colección de pruebas de la API de FlyTask. Para este ejemplo probaremos el CRUD de Tareas, que es una de las funcionalidades más importantes de la aplicación, revisaremos:
+- Crear una tarea: Resultado esperado: 201 Created
+- Editar una tarea: Resultado esperado: 200 OK
+- Eliminar una tarea: Resultado esperado: 204 No Content
+- Listar tareas: Resultado esperado: 200 OK
+
+Los detalles a tener en cuenta son:`;
+
+const img3= `${Postman}`;
+
+const tex9 = `1. El ambiente al que se está apuntando, en este caso se está apuntando al servidor local, que es donde se encuentra la API de FlyTask.
+2. El Payload o cuerpo de la petición, que es la información que se envía al servidor para que este realice la acción solicitada, en este caso se está enviando un JSON con la información de la tarea que se desea crear, 
+normalmente este cuerpo se encuentra en la documentación de la API que debe realizar el desarrollador backend.
+
+Para cada petición se recomienda realizar una prueba "Happy Path" que es en la que se espera un resultado exitoso y una "Prueba de error" en la que se modifica
+la data que se manda para que la API nos responda con un error o al menos eso es lo que se espera, si la prueba de error no nos devuelve un error o nos devuelve un error inesperado,
+se debe comunicar al equipo de desarrollo para que este realice las correcciones necesarias.`;
 
 const Testing = () => {
     return(
@@ -54,13 +79,29 @@ const Testing = () => {
         <TextBlock title= "Pruebas de Control de Calidad"/>
         <TextBlock textContent={text1}/>
         <TextBlock textContent={text2}/>
-        <ImageComponent source={image1}/>
+        <ImageComponent 
+        image={image1}
+        width="w-50"
+        height="h-50" 
+        title="piramide de pruebas de calidad"
+        />
         <TextBlock textContent={text3}/>
         <TextBlock title= "Pruebas Manuales y Exploratorias" textContent={text4} />
-        <ImageComponent source={img2}/>
+        <ImageComponent 
+        image={img2}
+        width="w-50"
+        height="h-50" 
+        title="tabla de pruebas"/>
         <TextBlock textContent={text5}/>
         <TextBlock textContent={text6}/>
-        <TextBlock title="Pruebas de API y UI" />
+        <TextBlock title="Pruebas de API y UI" textContent={text7} />
+        <TextBlock textContent={text8}/>
+        <ImageComponent
+        image={img3}
+        width="w-50"
+        height="h-50" 
+        title="configuración de postman"/>
+        <TextBlock textContent={tex9}/>
         </div>
     );
 

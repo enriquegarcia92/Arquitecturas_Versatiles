@@ -16,7 +16,7 @@ import MongoDev from "./pages/subPages/backend/MongoDev";
 import Deployment from "./pages/subPages/deployment/Deployment";
 import ComposeSetup from "./pages/subPages/deployment/ComposeSetup";
 import NginxSetup from "./pages/subPages/deployment/NginxSetup";
-
+import QATesting from "./pages/subPages/qatesting/Testing";
 const BASE_URL = "/"
 
 const App = () => {
@@ -38,6 +38,7 @@ const App = () => {
         <Route path={`${BASE_URL}main/deloymentdocker`} element={<Deployment/>} />
         <Route path={`${BASE_URL}main/deploycomposesetup`} element={<ComposeSetup/>} />
         <Route path={`${BASE_URL}main/deploynginxsetup`} element={<NginxSetup/>} />
+        <Route path={`${BASE_URL}main/qatesting`} element={<QATesting/>} />
         </Route>
       </Routes>
     </Router>
