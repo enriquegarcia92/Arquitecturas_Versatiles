@@ -85,9 +85,9 @@ const Sidebar = () => {
               icon={FaServer}
             />
             <DisclosureMenu
-              title="Front-End Guide"
+              title="Desarrollo Front-End"
               subtitles={[
-                { label: "Introduction", link: "/main/frontendprimer" },
+                { label: "Introducción", link: "/main/frontendprimer" },
                 { label: "Enrutamiento", link: "/main/frontend-routing"}, 
                 { label: "Manejo de peticiones", link: "/main/frontend-requestmgmt"}, 
                 { label: "Estructura de carpetas", link: "/main/frontend-folderstruct"}, 
@@ -159,9 +159,9 @@ const Sidebar = () => {
               icon={FaServer}
             />
             <DisclosureMenu
-              title="Front-End Guide"
+              title="Desarrollo Front-End"
               subtitles={[
-                { label: "Introduction", link: "/main/frontendprimer" },
+                { label: "Introducción", link: "/main/frontendprimer" },
                 { label: "Enrutamiento", link: "/main/frontend-routing"}, 
                 { label: "Manejo de peticiones", link: "/main/frontend-requestmgmt"}, 
                 { label: "Estructura de carpetas", link: "/main/frontend-folderstruct"}
