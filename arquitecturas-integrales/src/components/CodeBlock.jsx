@@ -15,7 +15,7 @@ const CodeBlock = ({ code1, language1, code2, language2, code3, language3 }) => 
   };
 
   return (
-    <div className="relative max-w-full max-h-[400px] overflow-auto border border-gray-800 rounded-md bg-gray-900">
+    <div className="relative max-w-full max-h-[600px] overflow-auto border border-gray-800 rounded-md bg-gray-900">
       <div className="flex justify-between items-center px-4 py-2 bg-gray-700 rounded-t-md">
         <div>
           <button
@@ -48,7 +48,7 @@ const CodeBlock = ({ code1, language1, code2, language2, code3, language3 }) => 
           {copied ? 'Copied!' : 'Copy'}
         </button>
       </div>
-      <div className="max-h-[350px] overflow-auto p-4">
+      <div className="max-h-[500px] overflow-auto p-4">
         <SyntaxHighlighter
           language={activeTab === 'tab1' ? language1 : activeTab === 'tab2' ? language2 : language3}
           style={atomDark}
@@ -65,3 +65,4 @@ const CodeBlock = ({ code1, language1, code2, language2, code3, language3 }) => 
 };
 
 export default CodeBlock;
+

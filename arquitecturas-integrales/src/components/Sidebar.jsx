@@ -79,8 +79,10 @@ const Sidebar = () => {
             <DisclosureMenu
               title="Front-End Guide"
               subtitles={[
-                { label: "Introduction", link: "/frontend/introduction" },
-                { label: "Overview", link: "/frontend/overview" },
+                { label: "Introduction", link: "/main/frontendprimer" },
+                { label: "Enrutamiento", link: "/main/frontend-routing"}, 
+                { label: "Manejo de peticiones", link: "/main/frontend-requestmgmt"}, 
+                { label: "Estructura de carpetas", link: "/main/frontend-folderstruct"}, 
               ]}
               icon={MdComputer}
             />
@@ -135,8 +137,10 @@ const Sidebar = () => {
             <DisclosureMenu
               title="Front-End Guide"
               subtitles={[
-                { label: "Introduction", link: "/frontend/introduction" },
-                { label: "Overview", link: "/frontend/overview" },
+                { label: "Introduction", link: "/main/frontendprimer" },
+                { label: "Enrutamiento", link: "/main/frontend-routing"}, 
+                { label: "Manejo de peticiones", link: "/main/frontend-requestmgmt"}, 
+                { label: "Estructura de carpetas", link: "/main/frontend-folderstruct"}
               ]}
               icon={MdComputer}
             />
