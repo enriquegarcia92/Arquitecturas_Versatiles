@@ -1,15 +1,5 @@
 /* */
 
-export const texto1 = `
-Aunque se utiliza con mayor frecuencia en equipos de desarrollo de software, los principios y 
-lecciones de Scrum se pueden aplicar a todo tipo de trabajo en equipo. Esto ha llevado a su popularidad 
-en una variedad de industrias.
-
-Scrum se compone de una serie de reuniones, herramientas y roles que ayudan a los equipos a estructurar 
-y gestionar su trabajo. En Scrum, el trabajo se divide en ciclos cortos y repetitivos llamados sprints, 
-que generalmente duran de dos a cuatro semanas, durante los cuales los equipos trabajan para completar 
-una cantidad específica de trabajo.`;
-
 export const texto100 = `La metodología para el desarrollo del proyecto se basará en SCRUM, 
 el cual está basado en un enfoque iterativo e incremental, permitiendo la flexibilidad necesaria 
 para adaptarse a las necesidades cambiantes del proyecto.`
