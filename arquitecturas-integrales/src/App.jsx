@@ -17,6 +17,13 @@ import Deployment from "./pages/subPages/deployment/Deployment";
 import ComposeSetup from "./pages/subPages/deployment/ComposeSetup";
 import NginxSetup from "./pages/subPages/deployment/NginxSetup";
 import QATesting from "./pages/subPages/qatesting/Testing";
+import GettingStartedPage from "./pages/subPages/GettingStartedPage";
+import BackEndPage from "./pages/subPages/BackEndPage";
+import FrontEndPrimer from "./pages/subPages/front-end/FrontEndPrimer";
+import Routing from "./pages/subPages/front-end/Routing";
+import RequestManagement from "./pages/subPages/front-end/RequestManagement";
+import FolderStruct from "./pages/subPages/front-end/FolderStruct";
+
 const BASE_URL = "/"
 
 const App = () => {
@@ -39,6 +46,10 @@ const App = () => {
         <Route path={`${BASE_URL}main/deploycomposesetup`} element={<ComposeSetup/>} />
         <Route path={`${BASE_URL}main/deploynginxsetup`} element={<NginxSetup/>} />
         <Route path={`${BASE_URL}main/qatesting`} element={<QATesting/>} />
+          <Route path={`${BASE_URL}main/frontendprimer`} element={<FrontEndPrimer />} />
+          <Route path={`${BASE_URL}main/frontend-routing`} element={<Routing />} />
+          <Route path={`${BASE_URL}main/frontend-requestmgmt`} element={<RequestManagement />} />
+          <Route path={`${BASE_URL}main/frontend-folderstruct`} element={<FolderStruct />} />
         </Route>
       </Routes>
     </Router>
