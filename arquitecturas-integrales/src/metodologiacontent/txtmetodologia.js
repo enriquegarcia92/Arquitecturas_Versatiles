@@ -34,23 +34,23 @@ export const texto2e = `
 Requerimientos técnicos de hardware y software.`;
 
 export const texto2f = `
-Requerimiento de hardware:
-Procesador: 2.5 GHz o superior
-Memoria RAM: 16 GB mínimo
-Espacio en disco: 256 GB SSD mínimo
-Sistema operativo:
-Windows 10 64-bit (build 19043 o posterior)
-macOS 10.10 o posterior
-Ubuntu 18.04 o posterior`;
+-Requerimiento de hardware:
+-Procesador: 2.5 GHz o superior
+-Memoria RAM: 16 GB mínimo
+-Espacio en disco: 256 GB SSD mínimo
+-Sistema operativo:
+-Windows 10 64-bit (build 19043 o posterior)
+-macOS 10.10 o posterior
+-Ubuntu 18.04 o posterior`;
 
 export const texto2g = `
-Requerimiento de software:
-IDE: Visual Studio Code
-Control de versiones: Git
-Frameworks: Angular, React, Spring Boot, Django, Express.js, Vue.js
-Bases de datos: MongoDB, PostgreSQL
-Contenedores: Docker, Docker Compose
-Servidor web: Nginx`;
+-Requerimiento de software:
+-IDE: Visual Studio Code
+-Control de versiones: Git
+-Frameworks: Angular, React, Spring Boot, Django, Express.js, Vue.js
+-Bases de datos: MongoDB, PostgreSQL
+-Contenedores: Docker, Docker Compose
+-Servidor web: Nginx`;
 
 export const texto2h = `
 Estas herramientas son comúnmente utilizadas en el desarrollo de aplicaciones modernas y proporcionan un entorno consistente y controlado para el desarrollo y la implementación de la aplicación.`;
@@ -64,9 +64,9 @@ Se elige este tipo de arquitectura específicamente porque permite que mediante 
 
 export const texto2k = `
 Para esta fase es necesario realizar las siguientes sub-fases:
-Selección de tecnologías para el frontend
-Selección de tecnologías para el backend
-Selección de bases de datos`;
+-Selección de tecnologías para el frontend
+-Selección de tecnologías para el backend
+-Selección de bases de datos`;
 
 export const texto2l = `
 Patrones de diseño
@@ -458,7 +458,8 @@ Principios adicionales en Spring Boot, Django y Express.js
   - Implementado junto con los principios de abierto/cerrado y responsabilidad única.
   
 - Principio de inversión de dependencias:
-  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel no dependan de módulos de bajo nivel.
+  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel 
+  no dependan de módulos de bajo nivel.
 `;
 
 export const texto14f = `
