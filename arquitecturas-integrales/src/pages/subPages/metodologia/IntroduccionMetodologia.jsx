@@ -4,8 +4,7 @@ import TextBlock from "../../../components/TextBlock"
 import {
   texto2, texto2a, texto2b, texto2c, texto2d, texto2e, texto2f, texto2g, texto2h, texto2i, texto2j,
   texto2k, texto2l, texto2m, texto2n, texto2o, texto2p, texto2q, texto2r, texto2s, texto2t, texto2u, texto2v,
-  texto3, texto19, 
-  texto19a, texto19b, 
+  texto3,  
   texto20, texto20a, texto20b, texto20c, texto20d, texto20e,
   
   texto100, texto101, texto102
@@ -75,11 +74,7 @@ const IntroduccionMetodologia = () => {
       <TextBlock textContent={texto3} />
 
       
-      <TextBlock textContent={texto19} />
 
-      <TextBlock textContent={texto19a} />
-
-      <TextBlock textContent={texto19b} />
       
       <TextBlock textContent={texto20} />
 

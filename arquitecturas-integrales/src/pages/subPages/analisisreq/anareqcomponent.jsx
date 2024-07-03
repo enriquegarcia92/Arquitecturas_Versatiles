@@ -12,7 +12,7 @@ const Anareqcomponent = () => {
     return (
     < div className="flex flex-col">
 
-<TextBlock textContent={analisis} />
+<TextBlock textContent={analisis} title={"Análisis de requerimientos de la aplicación a desarrollar"} />
 <TextBlock textContent={analisis1} />
 <TextBlock textContent={analisis2} />
 <TextBlock textContent={analisis3} />
