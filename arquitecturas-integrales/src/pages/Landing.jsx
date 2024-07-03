@@ -16,7 +16,7 @@ const Landing = () => {
 
           <nav className="space-x-4 overflow-x px-4">
             <a
-              href="/landing"
+              href="/"
               className="text-gray-300 hover:text-white p-3 rounded-lg hover:bg-gray-700"
             >
               Home
@@ -27,18 +27,6 @@ const Landing = () => {
             >
               Docs
             </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
-            >
-              Links
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
-            >
-              About Us
-            </a>
           </nav>
         </div>
       </header>
@@ -46,14 +34,13 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center h-[90vh]">
         <h2 className="text-4xl text-4xl md:text-6xl mx-1 md:mx-0 font-extrabold mb-4 text-center ">
-          Welcome to TBD
+          Bienvenido a arquitecturas integrales!
         </h2>
         <p className="text-lg text-xl md:text-2xl mx-1 md:mx-0 text-center max-w-2xl mb-8">
-          Your ultimate solution for seamless integration and deployment.
-          Experience the power and flexibility of FlyStack.
+          La herramienta que reune todo lo que necesitas para codificar una aplicación web.
         </p>
         <a href="/main" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-lg font-semibold transition">
-          Get Started
+          Ver la documentación
         </a>
       </section>
     </div>

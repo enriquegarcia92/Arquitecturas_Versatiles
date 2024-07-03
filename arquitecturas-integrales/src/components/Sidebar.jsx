@@ -38,10 +38,10 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="md:flex md:h-full">
+    <div className="md:flex md:h-full overflow-y-auto">
       {/* Sidebar for md and above */}
       <div
-        className={`bg-gray-700 text-white hidden md:flex flex-col space-y-2 px-2 py-4 transition-width duration-300 ${
+        className={`bg-gray-700 h text-white hidden md:flex flex-col space-y-2 px-2 py-4 transition-width duration-300 ${
           isSidebarOpen ? "w-64" : "w-16"
         }`}
       >
@@ -132,7 +132,7 @@ const Sidebar = () => {
       </div>
 
       {/* Topbar for below md */}
-      <div className="md:hidden">
+      <div className="md:hidden overflow-y-auto">
         <div className="bg-gray-700 text-white flex justify-between items-center p-4">
           <button onClick={toggleMenu} className="focus:outline-none">
             <FaBars className="text-white w-6 h-6" />
