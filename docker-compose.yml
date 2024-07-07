@@ -1,4 +1,12 @@
 services:
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email 00093619@uca.edu.sv -d arquitecturasintegrales.info --agree-tos
+
 #REVERSE PROXY
   nginx:
     build: ./nginx
@@ -6,6 +14,7 @@ services:
     container_name: "nginx_container"
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - java_app
       - java_app_mdb
@@ -15,7 +24,9 @@ services:
       - react
       - react_mdb
     volumes:
-    - ./nginx:/etc/nginx/conf.d
+      - ./nginx/default.conf:/etc/nginx/default.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
 #CONTENEDOR PAGINA INFORMATIVA
   arquitecturas_integrales:
     image: arquitecturas_integrales:1.0.0
