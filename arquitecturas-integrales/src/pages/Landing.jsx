@@ -19,13 +19,19 @@ const Landing = () => {
               href="/"
               className="text-gray-300 hover:text-white p-3 rounded-lg hover:bg-gray-700"
             >
-              Home
+              Inicio
             </a>
             <a
               href="/main"
               className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
             >
-              Docs
+              Documentación
+            </a>
+            <a
+              href="https://github.com/enriquegarcia92/Arquitecturas_Versatiles"
+              className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
+            >
+              Repositorio de ejemplo
             </a>
           </nav>
         </div>

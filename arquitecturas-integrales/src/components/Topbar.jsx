@@ -20,28 +20,22 @@ const Topbar = () => {
         </div>
         <nav className="hidden md:flex space-x-4 overflow-x px-4">
           <a
-            href="/landing"
+            href="/"
             className="text-gray-300 hover:text-white p-3 rounded-lg hover:bg-gray-700"
           >
-            Home
+            Inicio
           </a>
           <a
             href="/main"
             className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
           >
-            Docs
+            Documentación
           </a>
           <a
-            href="#"
+            href="https://github.com/enriquegarcia92/Arquitecturas_Versatiles.git"
             className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
           >
-            Links
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
-          >
-            About Us
+            Repositorio de ejemplo
           </a>
         </nav>
         <div className="md:hidden flex items-center relative">
@@ -52,10 +46,10 @@ const Topbar = () => {
             <ul className="absolute right-0 mt-8 w-48 bg-gray-700 text-white rounded-lg shadow-lg">
               <li>
                 <a
-                  href="/landing"
+                  href="/"
                   className="block px-4 py-2 hover:bg-gray-600 rounded-t-lg"
                 >
-                  Home
+                  Inicio
                 </a>
               </li>
               <li>
@@ -63,7 +57,7 @@ const Topbar = () => {
                   href="/main"
                   className="block px-4 py-2 hover:bg-gray-600"
                 >
-                  Docs
+                  Documentación
                 </a>
               </li>
               <li>
@@ -71,16 +65,8 @@ const Topbar = () => {
                   href="#"
                   className="block px-4 py-2 hover:bg-gray-600"
                 >
-                  Links
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-600 rounded-b-lg"
-                >
-                  About Us
-                </a>
+              Repositorio de ejemplo
+              </a>
               </li>
             </ul>
           )}
