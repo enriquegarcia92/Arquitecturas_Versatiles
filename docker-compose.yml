@@ -67,9 +67,9 @@ services:
     ports:
       - 3000:3000
     environment:
-      - SECRET_KEY=$SECRET_KEY
-      - EMAIL_HOST_USER=$EMAIL_HOST_USER
-      - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
+      - SECRET_KEY='jb0v74po0f32r3vlcm322zt4cfsqlszi18jb0v74po0f32r3vlcm322zt4cfsqlszi18jb0v74po0f32r3vlcm322zt4cfsqlszi18'
+      - EMAIL_HOST_USER='flytask503@gmail.com'
+      - EMAIL_HOST_PASSWORD='e j d h y l t n m t u c z v b m'
     depends_on:
       - db
 #CONTENEDOR DE EXPRESS CON BASE DE DATOS MONGODB
@@ -80,9 +80,9 @@ services:
     ports:
       - 3001:3001
     environment:
-      - SECRET_KEY=$SECRET_KEY
-      - EMAIL_HOST_USER=$EMAIL_HOST_USER
-      - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
+      - SECRET_KEY='jb0v74po0f32r3vlcm322zt4cfsqlszi18jb0v74po0f32r3vlcm322zt4cfsqlszi18jb0v74po0f32r3vlcm322zt4cfsqlszi18'
+      - EMAIL_HOST_USER='flytask503@gmail.com'
+      - EMAIL_HOST_PASSWORD='e j d h y l t n m t u c z v b m'
 #CONTENEDOR DE REACT QUE SE CONECTA A STREAM DE POSTGRE
   react:
     container_name: react_container
@@ -91,9 +91,9 @@ services:
     ports:
       - 5173:5173
     environment:
-      - VITE_URL_API=$VITE_POSTGRES_API
-      - VITE_BASE_ROUTES=$VITE_REACT_POSTGRE_BASE
-      - VITE_BASE_PORT=$VITE_POSTGRE_PORT
+      - VITE_URL_API='http://localhost/postgre_api/api''
+      - VITE_BASE_ROUTES='/react/'
+      - VITE_BASE_PORT=5173
     depends_on:
       - java_app
       - django_postgre
@@ -105,9 +105,9 @@ services:
     ports:
       - 5163:5163
     environment:
-      - VITE_URL_API=$VITE_POSTGRES_API
-      - VITE_BASE_ROUTES=$VITE_VUE_POSTGRE_BASE
-      - VITE_BASE_PORT=$VITE_VUE_POSTGRE_PORT
+      - VITE_URL_API='http://localhost/postgre_api/api'
+      - VITE_BASE_ROUTES='/vue/'
+      - VITE_BASE_PORT=5163
     depends_on:
       - java_app
       - django_postgre
@@ -119,10 +119,10 @@ services:
       ports:
         - 5170:5170
       environment:
-        - VITE_URL_API=$VITE_MONGO_API
-        - VITE_BASE_ROUTES=$VITE_REACT_MONGO_BASE
-        - VITE_BASE_PORT=$VITE_MONGO_PORT
-        - VITE_ROUTER_PATH=$VITE_VUE_POSTGRE_ROUTER_PATH
+        - VITE_URL_API='http://localhost/mongo_api/api'
+        - VITE_BASE_ROUTES='/react_mdb/'
+        - VITE_BASE_PORT=5170
+        - VITE_ROUTER_PATH='/react_mdb/'
       depends_on:
         - java_app_mdb
         - django_mdb
@@ -134,10 +134,10 @@ services:
       ports:
         - 5160:5160
       environment:
-        - VITE_URL_API=$VITE_MONGO_API
-        - VITE_BASE_ROUTES=$VITE_VUE_MONGO_BASE
-        - VITE_BASE_PORT=$VITE_VUE_MONGO_PORT
-        - VITE_ROUTER_PATH=$VITE_VUE_MONGO_ROUTER_PATH
+        - VITE_URL_API='http://localhost/mongo_api/api'
+        - VITE_BASE_ROUTES='/vue_mdb/'
+        - VITE_BASE_PORT=5160
+        - VITE_ROUTER_PATH='/vue_mdb/'
       depends_on:
         - java_app_mdb
         - django_mdb
@@ -149,9 +149,9 @@ services:
       ports:
         - "5432:5432"
       environment:
-        - POSTGRES_USER=$POSTGRES_USER
-        - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-        - POSTGRES_DB=$POSTGRES_DB
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=flytask
 
   certbot:
       image: certbot/certbot
