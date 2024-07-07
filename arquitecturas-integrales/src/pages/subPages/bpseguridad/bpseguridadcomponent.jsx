@@ -10,6 +10,7 @@ import { despliegue, despliegue1, contenedores1, contenedores2, contenedores3, c
 import { servidorWeb, servidorWeb1, servidorWeb2, servidorWeb3, servidorWeb4 } from "../../../metodologiacontent/cap3";
 import { ciCd, ciCd1, ciCd2, ciCd3, ciCd4 } from "../../../metodologiacontent/cap3";
 
+import {texto21, texto21a, texto21b, texto21c, texto21d, texto21e, texto21f, texto21g, texto21h, texto21i, texto21j,} from "../../../metodologiacontent/txtmetodologia";
 
 const Bpseguridadcomponent = () => {
     return (
@@ -60,6 +61,28 @@ const Bpseguridadcomponent = () => {
 <TextBlock textContent={ciCd2} />
 <TextBlock textContent={ciCd3} />
 <TextBlock textContent={ciCd4} />
+
+<TextBlock textContent={texto21} />
+
+<TextBlock textContent={texto21a} />
+
+<TextBlock textContent={texto21b} />
+
+<TextBlock textContent={texto21c} />
+
+<TextBlock textContent={texto21d} />
+
+<TextBlock textContent={texto21e} />
+
+<TextBlock textContent={texto21f} />
+
+<TextBlock textContent={texto21g} />
+
+<TextBlock textContent={texto21h} />
+
+<TextBlock textContent={texto21i} />
+
+<TextBlock textContent={texto21j} />
     </div>
     );
 };
