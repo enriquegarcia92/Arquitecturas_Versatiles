@@ -1,4 +1,4 @@
-export const analisis = `Análisis de requerimientos de la aplicación a desarrollar
+export const analisis = `
 La fase de levantamiento de requerimientos, comprende la base del proyecto en la cual se debe identificar, comprender y documentar las necesidades de los usuarios, las funcionalidades de la aplicación y las características técnicas que debe cumplir. Para esta fase es necesario realizar las siguientes sub-fases:`;
 
 export const analisis1 = `Comprender las necesidades de los usuarios.`;
@@ -43,7 +43,7 @@ Facilita la mantenibilidad y manipulación del código, permite escalabilidad, s
 
 export const patrones1 = `Selección de patrones de diseño.`;
 
-export const buenasPracticas = `Buenas prácticas de programación
+export const buenasPracticas = `
 Conjunto de prácticas permite mantener un flujo de trabajo organizado y garantizar la calidad de la aplicación. Algunas prácticas tienen su origen en patrones conocidos de desarrollo para las distintas capas del sistema que permiten crear aplicaciones con alta experiencia de calidad para el usuario y código de fácil mantenimiento y escalabilidad para los desarrolladores. Para esta fase es necesario realizar la siguiente sub-fase:`;
 
 export const buenasPracticas1 = `Identificar algunas de las buenas prácticas actuales para un desarrollo full stack.`;

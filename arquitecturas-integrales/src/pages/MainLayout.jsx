@@ -9,6 +9,7 @@ import { AiOutlineDeploymentUnit } from "react-icons/ai";
 import { BsCheck, BsHandThumbsUp, BsListCheck } from "react-icons/bs";
 import Topbar from "../components/Topbar";
 import Sidebar from "../components/Sidebar";
+import TextBlock from "../components/TextBlock";
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

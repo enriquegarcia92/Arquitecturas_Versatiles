@@ -34,23 +34,23 @@ export const texto2e = `
 Requerimientos técnicos de hardware y software.`;
 
 export const texto2f = `
-Requerimiento de hardware:
-Procesador: 2.5 GHz o superior
-Memoria RAM: 16 GB mínimo
-Espacio en disco: 256 GB SSD mínimo
-Sistema operativo:
-Windows 10 64-bit (build 19043 o posterior)
-macOS 10.10 o posterior
-Ubuntu 18.04 o posterior`;
+-Requerimiento de hardware:
+-Procesador: 2.5 GHz o superior
+-Memoria RAM: 16 GB mínimo
+-Espacio en disco: 256 GB SSD mínimo
+-Sistema operativo:
+-Windows 10 64-bit (build 19043 o posterior)
+-macOS 10.10 o posterior
+-Ubuntu 18.04 o posterior`;
 
 export const texto2g = `
-Requerimiento de software:
-IDE: Visual Studio Code
-Control de versiones: Git
-Frameworks: Angular, React, Spring Boot, Django, Express.js, Vue.js
-Bases de datos: MongoDB, PostgreSQL
-Contenedores: Docker, Docker Compose
-Servidor web: Nginx`;
+-Requerimiento de software:
+-IDE: Visual Studio Code
+-Control de versiones: Git
+-Frameworks: Angular, React, Spring Boot, Django, Express.js, Vue.js
+-Bases de datos: MongoDB, PostgreSQL
+-Contenedores: Docker, Docker Compose
+-Servidor web: Nginx`;
 
 export const texto2h = `
 Estas herramientas son comúnmente utilizadas en el desarrollo de aplicaciones modernas y proporcionan un entorno consistente y controlado para el desarrollo y la implementación de la aplicación.`;
@@ -64,9 +64,9 @@ Se elige este tipo de arquitectura específicamente porque permite que mediante 
 
 export const texto2k = `
 Para esta fase es necesario realizar las siguientes sub-fases:
-Selección de tecnologías para el frontend
-Selección de tecnologías para el backend
-Selección de bases de datos`;
+-Selección de tecnologías para el frontend
+-Selección de tecnologías para el backend
+-Selección de bases de datos`;
 
 export const texto2l = `
 Patrones de diseño
@@ -414,19 +414,16 @@ Para React se utiliza el patrón Contenedor-Presentador (o Contenedor-Componente
 `;
 
 export const texto14 = `
-Implementación de buenas prácticas de codificación
 
 Al implementar las buenas prácticas de codificación, se utilizan herramientas que facilitan la creación de aplicaciones de alta calidad y seguridad. Estas librerías y frameworks son bloques de funcionalidades probadas a lo largo del tiempo, cuyo código se puede reutilizar fácilmente. Los programadores pueden diseñar operaciones específicas de lógica de negocios utilizando estas herramientas, basándose en los principios SOLID.
 `;
 
 export const texto14a = `
-Desarrollo Back End con buenas prácticas
 
 En el desarrollo Back End, la implementación de buenas prácticas y el uso de SOLID están presentes a lo largo del framework utilizado. Estos marcos de trabajo proporcionan una base sólida y previamente estudiada, asegurando un código limpio y fácil de mantener. El uso de patrones de diseño garantiza que los archivos y sus responsabilidades estén adecuadamente separados.
 `;
 
 export const texto14b = `
-Principios aplicados en Spring Boot, Django y Express.js
 
 - Principio de responsabilidad única:
   - En Spring Boot, se aplica en los servicios que manejan la lógica de negocios.
@@ -435,7 +432,6 @@ Principios aplicados en Spring Boot, Django y Express.js
 `;
 
 export const texto14c = `
-Patrones de diseño en Spring Boot, Django y Express.js
 
 - Principio abierto/cerrado:
   - En Spring Boot, aplicado a los repositorios.
@@ -444,7 +440,6 @@ Patrones de diseño en Spring Boot, Django y Express.js
 `;
 
 export const texto14d = `
-Principio de sustitución de Liskov en Spring Boot, Django y Express.js
 
 - En Spring Boot, se refleja en la programación basada en interfaces y la inyección automática de dependencias.
 - En Django, se aplica en el uso de clases modelos expandibles y heredables.
@@ -452,23 +447,22 @@ Principio de sustitución de Liskov en Spring Boot, Django y Express.js
 `;
 
 export const texto14e = `
-Principios adicionales en Spring Boot, Django y Express.js
 
 - Principio de segregación de interfaces:
   - Implementado junto con los principios de abierto/cerrado y responsabilidad única.
   
 - Principio de inversión de dependencias:
-  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel no dependan de módulos de bajo nivel.
+  - Implementado junto con el principio de sustitución de Liskov, garantizando que los módulos de alto nivel 
+  no dependan de módulos de bajo nivel.
 `;
 
 export const texto14f = `
-Implementación de prácticas en codificación para React y Vue
 
 Para el desarrollo del Front End con React y Vue, se sigue el lineamiento SOLID y se utiliza el concepto de "Clean Architecture". El objetivo es mantener el desarrollo de la aplicación limpio y comprensible para cualquier desarrollador. La estructura de archivos y carpetas debe reflejar claramente las funcionalidades de la aplicación.
 `;
 
 
-export const texto15 = `Single Responsibility Principle (Principio de la única responsabilidad)
+export const texto15 = `
 En el desarrollo web este principio es muy predominante, ya que debe aislar cada tarea y función 
 de cada componente, conexión y página lo más posible; esto permite que se puedan manejar las 
 conexiones con los distintos Back Ends disponibles y no requiera de ningún cambio del lado del 
@@ -548,7 +542,7 @@ cambios y mejoras sin comprometer la funcionalidad existente.
 
 
 
-export const texto19 = `El principio de segregación de interfaz establece que los usuarios o clientes no deben depender de componentes 
+export const texto19 = `El "principio de segregación de interfaz" establece que los usuarios o clientes no deben depender de componentes 
 y páginas que no necesitan. En lugar de tener una única página grande que consulte muchos métodos y realice 
 todas las tareas, se utilizan múltiples interfaces que realizan tareas específicas dentro de la aplicación. 
 Esto significa que las clases solo se ocupan de las tareas relevantes en su contexto, reduciendo la dependencia 

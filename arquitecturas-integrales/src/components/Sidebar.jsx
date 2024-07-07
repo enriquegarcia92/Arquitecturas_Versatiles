@@ -72,9 +72,6 @@ const Sidebar = () => {
                 { label: "Diseño de arquitectura", link: "/main/diseñoarqcomponent" },
                 { label: "Diseño del sistema", link: "/main/diseñosistemacopomponent" },
                 { label: "Patrones de diseño", link: "/main/patroncomponent" }
-
-
-    
               ]}
               icon={FaCheck}
             />
@@ -119,14 +116,6 @@ const Sidebar = () => {
               ]}
               icon={AiOutlineDeploymentUnit}
             />
-            <DisclosureMenu
-              title="Best Practices"
-              subtitles={[
-                { label: "Introduction", link: "/best-practices/introduction" },
-                { label: "Overview", link: "/best-practices/overview" },
-              ]}
-              icon={BsHandThumbsUp}
-            />
           </>
         )}
       </div>
@@ -143,11 +132,17 @@ const Sidebar = () => {
         </div>
         {isMenuOpen && (
           <div className="bg-gray-700 text-white flex flex-col space-y-2 px-2 py-4">
-            <DisclosureMenu
-              title="First Principles"
+          <DisclosureMenu
+              title="Diseño de sistemas"
               subtitles={[
-                { label: "Introduction", link: "/main/methodology" },
-                { label: "Overview", link: "/" },
+                { label: "Metodologia", link: "/main/methodologyintro" },
+                { label: "Resultados ", link: "/main/resintro" },
+                { label: "Analisis de requerimientos", link: "/main/analisisreqintro" },
+                { label: "Buenas practicas de programación", link: "/main/bpprograintro" },
+                { label: "Seguridad", link: "/main/bpseguridad" },
+                { label: "Diseño de arquitectura", link: "/main/diseñoarqcomponent" },
+                { label: "Diseño del sistema", link: "/main/diseñosistemacopomponent" },
+                { label: "Patrones de diseño", link: "/main/patroncomponent" }
               ]}
               icon={FaCheck}
             />
@@ -185,14 +180,6 @@ const Sidebar = () => {
                 { label: "Uso de Nginx", link: "/main/deploynginxsetup" },
               ]}
               icon={AiOutlineDeploymentUnit}
-            />
-            <DisclosureMenu
-              title="Best Practices"
-              subtitles={[
-                { label: "Introduction", link: "/best-practices/introduction" },
-                { label: "Overview", link: "/best-practices/overview" },
-              ]}
-              icon={BsHandThumbsUp}
             />
           </div>
         )}
