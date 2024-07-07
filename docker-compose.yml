@@ -1,12 +1,4 @@
 services:
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes: 
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email 00093619@uca.edu.sv -d arquitecturasintegrales.info --agree-tos
-
 #REVERSE PROXY
   nginx:
     build: ./nginx
@@ -15,6 +7,10 @@ services:
     ports:
       - 80:80
       - 443:443
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/default.conf
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - java_app
       - java_app_mdb
@@ -23,10 +19,6 @@ services:
       - django_mdb
       - react
       - react_mdb
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/default.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
 #CONTENEDOR PAGINA INFORMATIVA
   arquitecturas_integrales:
     image: arquitecturas_integrales:1.0.0
@@ -160,3 +152,13 @@ services:
         - POSTGRES_USER=$POSTGRES_USER
         - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
         - POSTGRES_DB=$POSTGRES_DB
+
+certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email 00093619@uca.edu.sv -d arquitecturasintegrales.info --agree-tos
+    depends_on:
+      - nginx
