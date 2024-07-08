@@ -19,17 +19,17 @@ const Bpseguridadcomponent = () => {
 <TextBlock textContent={buenasPracticas} />
 <TextBlock textContent={buenasPracticas1} />
 
-<TextBlock textContent={seguridad} />
+<TextBlock textContent={seguridad}  title={"Buenas prácticas de seguridad" } />
 <TextBlock textContent={seguridad1} />
 <TextBlock textContent={seguridad2} />
-<TextBlock textContent={seguridad3} />
+<TextBlock textContent={seguridad3} title={"Manejo y autenticación de usuarios en la aplicación"} />
 
 <TextBlock textContent={tecnologia1} />
 <TextBlock textContent={tecnologia2} />
 <TextBlock textContent={tecnologia3} />
 <TextBlock textContent={tecnologia4} />
 
-<TextBlock textContent={programacion} />
+<TextBlock textContent={programacion} title={"Programación"} />
 <TextBlock textContent={programacion1} />
 <TextBlock textContent={programacion2} />
 <TextBlock textContent={programacion3} />
@@ -37,12 +37,12 @@ const Bpseguridadcomponent = () => {
 <TextBlock textContent={programacion5} />
 <TextBlock textContent={programacion6} />
 
-<TextBlock textContent={pruebas} />
+<TextBlock textContent={pruebas} title={"Pruebas"} />
 <TextBlock textContent={pruebas1} />
 <TextBlock textContent={pruebas2} />
 <TextBlock textContent={pruebas3} />
 
-<TextBlock textContent={despliegue} />
+<TextBlock textContent={despliegue}  title={"Despliegue"}/>
 <TextBlock textContent={despliegue1} />
 
 <TextBlock textContent={contenedores1} />
@@ -56,7 +56,7 @@ const Bpseguridadcomponent = () => {
 <TextBlock textContent={servidorWeb3} />
 <TextBlock textContent={servidorWeb4} />
 
-<TextBlock textContent={ciCd} />
+<TextBlock textContent={ciCd} title={"Herramientas de integración continua y entrega continua (CI/CD)"} />
 <TextBlock textContent={ciCd1} />
 <TextBlock textContent={ciCd2} />
 <TextBlock textContent={ciCd3} />
