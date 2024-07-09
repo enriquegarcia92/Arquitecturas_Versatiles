@@ -26,11 +26,11 @@ const IntroduccionMetodologia = () => {
       
       <TextBlock textContent={texto2b} />
       
-      <TextBlock textContent={texto2c} />
+      <TextBlock textContent={texto2c}  title={"Diseño"}/>
       
       <TextBlock textContent={texto2d} />
       
-      <TextBlock textContent={texto2e} />
+      <TextBlock textContent={texto2e} title={"Requerimientos técnicos de hardware y software."} />
       
       <TextBlock textContent={texto2f} />
       
@@ -44,31 +44,31 @@ const IntroduccionMetodologia = () => {
       
       <TextBlock textContent={texto2k} />
       
-      <TextBlock textContent={texto2l} />
+      <TextBlock textContent={texto2l} title={"Patrones de diseño"}/>
       
       <TextBlock textContent={texto2m} />
       
-      <TextBlock textContent={texto2n} />
+      <TextBlock textContent={texto2n} title={" Buenas prácticas de seguridad"} />
       
       <TextBlock textContent={texto2o} />
       
       <TextBlock textContent={texto2p} />
       
       <pre>
-  <TextBlock textContent={texto2q} />
+  <TextBlock textContent={texto2q}  title={"Programación"}/>
 </pre>
       
 <pre>
-  <TextBlock textContent={texto2r} />
+  <TextBlock textContent={texto2r} title={"Pruebas"} />
 </pre>
       
-      <TextBlock textContent={texto2s} />
+      <TextBlock textContent={texto2s} title={"Despliegue"} />
       
       <TextBlock textContent={texto2t} />
       
-      <TextBlock textContent={texto2u} />
+      <TextBlock textContent={texto2u} title={"Servidor web"} />
       
-      <TextBlock textContent={texto2v} />
+      <TextBlock textContent={texto2v} title={"Herramientas de integración continua y entrega continua (CI/CD)"} />
 
       <TextBlock title="Resultados" textContent={texto3} />
       <TextBlock textContent={texto3} />
