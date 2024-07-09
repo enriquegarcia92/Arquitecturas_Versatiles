@@ -1,41 +1,12 @@
 import React from "react";
 import chincheta from '../img/chincheta.png'
+import Topbar from "../components/Topbar";
 
 const Landing = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen w-full">
       {/* Header */}
-      <header className="bg-gray-800 py-4 shadow-md w-full">
-        <div className="w-full flex flex-col md:flex-row justify-center items-center md:justify-between md:items-center">
-          <div className="flex justify-evenly">
-            <img src={chincheta} alt="" className="w-12 h-12"/>
-            <h1 className="text-3xl font-bold mb-3 md:mb-0 px-4">
-              Arquitecturas Integrales
-            </h1>
-          </div>
-
-          <nav className="space-x-4 overflow-x px-4">
-            <a
-              href="/"
-              className="text-gray-300 hover:text-white p-3 rounded-lg hover:bg-gray-700"
-            >
-              Inicio
-            </a>
-            <a
-              href="/main"
-              className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
-            >
-              Documentación
-            </a>
-            <a
-              href="https://github.com/enriquegarcia92/Arquitecturas_Versatiles"
-              className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
-            >
-              Repositorio de ejemplo
-            </a>
-          </nav>
-        </div>
-      </header>
+      <Topbar />
 
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center h-[90vh]">
