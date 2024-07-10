@@ -35,7 +35,7 @@ const Topbar = () => {
             href="https://github.com/enriquegarcia92/Arquitecturas_Versatiles.git"
             className="text-gray-300 hover:text-white p-3 rounded-md hover:bg-gray-700"
           >
-            Repositorio de ejemplo
+            Repositorio
           </a>
         </nav>
         <div className="md:hidden flex items-center relative">
@@ -43,7 +43,7 @@ const Topbar = () => {
             <FaEllipsisV className="text-white w-6 h-6" />
           </button>
           {isMenuOpen && (
-            <ul className="absolute right-0 mt-8 w-48 bg-gray-700 text-white rounded-lg shadow-lg">
+            <ul className="absolute right-10 mt-8 w-48 bg-gray-700 text-white rounded-lg shadow-lg">
               <li>
                 <a
                   href="/"
@@ -54,7 +54,7 @@ const Topbar = () => {
               </li>
               <li>
                 <a
-                  href="/main"
+                  href="/main/methodologyintro"
                   className="block px-4 py-2 hover:bg-gray-600"
                 >
                   Documentación
@@ -62,10 +62,10 @@ const Topbar = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://github.com/enriquegarcia92/Arquitecturas_Versatiles"
                   className="block px-4 py-2 hover:bg-gray-600"
                 >
-              Repositorio de ejemplo
+              Repositorio
               </a>
               </li>
             </ul>

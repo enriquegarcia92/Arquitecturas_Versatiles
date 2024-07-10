@@ -38,10 +38,10 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="md:flex md:h-full overflow-y-auto">
+    <div className="md:flex md:h-full overflow-y-auto bg-gray-700">
       {/* Sidebar for md and above */}
       <div
-        className={`bg-gray-700 h text-white hidden md:flex flex-col space-y-2 px-2 py-4 transition-width duration-300 ${
+        className={`bg-gray-700 overflow-y-auto text-white hidden md:flex flex-col space-y-2 px-2 py-4 transition-width duration-300 ${
           isSidebarOpen ? "w-64" : "w-16"
         }`}
       >
@@ -121,17 +121,14 @@ const Sidebar = () => {
       </div>
 
       {/* Topbar for below md */}
-      <div className="md:hidden overflow-y-auto">
-        <div className="bg-gray-700 text-white flex justify-between items-center p-4">
+      <div className="md:hidden">
+        <div className=" text-white flex justify-between items-center p-4">
           <button onClick={toggleMenu} className="focus:outline-none">
             <FaBars className="text-white w-6 h-6" />
           </button>
-          <div className="text-white font-bold text-xl kanit-bold">
-            {selectedMenu}
-          </div>
         </div>
         {isMenuOpen && (
-          <div className="bg-gray-700 text-white flex flex-col space-y-2 px-2 py-4">
+          <div className="text-white flex flex-col space-y-2 px-2 py-4 h-1/2">
           <DisclosureMenu
               title="Diseño de sistemas"
               subtitles={[

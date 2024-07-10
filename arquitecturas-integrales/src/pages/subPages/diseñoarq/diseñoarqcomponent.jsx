@@ -16,11 +16,12 @@ const Diseñoarqcopomponent = () => {
 
     <TextBlock textContent={texto12} />
 
-      <TextBlock textContent={texto12a} />
+<pre><TextBlock textContent={texto12a} /></pre>
 
-      <TextBlock textContent={texto12b} />
+<pre><TextBlock textContent={texto12b} /></pre>
 
-      <TextBlock textContent={texto12c} />
+<pre><TextBlock textContent={texto12c} /></pre>
+
 
       <TextBlock textContent={texto12d} />
 
