@@ -23,7 +23,7 @@ Definir funcionalidades del sistema.
 Especificar las características técnicas (definición de diagrama de clases).`;
 
 export const texto2c = `
-Diseño
+
 Los requerimientos y funcionalidades de la aplicación definidos son la base para el flujo de la aplicación, la cual se diseña gráficamente antes de iniciar con la programación. Existen diferentes herramientas que permiten el diseño de mockups estáticos e interactivos, como por ejemplo Figma.`;
 
 export const texto2d = `
@@ -31,7 +31,7 @@ Para esta fase es necesario realizar las siguientes sub-fases:
 Desarrollo de mockup.`;
 
 export const texto2e = `
-Requerimientos técnicos de hardware y software.`;
+`;
 
 export const texto2f = `
 -Requerimiento de hardware:
@@ -69,7 +69,6 @@ Para esta fase es necesario realizar las siguientes sub-fases:
 -Selección de bases de datos`;
 
 export const texto2l = `
-Patrones de diseño
 Facilitan la mantenibilidad y manipulación del código, permiten escalabilidad, separan las responsabilidades y facilitan la detección y corrección de errores. Según el programador, puede variar el patrón de diseño implementado, además de que está sujeto a cómo funciona la tecnología.`;
 
 export const texto2m = `
@@ -77,7 +76,6 @@ Para esta fase es necesario realizar la siguiente sub-fase:
 Selección de patrones de diseño`;
 
 export const texto2n = `
-Buenas prácticas de seguridad
 
 La seguridad para un proyecto es de vital importancia. No es posible proveer al usuario una experiencia de alta calidad al utilizar la aplicación si no se puede garantizar la seguridad de sus datos y del sistema en sí.`;
 
@@ -94,7 +92,6 @@ c. NoSQL: Se selecciona cuando se trabaja con grandes volúmenes de datos distri
 d. JWT (JSON Web Token): Se elige cuando se necesita manejar la autenticación o autorización de los usuarios en la aplicación. Es útil cuando se requiere una manera segura de transmitir información entre partes como la identidad de usuario, los roles y los privilegios.`;
 
 export const texto2q = `
-Programación
 
 Para esta fase es necesario realizar las siguientes sub-fases:
 Implementación de buenas prácticas de codificación
@@ -105,7 +102,7 @@ Desarrollo del back-end
 Integración del back-end y front-end`;
 
 export const texto2r = `
-Pruebas
+
 
 Para esta fase es necesario realizar la siguiente sub-fase:
 Pruebas unitarias: Verifican la precisión de un bloque de código aislado.
@@ -113,7 +110,7 @@ Pruebas de integración: Evalúan cómo interactúan varios módulos de software
 Pruebas de aceptación: Verifican si un sistema cumple con los requisitos empresariales.`;
 
 export const texto2s = `
-Despliegue
+
 
 El despliegue es una etapa esencial en el desarrollo de software que implica la transición de aplicaciones a producción. Para esta fase es necesario realizar las siguientes sub-fases:
 Contenedores`;
@@ -126,7 +123,7 @@ Escalabilidad: Se pueden escalar fácilmente para satisfacer las demandas cambia
 Agilidad: Agilizan el proceso de despliegue, ya que no requieren la instalación de un sistema operativo completo para cada aplicación.`;
 
 export const texto2u = `
-Servidor web
+
 
 Infraestructura confiable: El servidor web cuenta con una infraestructura robusta y confiable para garantizar la disponibilidad y el rendimiento óptimos de la aplicación.
 Conectividad de alta velocidad: Una conexión a Internet de alta velocidad es esencial para garantizar un acceso rápido y fluido a la aplicación por parte de los usuarios.
@@ -134,7 +131,7 @@ Seguridad sólida: El servidor web cuenta con medidas de seguridad sólidas para
 Escalabilidad: El proveedor de alojamiento web ofrece opciones de escalabilidad para que la infraestructura pueda adaptarse al crecimiento de la aplicación y la demanda de los usuarios.`;
 
 export const texto2v = `
-Herramientas de integración continua y entrega continua (CI/CD)
+
 
 Mayor velocidad: Automatizan tareas repetitivas, permitiendo a los equipos desarrollar y entregar software con mayor rapidez.
 Mejor calidad: La automatización de las pruebas ayuda a identificar y corregir errores antes de que se implementen en producción.
